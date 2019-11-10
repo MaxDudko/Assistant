@@ -1,0 +1,19 @@
+{
+  "name": "assistant",
+  "version": "1.0.0",
+  "description": "Virtual Assistant with many useful functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxDudko/Assistant.git"
+  },
+  "author": "MaxDudko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaxDudko/Assistant/issues"
+  },
+  "homepage": "https://github.com/MaxDudko/Assistant#readme"
+}
