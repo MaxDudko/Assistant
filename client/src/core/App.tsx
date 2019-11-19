@@ -1,13 +1,7 @@
 import React from 'react';
 import style from './App.module.scss';
 
-import Navbar from "./components/Navbar/Navbar";
-import DashBoard from "./components/DashBoard/DashBoard";
-import Sidebar from "./components/Sidebar/Sidebar";
-
-interface IState {
-  
-}
+interface IState {}
 
 class App extends React.Component<{}, IState> {
   state: IState = {};
@@ -15,11 +9,17 @@ class App extends React.Component<{}, IState> {
   render() {
     return(
         <div className={style.App}>
-          <Navbar/>
-            <div className={style.wrapper}>
-                <Sidebar/>
-                <DashBoard/>
-            </div>
+            <iframe src="https://maxdudko.github.io/Assistant/"
+                    className={style.App}
+                    title="Assistant"
+                    frameBorder="0"
+                    style={{
+                        width: "100%",
+                        height: "99.5vh",
+                        margin: "0",
+                        padding: "0",
+                    }}
+            />
         </div>
     )
   }
