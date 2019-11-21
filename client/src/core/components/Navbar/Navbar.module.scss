@@ -1,1 +1,27 @@
-.Navbar {}
+.Navbar {
+  height: 50px;
+  background: #24292e;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .item {
+    font-size: 25px;
+    padding: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 720px) {
+  .Navbar {
+    height: 25px;
+  }
+}
