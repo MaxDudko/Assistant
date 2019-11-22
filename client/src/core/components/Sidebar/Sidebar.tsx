@@ -9,7 +9,8 @@ import { faBars, faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
 interface IProps {
     isCollapsed: boolean,
     collapsed: any,
-    SidebarItems: any
+    SidebarItems: any,
+    modalController: any,
 }
 
 const Sidebar: React.FC<IProps> = (props) => {
@@ -20,7 +21,11 @@ const Sidebar: React.FC<IProps> = (props) => {
                 <img src={logo} alt="#"
                      className={style.logo}
                 />
-                <span className={style.title}>Assistant</span>
+                <span className={style.title}
+                      onClick={() => props.modalController()}
+                >
+                    Assistant
+                </span>
                 <FontAwesomeIcon icon={faBars}
                                  className={style.collapsed_icon}
                                  onClick={() => props.collapsed()}

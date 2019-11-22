@@ -5,11 +5,27 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
   .item {
     font-size: 25px;
     padding: 10px;
+    margin: 0 5px;
+    display: flex;
     &:hover {
       cursor: pointer;
+    }
+    span {
+      position: relative;
+      right: -4px;
+      top: 14px;
+      font-size: 14px;
+    }
+    img {
+      width: 36px;
+      height: 36px;
+      border-radius: 100px;
     }
   }
   .avatar {
@@ -22,6 +38,12 @@
 
 @media (max-width: 720px) {
   .Navbar {
-    height: 25px;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    width: 100%;
+    .item {
+      padding-right: 5px;
+    }
   }
 }

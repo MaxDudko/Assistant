@@ -2,6 +2,7 @@
   background: lighten(#24292e, 5%);
   color: white;
   position: fixed;
+  z-index: 110;
   top: 0;
   left: 0;
   height: 100vh;
@@ -74,6 +75,30 @@
       align-items: center;
       .item_name {
         display: none;
+      }
+    }
+  }
+}
+@media (max-width: 720px) {
+  .Sidebar {
+    width: auto;
+    .header {
+      .logo {
+        display: none;
+      }
+      .title {
+        margin-left: 5px;
+      }
+    }
+    .list {
+      padding-right: 5px;
+    }
+  }
+  .collapsed_true {
+    width: 40px;
+    .header {
+      .title {
+        left: 35px;
       }
     }
   }

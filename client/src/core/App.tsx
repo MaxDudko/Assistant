@@ -3,19 +3,33 @@ import style from './App.module.scss';
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import DashBoard from "./components/DashBoard/DashBoard";
-import Footer from "./components/Footer/Footer";
+import Notifications from "./components/Notifications/Notifications";
+import Settings from "./components/Settings/Settings";
+import UserAccount from "./components/UserAccount/UserAccount";
 
 interface IState {
     isLogin: boolean,
-    userName: string,
+    user: any,
     isCollapsed: boolean,
     SidebarItems: any,
+    notifications: any,
+    modal: string | null,
 }
 
 class App extends React.Component<{}, IState> {
   state: IState = {
       isLogin: true,
-      userName: "Admin",
+      user: {
+          id: 1,
+          userName: "Max",
+          firstName: "Max",
+          lastName: "Dudko",
+          birthday: "24.10.1991",
+          location: "Ukraine, ZP-City",
+          avatar: "https://media.licdn.com/dms/image/C4D03AQFI1XZ240JlXg/profile-displayphoto-shrink_100_100/0?e=1579737600&v=beta&t=JydIeQO26Zq4YkQlwx0Zwfml-g0MoEc3-8_hg9P-O_I",
+          email: "max2410zp@gmail.com"
+      },
+      modal: null,
       isCollapsed: false,
       SidebarItems: [
           {
@@ -39,27 +53,87 @@ class App extends React.Component<{}, IState> {
               icon: "faCheck"
           }
       ],
+      notifications: [
+          {
+              title: "Welcome",
+              from: "Assistant",
+              to: "Max",
+              date: "22.11.2019 12:00",
+              text: "Welcome to Assistant!!! Glad to see you here 😊😊😊"
+          },
+          {
+              title: "About",
+              from: "Assistant",
+              to: "Max",
+              date: "22.11.2019 14:10",
+              text: `All what you need in one application... Personal dashboard with convenient customizable interface, include: customizable interface options, different widgets: to-do-list, calendar, weather, news, social networks, payment, etc... notifications, data storage, etc... Docs: https://docs.google.com/document/d/133I9VMq4_CGjn6BMtMuWr7puimJ9lBa3fbLjTqe1pJs/edit Repository: https://github.com/MaxDudko/Assistant`
+          },
+          {
+              title: "Lorem Ipsum",
+              from: "Lorem Fish",
+              to: "Max",
+              date: "22.11.2019 16:25",
+              text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          }
+      ]
   };
+
+  authController() {
+      let login = !this.state.isLogin;
+      this.setState({isLogin: login})
+  }
 
   collapsed() {
       let collapsed = !this.state.isCollapsed;
       this.setState({isCollapsed: collapsed})
   }
-  render() {
-    return(
-        <div className={style.App}>
-            <Navbar isLogin={this.state.isLogin}
-                    userName={this.state.userName}
-            />
-            <div className={style.wrapper}>
-                <Sidebar isCollapsed={this.state.isCollapsed}
-                         collapsed={this.collapsed.bind(this)}
-                         SidebarItems={this.state.SidebarItems}
-                />
-                <DashBoard/>
-            </div>
-        </div>
-    )
+
+  modalController(selected: string) {
+      this.state.modal === selected ?
+          this.setState({modal: null})
+          :
+          this.setState({modal: selected})
+  }
+
+  openModal() {
+      let modal = this.state.modal;
+      const allModals: { [key: string]: any } = {
+          Notifications: <Notifications notifications={this.state.notifications}/>,
+          Settings: <Settings/>,
+          UserAccount: <UserAccount user={this.state.user}/>,
+      };
+      if(modal === null) return;
+      return allModals[modal];
+  }
+
+   render() {
+      return(
+          <div className={style.App}>
+              <Navbar isLogin={this.state.isLogin}
+                      userName={this.state.user.userName}
+                      avatar={this.state.user.avatar}
+                      notifications={this.state.notifications.length}
+                      modalController={this.modalController.bind(this)}
+                      signOut={this.authController.bind(this)}
+              />
+              <div className={style.wrapper}>
+                  <Sidebar isCollapsed={this.state.isCollapsed}
+                           collapsed={this.collapsed.bind(this)}
+                           SidebarItems={this.state.SidebarItems}
+                           modalController={this.modalController.bind(this)}
+                  />
+                  <DashBoard/>
+                  {
+                      this.state.modal !== null ?
+                          <div className={style.modal}>
+                              {this.openModal()}
+                          </div>
+                          :
+                          null
+                  }
+              </div>
+          </div>
+      )
   }
 }
 
