@@ -8,9 +8,9 @@ import { faBars, faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 interface IProps {
     isCollapsed: boolean,
-    collapsed: any,
+    collapseController: any,
     SidebarItems: any,
-    modalController: any,
+    selectController: any,
 }
 
 const Sidebar: React.FC<IProps> = (props) => {
@@ -22,13 +22,13 @@ const Sidebar: React.FC<IProps> = (props) => {
                      className={style.logo}
                 />
                 <span className={style.title}
-                      onClick={() => props.modalController()}
+                      onClick={() => props.selectController()}
                 >
                     Assistant
                 </span>
                 <FontAwesomeIcon icon={faBars}
                                  className={style.collapsed_icon}
-                                 onClick={() => props.collapsed()}
+                                 onClick={() => props.collapseController()}
                 />
             </div>
             <div className={style.list}>
@@ -38,7 +38,9 @@ const Sidebar: React.FC<IProps> = (props) => {
                         let icon = item[i];
                         let name = item.name;
                         return (
-                            <p className={style.item} key={index}>
+                            <p className={style.item} key={index}
+                               onClick={() => props.selectController("WidgetSelected", name)}
+                            >
                                 <FontAwesomeIcon icon={icon === "faPlus" ? faPlus : faCheck}
                                                  className={style.item_icon}
                                                  title={name}

@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './App.module.scss';
+import Authentication from "./components/Authentication/Authentication";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import DashBoard from "./components/DashBoard/DashBoard";
@@ -12,13 +13,17 @@ interface IState {
     user: any,
     isCollapsed: boolean,
     SidebarItems: any,
+    WidgetSelected: string,
+    SettingsSelected: string | null,
     notifications: any,
     modal: string | null,
+    [key: string]: any
+
 }
 
 class App extends React.Component<{}, IState> {
   state: IState = {
-      isLogin: true,
+      isLogin: false,
       user: {
           id: 1,
           userName: "Max",
@@ -53,6 +58,8 @@ class App extends React.Component<{}, IState> {
               icon: "faCheck"
           }
       ],
+      WidgetSelected: "DashBoard",
+      SettingsSelected: null,
       notifications: [
           {
               title: "Welcome",
@@ -83,16 +90,16 @@ class App extends React.Component<{}, IState> {
       this.setState({isLogin: login})
   }
 
-  collapsed() {
+  collapseController() {
       let collapsed = !this.state.isCollapsed;
       this.setState({isCollapsed: collapsed})
   }
 
-  modalController(selected: string) {
-      this.state.modal === selected ?
-          this.setState({modal: null})
+  selectController(key: any, selected: string) {
+      this.state[key] === selected ?
+          this.setState({[key]: null})
           :
-          this.setState({modal: selected})
+          this.setState({[key]: selected})
   }
 
   openModal() {
@@ -109,29 +116,38 @@ class App extends React.Component<{}, IState> {
    render() {
       return(
           <div className={style.App}>
-              <Navbar isLogin={this.state.isLogin}
-                      userName={this.state.user.userName}
-                      avatar={this.state.user.avatar}
-                      notifications={this.state.notifications.length}
-                      modalController={this.modalController.bind(this)}
-                      signOut={this.authController.bind(this)}
-              />
-              <div className={style.wrapper}>
-                  <Sidebar isCollapsed={this.state.isCollapsed}
-                           collapsed={this.collapsed.bind(this)}
-                           SidebarItems={this.state.SidebarItems}
-                           modalController={this.modalController.bind(this)}
-                  />
-                  <DashBoard/>
-                  {
-                      this.state.modal !== null ?
-                          <div className={style.modal}>
-                              {this.openModal()}
+              {
+                  this.state.isLogin ?
+                      <div>
+                          <Navbar isLogin={this.state.isLogin}
+                                  userName={this.state.user.userName}
+                                  avatar={this.state.user.avatar}
+                                  notifications={this.state.notifications.length}
+                                  selectController={this.selectController.bind(this)}
+                                  signOut={this.authController.bind(this)}
+                          />
+                          <div className={style.wrapper}>
+                              <Sidebar isCollapsed={this.state.isCollapsed}
+                                       collapseController={this.collapseController.bind(this)}
+                                       SidebarItems={this.state.SidebarItems}
+                                       selectController={this.selectController.bind(this)}
+                              />
+                              <DashBoard WidgetSelected={this.state.WidgetSelected}
+                                         isCollapsed={this.state.isCollapsed}
+                              />
+                              {
+                                  this.state.modal !== null ?
+                                      <div className={style.modal}>
+                                          {this.openModal()}
+                                      </div>
+                                      :
+                                      null
+                              }
                           </div>
+                      </div>
                           :
-                          null
-                  }
-              </div>
+                      <Authentication/>
+              }
           </div>
       )
   }

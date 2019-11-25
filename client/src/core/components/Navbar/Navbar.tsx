@@ -9,24 +9,24 @@ interface IProps {
     userName: string,
     notifications: number,
     avatar?: string,
-    modalController: any
+    selectController: any
 }
 
 const Navbar: React.FC<IProps> = (props) => {
     return (
         <div className={style.Navbar}>
-            <div className={style.item} onClick={() => props.modalController("Notifications")}>
+            <div className={style.item} onClick={() => props.selectController("modal", "Notifications")}>
                 <FontAwesomeIcon icon={faBell}
                                  title="Notifications"
                 />
                 <span>{props.notifications}</span>
             </div>
-            <div className={style.item} onClick={() => props.modalController("Settings")}>
+            <div className={style.item} onClick={() => props.selectController("modal", "Settings")}>
                 <FontAwesomeIcon icon={faCogs}
                                  title="Settings"
                 />
             </div>
-            <div className={style.item} onClick={() => props.modalController("UserAccount")}>
+            <div className={style.item} onClick={() => props.selectController("modal", "UserAccount")}>
                 {
                     props.avatar ?
                         <img src={props.avatar} alt={props.userName} title="User Account"/>

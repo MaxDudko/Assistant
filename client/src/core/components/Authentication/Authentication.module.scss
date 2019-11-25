@@ -1,1 +1,60 @@
-.Authentication {}
+.Authentication {
+  width: 100%;
+  height: 100vh;
+  .navbar {
+    width: 100%;
+    height: 50px;
+    background: #24292e;
+    .header {
+      display: flex;
+      align-items: center;
+      background: #24292e;
+      height: 50px;
+      color: white;
+      .logo {
+        width: 36px;
+        height: 36px;
+        padding: 0 15px;
+      }
+      .title {
+        font-weight: bold;
+        font-size: 20px;
+      }
+    }
+  }
+  .wrapper {
+    width: 100%;
+    height: calc(100vh - 50px);
+    display: flex;
+    justify-content: space-between;
+    .leftSide {
+      width: 50%;
+      height: 100%;
+      background: lighten(#24292e, 10%);
+      iframe {
+        position: absolute;
+        top: 0;
+      }
+    }
+    .rightSide {
+      width: 50%;
+      height: 100%;
+      background: lighten(#24292e, 5%);
+      position: absolute;
+      left: 50%;
+      top: auto;
+      .tabs {
+        width: 100%;
+        height: 50px;
+        background: #0b0c0e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        span {
+
+        }
+      }
+    }
+  }
+}
