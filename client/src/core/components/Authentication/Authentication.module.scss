@@ -2,57 +2,87 @@
   width: 100%;
   height: 100vh;
   .navbar {
-    width: 100%;
     height: 50px;
+    width: 100%;
     background: #24292e;
-    .header {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .title_logo {
       display: flex;
       align-items: center;
-      background: #24292e;
-      height: 50px;
-      color: white;
       .logo {
         width: 36px;
         height: 36px;
-        padding: 0 15px;
       }
       .title {
-        font-weight: bold;
-        font-size: 20px;
+        color: white;
+      }
+    }
+    .menu {
+      display: flex;
+      align-items: center;
+      color: white;
+      .btn {
+        width: 50px;
+        margin: 0 20px;
+        padding: 10px;
+        transform: skewX(-10deg);
+        text-align: center;
+        &:hover {
+          background: lighten(#24292e, 5%);
+          cursor: pointer;
+        }
       }
     }
   }
-  .wrapper {
-    width: 100%;
-    height: calc(100vh - 50px);
-    display: flex;
-    justify-content: space-between;
-    .leftSide {
-      width: 50%;
-      height: 100%;
-      background: lighten(#24292e, 10%);
-      iframe {
-        position: absolute;
-        top: 0;
-      }
+  .form {
+    position: absolute;
+    right: 0;
+    z-index: 100;
+    background: lighten(#24292e, 5%);
+    color: white;
+    width: 25%;
+    height: 100vh;
+    padding-top: 60px;
+    h4 {
+      text-align: center;
     }
-    .rightSide {
-      width: 50%;
-      height: 100%;
-      background: lighten(#24292e, 5%);
-      position: absolute;
-      left: 50%;
-      top: auto;
-      .tabs {
-        width: 100%;
-        height: 50px;
-        background: #0b0c0e;
+    .login, .register {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      label {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        margin-top: 10px;
+      }
+      input {
+        padding: 5px 10px;
+        border-radius: 6px;
+        border: none;
+        outline: 0;
+      }
+      p {
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        color: white;
-        span {
-
+        input {
+          margin-left: 10px;
+        }
+      }
+      button {
+        padding: 5px 10px;
+        width: 100px;
+        border-radius: 10px;
+        border: none;
+        outline: 0;
+        &:hover {
+          cursor: pointer;
+          background: lighten(#24292e, 25%);
         }
       }
     }

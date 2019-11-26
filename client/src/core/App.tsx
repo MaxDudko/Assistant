@@ -85,6 +85,15 @@ class App extends React.Component<{}, IState> {
       ]
   };
 
+    componentDidMount () {
+        const script = document.createElement("script");
+
+        script.src = "https://maxdudko.github.io/Assistant/animation.js";
+        script.async = true;
+
+        document.body.appendChild(script);
+    }
+
   authController() {
       let login = !this.state.isLogin;
       this.setState({isLogin: login})
@@ -146,7 +155,7 @@ class App extends React.Component<{}, IState> {
                           </div>
                       </div>
                           :
-                      <Authentication/>
+                      <Authentication authController={this.authController.bind(this)}/>
               }
           </div>
       )
