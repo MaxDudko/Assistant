@@ -8,9 +8,7 @@ interface IProps {
 }
 
 const Authentication: React.FC<IProps> = (props) => {
-    const [ active, setActive ] = React.useState(null);
-
-
+    // const [ active, setActive ] = React.useState(null);
 
     return (
         <div className={style.Authentication + ' app-content'}>

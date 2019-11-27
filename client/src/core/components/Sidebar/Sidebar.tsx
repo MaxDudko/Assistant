@@ -22,7 +22,7 @@ const Sidebar: React.FC<IProps> = (props) => {
                      className={style.logo}
                 />
                 <span className={style.title}
-                      onClick={() => props.selectController()}
+                      onClick={() => props.selectController('modalSelected', null)}
                 >
                     Assistant
                 </span>

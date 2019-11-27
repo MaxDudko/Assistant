@@ -15,18 +15,18 @@ interface IProps {
 const Navbar: React.FC<IProps> = (props) => {
     return (
         <div className={style.Navbar}>
-            <div className={style.item} onClick={() => props.selectController("modal", "Notifications")}>
+            <div className={style.item} onClick={() => props.selectController("modalSelected", "Notifications")}>
                 <FontAwesomeIcon icon={faBell}
                                  title="Notifications"
                 />
                 <span>{props.notifications}</span>
             </div>
-            <div className={style.item} onClick={() => props.selectController("modal", "Settings")}>
+            <div className={style.item} onClick={() => props.selectController("modalSelected", "Settings")}>
                 <FontAwesomeIcon icon={faCogs}
                                  title="Settings"
                 />
             </div>
-            <div className={style.item} onClick={() => props.selectController("modal", "UserAccount")}>
+            <div className={style.item} onClick={() => props.selectController("modalSelected", "UserAccount")}>
                 {
                     props.avatar ?
                         <img src={props.avatar} alt={props.userName} title="User Account"/>
@@ -38,7 +38,7 @@ const Navbar: React.FC<IProps> = (props) => {
             </div>
             <div className={style.item} onClick={() => props.signOut()}>
                 <FontAwesomeIcon icon={faSignOutAlt}
-                                 title="Notifications"
+                                 title="Sign Out"
                 />
             </div>
         </div>
