@@ -1,1 +1,97 @@
-.Authentication {}
+.Authentication {
+  width: 100%;
+  height: 100vh;
+  .navbar {
+    height: 50px;
+    width: 100%;
+    background: #24292e;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .title_logo {
+      display: flex;
+      align-items: center;
+      .logo {
+        width: 36px;
+        height: 36px;
+      }
+      .title {
+        color: white;
+      }
+    }
+    .menu {
+      display: flex;
+      align-items: center;
+      color: white;
+      .btn {
+        width: 50px;
+        margin: 0 20px;
+        padding: 10px;
+        transform: skewX(-10deg);
+        text-align: center;
+        &:hover {
+          background: lighten(#24292e, 5%);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .form {
+    position: absolute;
+    right: 0;
+    z-index: 100;
+    background: lighten(#24292e, 5%);
+    color: white;
+    width: 25%;
+    height: 100vh;
+    padding-top: 60px;
+    h4 {
+      text-align: center;
+    }
+    .login, .register {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      label {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+      }
+      input {
+        padding: 5px 10px;
+        border-radius: 6px;
+        border: none;
+        outline: 0;
+      }
+      p {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        input {
+          margin-left: 10px;
+        }
+      }
+      button {
+        padding: 5px 10px;
+        width: 100px;
+        border-radius: 10px;
+        border: none;
+        outline: 0;
+        &:hover {
+          cursor: pointer;
+          background: lighten(#24292e, 25%);
+        }
+      }
+    }
+  }
+}
+@media (max-width: 720px) {
+  .Authentication {
+    .form {
+      width: 100%;
+    }
+  }
+}
