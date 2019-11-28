@@ -7,7 +7,9 @@ interface IProps {
 }
 
 const DashBoard: React.FC<IProps> = (props) => {
+
     let isCollapsed = props.isCollapsed ? style.collapsed_true : style.collapsed_false;
+
     return (
         <div className={style.DashBoard + ` ${isCollapsed}`}>
             {props.WidgetSelected}

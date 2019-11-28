@@ -7,7 +7,8 @@ const data: any = {
         birthday: "24.10.1991",
         location: "Ukraine, ZP-City",
         avatar: "https://media.licdn.com/dms/image/C4D03AQFI1XZ240JlXg/profile-displayphoto-shrink_100_100/0?e=1579737600&v=beta&t=JydIeQO26Zq4YkQlwx0Zwfml-g0MoEc3-8_hg9P-O_I",
-        email: "max2410zp@gmail.com"
+        email: "max2410zp@gmail.com",
+        registration: "10.11.2019"
     },
     SidebarItems: [
         {

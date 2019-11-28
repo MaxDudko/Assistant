@@ -1,7 +1,9 @@
 .Notifications {
   position: relative;
   top: 0;
-  width:100%;
+  right: 0;
+  //width:100%;
+  width: 500px;
   height: 100%;
   background: #FFF0F5;
   color: #24292e;
@@ -22,6 +24,14 @@
       .title {
         width: 100%;
         text-align: center;
+        .menu {
+          position: absolute;
+          right: 20px;
+          .btn {
+            cursor: pointer;
+            padding: 0 5px;
+          }
+        }
       }
       .subtitle {
         color: lighten(#24292e, 50%);
@@ -33,5 +43,11 @@
         word-wrap: break-word;
       }
     }
+  }
+}
+
+@media (max-width: 720px) {
+  .Notifications {
+    width: 100%;
   }
 }

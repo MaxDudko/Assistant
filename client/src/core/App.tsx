@@ -25,7 +25,7 @@ interface IState {
 
 class App extends React.Component<{}, IState> {
   state: IState = {
-      isLogin: false,
+      isLogin: true,
       isCollapsed: false,
       modalSelected: null,
       WidgetSelected: "DashBoard",
@@ -35,23 +35,13 @@ class App extends React.Component<{}, IState> {
       notifications: data.notifications
   };
 
-    componentDidMount () {
-        const script = document.createElement("script");
-
-        script.src = "https://maxdudko.github.io/Assistant/animation.js";
-        script.async = true;
-
-        document.body.appendChild(script);
-    }
-
-  authController() {
-      let login = !this.state.isLogin;
-      this.setState({isLogin: login})
+  authController(form:string, data:any) {
+      // API(auth) => if(true) => setState()
+      this.setState({isLogin: !this.state.isLogin})
   }
 
-  collapseController() {
-      let collapsed = !this.state.isCollapsed;
-      this.setState({isCollapsed: collapsed})
+  viewController() {
+      this.setState({isCollapsed: !this.state.isCollapsed})
   }
 
   selectController(key: any, selected: string) {
@@ -87,7 +77,7 @@ class App extends React.Component<{}, IState> {
                           />
                           <div className={style.wrapper}>
                               <Sidebar isCollapsed={this.state.isCollapsed}
-                                       collapseController={this.collapseController.bind(this)}
+                                       viewController={this.viewController.bind(this)}
                                        SidebarItems={this.state.SidebarItems}
                                        selectController={this.selectController.bind(this)}
                               />

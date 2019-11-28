@@ -1,7 +1,7 @@
 .UserAccount {
   position: relative;
   top: 0;
-  width:100%;
+  width: 500px;
   height: 100%;
   background: #FFF0F5;
   color: #24292e;
@@ -18,9 +18,24 @@
   }
   .body {
     padding: 20px;
-    span {
-      color: lighten(#24292e, 50%);
-      margin-right: 10px;
+    .item {
+
+      &_name {
+        color: lighten(#24292e, 50%);
+        margin-right: 10px;
+      }
+      &_icon {
+        margin-left: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        padding-bottom: 5px;
+      }
     }
+  }
+}
+
+@media (max-width: 720px) {
+  .UserAccount {
+    width: 100%;
   }
 }

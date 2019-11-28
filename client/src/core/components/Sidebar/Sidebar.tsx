@@ -4,11 +4,9 @@ import logo from "./../../../assets/img/mern.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCheck, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-
-
 interface IProps {
     isCollapsed: boolean,
-    collapseController: any,
+    viewController: any,
     SidebarItems: any,
     selectController: any,
 }
@@ -28,7 +26,7 @@ const Sidebar: React.FC<IProps> = (props) => {
                 </span>
                 <FontAwesomeIcon icon={faBars}
                                  className={style.collapsed_icon}
-                                 onClick={() => props.collapseController()}
+                                 onClick={() => props.viewController()}
                 />
             </div>
             <div className={style.list}>
@@ -41,7 +39,7 @@ const Sidebar: React.FC<IProps> = (props) => {
                             <p className={style.item} key={index}
                                onClick={() => props.selectController("WidgetSelected", name)}
                             >
-                                <FontAwesomeIcon icon={icon === "faPlus" ? faPlus : faCheck}
+                                <FontAwesomeIcon icon={faCheck}
                                                  className={style.item_icon}
                                                  title={name}
                                 />

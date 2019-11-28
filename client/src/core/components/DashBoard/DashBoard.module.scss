@@ -1,13 +1,14 @@
 .DashBoard {
-  width: 100%;
   height: 100%;
   background: lighten(#24292e, 80%);
 }
 .collapsed_true {
   padding-left: 50px;
+  width: calc(100% - 50px);
 }
 .collapsed_false {
   padding-left: 200px;
+  width: calc(100% - 200px);
 }
 
 @media (max-width: 720px) {
