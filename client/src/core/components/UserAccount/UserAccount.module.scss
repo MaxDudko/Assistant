@@ -1,0 +1,26 @@
+.UserAccount {
+  position: relative;
+  top: 0;
+  width:100%;
+  height: 100%;
+  background: #FFF0F5;
+  color: #24292e;
+  .head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    h4 {}
+    img {
+      border-radius: 100px;
+    }
+  }
+  .body {
+    padding: 20px;
+    span {
+      color: lighten(#24292e, 50%);
+      margin-right: 10px;
+    }
+  }
+}
