@@ -1,7 +1,6 @@
 import React from "react";
 import style from "./Authentication.module.scss";
 
-
 interface IProps {
     authController: any,
 }
@@ -123,16 +122,9 @@ const Authentication: React.FC<IProps> = (props) => {
                         :
                         Register
                 }
-
-                    {LoginData.login}
-                    {LoginData.password}
-                {RegisterData.password}
-                {RegisterData.confirmPassword}
-
             </div>
         </div>
     )
 };
 
 export default Authentication;
-

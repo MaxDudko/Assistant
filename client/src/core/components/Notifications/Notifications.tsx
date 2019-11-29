@@ -1,26 +1,24 @@
 import React from "react";
 import style from "./Notifications.module.scss";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBackspace, faMinusSquare } from "@fortawesome/free-solid-svg-icons";
+import {AiOutlineClose} from "react-icons/ai";
 
 interface IProps {
     notifications: any,
+    notificationsController: any,
 }
 
 const Notifications: React.FC<IProps> = (props) => {
+    let [isCollapsed, collapsed] = React.useState(false);
+
     const messages = () => {
         let list = props.notifications.map((m: any, i: number) => (
                 <div className={style.message} key={i}>
                     <div className={style.head}>
                         <b className={style.title}>
+                            <span className={style.id}>#{m.id}</span>
                             {m.title}
                             <span className={style.menu}>
-                                <FontAwesomeIcon icon={faMinusSquare}
-                                                 className={style.btn}
-                                />
-                                <FontAwesomeIcon icon={faBackspace}
-                                                 className={style.btn}
-                                />
+                                <AiOutlineClose className={style.btn} onClick={() => props.notificationsController(m.id)} />
                             </span>
                         </b>
                         <span className={style.subtitle}>from: <a href="/#">{m.from}</a></span>

@@ -12,47 +12,49 @@ const data: any = {
     },
     SidebarItems: [
         {
-            name: "DashBoard",
-            icon: "faCheck"
+            name: "Dash Board",
+            icon: "MdDashboard",
+            module: "DashBoard"
         },
         {
-            name: "Contacts",
-            icon: "faPlus"
+            name: "Task Manger",
+            icon: "FaTasks",
+            module: "TaskManager"
         },
         {
-            name: "Task List",
-            icon: "faCheck"
+            name: "PersonalFinance",
+            icon: "MdMonetizationOn",
+            module: "PersonalFinance"
         },
-        {
-            name: "Calendar",
-            icon: "faPlus"
-        },
-        {
-            name: "Notifications",
-            icon: "faCheck"
-        }
+
     ],
     notifications: [
         {
+            id: 1,
             title: "Welcome",
             from: "Assistant",
             to: "Max",
             date: "22.11.2019 12:00",
-            text: "Welcome to Assistant!!! Glad to see you here 😊😊😊"
+            text: "Welcome to Assistant!!! Glad to see you here 😊😊😊",
+            check: false,
         },
         {
+            id: 2,
             title: "About",
             from: "Assistant",
             to: "Max",
             date: "22.11.2019 14:10",
-            text: `All what you need in one application... Personal dashboard with convenient customizable interface, include: customizable interface options, different widgets: to-do-list, calendar, weather, news, social networks, payment, etc... notifications, data storage, etc... Docs: https://docs.google.com/document/d/133I9VMq4_CGjn6BMtMuWr7puimJ9lBa3fbLjTqe1pJs/edit Repository: https://github.com/MaxDudko/Assistant`
+            text: `All what you need in one application... Personal dashboard with convenient customizable interface, include: customizable interface options, different widgets: to-do-list, calendar, weather, news, social networks, payment, etc... notifications, data storage, etc... Docs: https://docs.google.com/document/d/133I9VMq4_CGjn6BMtMuWr7puimJ9lBa3fbLjTqe1pJs/edit Repository: https://github.com/MaxDudko/Assistant`,
+            check: false,
         },
         {
+            id: 3,
             title: "Lorem Ipsum",
             from: "Lorem Fish",
             to: "Max",
             date: "22.11.2019 16:25",
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            check: false,
         }
     ]
 };

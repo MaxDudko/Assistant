@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './App.module.scss';
+
 import Authentication from "./components/Authentication/Authentication";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -15,8 +16,8 @@ interface IState {
     user: any,
     isCollapsed: boolean,
     SidebarItems: any,
-    WidgetSelected: string,
-    SettingsSelected: string | null,
+    moduleSelected: string,
+    settingsSelected: string | null,
     notifications: any,
     modalSelected: string | null,
     [key: string]: any
@@ -28,8 +29,8 @@ class App extends React.Component<{}, IState> {
       isLogin: true,
       isCollapsed: false,
       modalSelected: null,
-      WidgetSelected: "DashBoard",
-      SettingsSelected: null,
+      moduleSelected: "DashBoard",
+      settingsSelected: null,
       user: data.user,
       SidebarItems: data.SidebarItems,
       notifications: data.notifications
@@ -45,21 +46,56 @@ class App extends React.Component<{}, IState> {
   }
 
   selectController(key: any, selected: string) {
-      this.state[key] === selected ?
-          this.setState({[key]: null})
-          :
+      if(key === "modalSelected") {
+          this.state[key] === selected ?
+              this.setState({[key]: null})
+              :
+              this.setState({[key]: selected})
+      } else {
           this.setState({[key]: selected})
+      }
   }
 
   openModal() {
       let modal = this.state.modalSelected;
       const allModals: { [key: string]: any } = {
-          Notifications: <Notifications notifications={this.state.notifications}/>,
-          Settings: <Settings/>,
-          UserAccount: <UserAccount user={this.state.user}/>,
+          Notifications: <Notifications notifications={this.state.notifications}
+                                        notificationsController={this.notificationsController.bind(this)}
+          />,
+          Settings: <Settings selectController={this.selectController.bind(this)}
+                              settingsSelected={this.state.settingsSelected}
+          />,
+          UserAccount: <UserAccount user={this.state.user}
+                                    userAccountController={this.userAccountController.bind(this)}
+          />,
       };
       if(modal === null) return;
       return allModals[modal];
+  }
+
+  // Some problem here
+  notificationsController(id: number) {
+      let del;
+      this.state.notifications.map((el:any, i: number) => {
+          if(el["id"] === id) {
+              console.log((el["id"] === id));
+              del = i;
+          }
+      });
+      console.log(del);
+      let newState = this.state.notifications.splice(del, 1);
+      console.log(newState);
+      this.setState({notifications: newState})
+  }
+
+  // Need to complete
+  userAccountController(key:string, value:string) {
+      this.setState({
+          user: {
+              ...this.state.user,
+              key: value
+          }
+      })
   }
 
    render() {
@@ -81,7 +117,7 @@ class App extends React.Component<{}, IState> {
                                        SidebarItems={this.state.SidebarItems}
                                        selectController={this.selectController.bind(this)}
                               />
-                              <DashBoard WidgetSelected={this.state.WidgetSelected}
+                              <DashBoard moduleSelected={this.state.moduleSelected}
                                          isCollapsed={this.state.isCollapsed}
                               />
                               {
