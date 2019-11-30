@@ -9,17 +9,17 @@ import Notifications from "./components/Notifications/Notifications";
 import Settings from "./components/Settings/Settings";
 import UserAccount from "./components/UserAccount/UserAccount";
 
-import data from "./App.data";
+import data from "./data";
 
 interface IState {
     isLogin: boolean,
-    user: any,
-    isCollapsed: boolean,
+    userData: any,
     SidebarItems: any,
-    moduleSelected: string,
-    settingsSelected: string | null,
-    notifications: any,
+    notifications:  any,
+    isCollapsed: boolean,
     modalSelected: string | null,
+    settingsSelected: string | null,
+    moduleSelected: string,
     [key: string]: any
 
 }
@@ -27,13 +27,13 @@ interface IState {
 class App extends React.Component<{}, IState> {
   state: IState = {
       isLogin: true,
+      userData: data.user,
+      SidebarItems: data.SidebarItems,
+      notifications: data.notifications,
       isCollapsed: false,
       modalSelected: null,
-      moduleSelected: "DashBoard",
       settingsSelected: null,
-      user: data.user,
-      SidebarItems: data.SidebarItems,
-      notifications: data.notifications
+      moduleSelected: "DashBoard",
   };
 
   authController(form:string, data:any) {
@@ -58,17 +58,22 @@ class App extends React.Component<{}, IState> {
 
   openModal() {
       let modal = this.state.modalSelected;
+
       const allModals: { [key: string]: any } = {
           Notifications: <Notifications notifications={this.state.notifications}
                                         notificationsController={this.notificationsController.bind(this)}
           />,
+
           Settings: <Settings selectController={this.selectController.bind(this)}
                               settingsSelected={this.state.settingsSelected}
           />,
-          UserAccount: <UserAccount user={this.state.user}
+
+          UserAccount: <UserAccount userData={this.state.userData}
                                     userAccountController={this.userAccountController.bind(this)}
           />,
+
       };
+
       if(modal === null) return;
       return allModals[modal];
   }
@@ -103,8 +108,8 @@ class App extends React.Component<{}, IState> {
                   this.state.isLogin ?
                       <div>
                           <Navbar isLogin={this.state.isLogin}
-                                  userName={this.state.user.userName}
-                                  avatar={this.state.user.avatar}
+                                  userName={this.state.userData.userName}
+                                  avatar={this.state.userData.avatar}
                                   notifications={this.state.notifications.length}
                                   selectController={this.selectController.bind(this)}
                                   signOut={this.authController.bind(this)}
