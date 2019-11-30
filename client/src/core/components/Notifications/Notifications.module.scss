@@ -1,15 +1,33 @@
 .Notifications {
   position: relative;
   top: 0;
-  width:100%;
+  right: 0;
+  //width:100%;
+  width: 500px;
   height: 100%;
-  background: #FFF0F5;
+  //background: #FFF0F5;
+  background: linear-gradient(
+                  to right top,
+                  rgba(209, 107, 165, .5),
+                  rgba(199, 119, 185, .5),
+                  rgba(186, 131, 202, .5),
+                  rgba(170, 143, 216, .5),
+                  rgba(154, 154, 225, .5),
+                  rgba(138, 167, 236, .5),
+                  rgba(121, 179, 244, .5),
+                  rgba(105, 191, 248, .5),
+                  rgba(82, 207, 254, .5),
+                  rgba(65, 223, 255, .5),
+                  rgba(70, 238, 250, .5),
+                  rgba(95, 251, 241, .5)
+  );
   color: #24292e;
   h2 {
     text-align: center;
   }
   .message {
-    background: #FFE4E1;
+    //background: #FFE4E1;
+    background: rgba(255, 215, 255, .5);
     margin: 10px;
     padding: 10px;
     border: 1px dotted coral;
@@ -19,9 +37,24 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      margin-bottom: 10px;
       .title {
         width: 100%;
+        display: flex;
+        justify-content: space-between;
         text-align: center;
+        .id {
+          color: lighten(#24292e, 50%);
+          font-size: 14px;
+        }
+        .menu {
+          //position: absolute;
+          //right: 20px;
+          .btn {
+            cursor: pointer;
+            padding: 0 5px;
+          }
+        }
       }
       .subtitle {
         color: lighten(#24292e, 50%);
@@ -31,6 +64,17 @@
     .body {
       p {
         word-wrap: break-word;
+      }
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .Notifications {
+    width: 100%;
+    .message {
+      .body {
+        padding: 10px;
       }
     }
   }

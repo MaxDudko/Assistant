@@ -1,55 +1,32 @@
 .Authentication {
   width: 100%;
   height: 100vh;
-  .navbar {
-    height: 50px;
-    width: 100%;
-    background: #24292e;
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .title_logo {
-      display: flex;
-      align-items: center;
-      .logo {
-        width: 36px;
-        height: 36px;
-      }
-      .title {
-        color: white;
-      }
-    }
-    .menu {
-      display: flex;
-      align-items: center;
-      color: white;
-      .btn {
-        width: 50px;
-        margin: 0 20px;
-        padding: 10px;
-        transform: skewX(-10deg);
-        text-align: center;
-        &:hover {
-          background: lighten(#24292e, 5%);
-          cursor: pointer;
-        }
-      }
-    }
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .form {
     position: absolute;
-    right: 0;
-    z-index: 100;
-    background: lighten(#24292e, 5%);
+    z-index: 1000;
+    left: 35%;
+    right: 35%;
+    background: rgba(36, 41, 46, .5);
     color: white;
-    width: 25%;
-    height: 100vh;
-    padding-top: 60px;
-    h4 {
+    width: 30%;
+    height: 500px;
+    padding: 60px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1, h4 {
       text-align: center;
+    }
+    h4 span {
+      color: lime;
+      cursor: pointer;
+      padding: 0 10px;
+      &:hover {
+      }
     }
     .login, .register {
       display: flex;
@@ -61,6 +38,7 @@
         margin-top: 10px;
       }
       input {
+        margin-top: 5px;
         padding: 5px 10px;
         border-radius: 6px;
         border: none;
@@ -76,7 +54,7 @@
       }
       button {
         padding: 5px 10px;
-        width: 100px;
+        width: 150px;
         border-radius: 10px;
         border: none;
         outline: 0;
@@ -85,13 +63,25 @@
           background: lighten(#24292e, 25%);
         }
       }
+      .inCorrect {
+        border: 1px solid red;
+      }
+      .correct {
+        border: none;
+      }
     }
   }
 }
+
 @media (max-width: 720px) {
   .Authentication {
     .form {
+      left: auto;
+      right: auto;
       width: 100%;
+      height: 100vh;
+      padding: 0;
+      border-radius: 0;
     }
   }
 }

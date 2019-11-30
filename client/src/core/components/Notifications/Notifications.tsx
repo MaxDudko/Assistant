@@ -1,22 +1,31 @@
 import React from "react";
 import style from "./Notifications.module.scss";
+import {AiOutlineClose} from "react-icons/ai";
 
 interface IProps {
     notifications: any,
+    notificationsController: any,
 }
 
 const Notifications: React.FC<IProps> = (props) => {
+
     const messages = () => {
-        let list = props.notifications.map((m: any, i: number) => (
-                <div className={style.message} key={i}>
+        let list = props.notifications.map((message: any, index: number) => (
+                <div className={style.message} key={index}>
                     <div className={style.head}>
-                        <b className={style.title}>{m.title}</b>
-                        <span className={style.subtitle}>from: <a href="/#">{m.from}</a></span>
-                        <span className={style.subtitle}>{m.date}</span>
+                        <b className={style.title}>
+                            <span className={style.id}>#{message.id}</span>
+                            {message.title}
+                            <span className={style.menu}>
+                                <AiOutlineClose className={style.btn} onClick={() => props.notificationsController(message.id)} />
+                            </span>
+                        </b>
+                        <span className={style.subtitle}>from: <a href="/#">{message.from}</a></span>
+                        <span className={style.subtitle}>{message.date}</span>
                     </div>
                     <div className={style.body}>
                         <p>
-                            {m.text}
+                            {message.text}
                         </p>
                     </div>
                 </div>
