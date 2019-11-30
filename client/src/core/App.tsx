@@ -94,8 +94,8 @@ class App extends React.Component<{}, IState> {
 
   userAccountController(key:string, value:string) {
       this.setState({
-          user: {
-              ...this.state.user,
+          userData: {
+              ...this.state.userData,
               [key]: value
           }
       })

@@ -30,8 +30,8 @@ const UserAccount: React.FC<IProps> = (props) => {
                                  title="Change Photo"
                                  onClick={() => avatarChange(!avatar)}
                     />
-                    <input type="file" style={{display: avatar?"block":"none"}}
-                           onChange={(e) => props.userAccountController("avatar", e.target.value)}/>
+                    {/*<input type="file" style={{display: avatar?"block":"none"}}*/}
+                    {/*       onChange={(e) => props.userAccountController("avatar", e.target.value)}/>*/}
                 </div>
                 <h4>{props.userData.firstName} {props.userData.lastName}</h4>
             </div>
