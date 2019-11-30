@@ -41,6 +41,7 @@
         cursor: pointer;
       }
       .item_icon {
+        font-size: 20px;
         padding: 10px;
         cursor: pointer;
       }
@@ -81,17 +82,22 @@
 }
 @media (max-width: 720px) {
   .Sidebar {
-    width: auto;
     .header {
       .logo {
         display: none;
       }
       .title {
         margin-left: 5px;
+        font-size: 16px;
       }
     }
     .list {
       padding-right: 5px;
+      .item {
+        .item_icon {
+          padding: 5px;
+        }
+      }
     }
   }
   .collapsed_true {
@@ -101,5 +107,8 @@
         left: 35px;
       }
     }
+  }
+  .collapsed_false {
+    width: 150px;
   }
 }

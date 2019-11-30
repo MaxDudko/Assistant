@@ -1,9 +1,24 @@
 .UserAccount {
   position: relative;
   top: 0;
-  width:100%;
+  width: 500px;
   height: 100%;
-  background: #FFF0F5;
+  //background: #FFF0F5;
+  background: linear-gradient(
+                  to right top,
+                  rgba(209, 107, 165, .5),
+                  rgba(199, 119, 185, .5),
+                  rgba(186, 131, 202, .5),
+                  rgba(170, 143, 216, .5),
+                  rgba(154, 154, 225, .5),
+                  rgba(138, 167, 236, .5),
+                  rgba(121, 179, 244, .5),
+                  rgba(105, 191, 248, .5),
+                  rgba(82, 207, 254, .5),
+                  rgba(65, 223, 255, .5),
+                  rgba(70, 238, 250, .5),
+                  rgba(95, 251, 241, .5)
+  );
   color: #24292e;
   .head {
     display: flex;
@@ -18,9 +33,28 @@
   }
   .body {
     padding: 20px;
-    span {
-      color: lighten(#24292e, 50%);
-      margin-right: 10px;
+    .item {
+
+      &_name {
+        color: lighten(#24292e, 30%);
+        margin-right: 10px;
+      }
+      &_value {}
+      &_icon {
+        margin-left: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        padding-bottom: 5px;
+      }
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .UserAccount {
+    width: 100%;
+    .body {
+      padding: 10px;
     }
   }
 }

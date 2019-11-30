@@ -1,9 +1,25 @@
 .DashBoard {
-  width: 100%;
   height: 100%;
   background: lighten(#24292e, 80%);
+  overflow: hidden;
+  .DashBoardWidgets {
+    display: flex;
+  }
+}
+.collapsed_true {
+  padding-left: 40px;
+  width: calc(100% - 40px);
+}
+.collapsed_false {
+  padding-left: 200px;
+  width: calc(100% - 200px);
 }
 
 @media (max-width: 720px) {
-  .DashBoard {}
+  .DashBoard {
+  }
+  .collapsed_false {
+    padding-left: 150px;
+    width: calc(100% - 150px);
+  }
 }

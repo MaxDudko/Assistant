@@ -1,7 +1,6 @@
 import React from "react";
 import style from "./Navbar.module.scss";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt, faCogs, faBell, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FaSignOutAlt, FaCogs, FaBell, FaUser } from "react-icons/fa";
 
 interface IProps {
     isLogin: boolean,
@@ -9,37 +8,29 @@ interface IProps {
     userName: string,
     notifications: number,
     avatar?: string,
-    modalController: any
+    selectController: any
 }
 
 const Navbar: React.FC<IProps> = (props) => {
     return (
         <div className={style.Navbar}>
-            <div className={style.item} onClick={() => props.modalController("Notifications")}>
-                <FontAwesomeIcon icon={faBell}
-                                 title="Notifications"
-                />
+            <div className={style.item} onClick={() => props.selectController("modalSelected", "Notifications")}>
+                <FaBell title="Notifications" />
                 <span>{props.notifications}</span>
             </div>
-            <div className={style.item} onClick={() => props.modalController("Settings")}>
-                <FontAwesomeIcon icon={faCogs}
-                                 title="Settings"
-                />
+            <div className={style.item} onClick={() => props.selectController("modalSelected", "Settings")}>
+                <FaCogs title="Settings" />
             </div>
-            <div className={style.item} onClick={() => props.modalController("UserAccount")}>
+            <div className={style.item} onClick={() => props.selectController("modalSelected", "UserAccount")}>
                 {
                     props.avatar ?
                         <img src={props.avatar} alt={props.userName} title="User Account"/>
                         :
-                        <FontAwesomeIcon icon={faUser}
-                                         title="User Account"
-                        />
+                        <FaUser title="User Account" />
                 }
             </div>
             <div className={style.item} onClick={() => props.signOut()}>
-                <FontAwesomeIcon icon={faSignOutAlt}
-                                 title="Notifications"
-                />
+                <FaSignOutAlt title="Sign Out" />
             </div>
         </div>
     )
