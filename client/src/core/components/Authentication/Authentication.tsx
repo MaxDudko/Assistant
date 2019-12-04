@@ -8,12 +8,11 @@ interface IProps {
 const Authentication: React.FC<IProps> = (props) => {
     let [form, selectForm] = React.useState("login");
     const [LoginData, setLogin] = React.useState({
-        login: "",
+        email: "",
         password: ""
     });
     const [RegisterData, setRegister] = React.useState({
         email: "",
-        login: "",
         password: "",
         confirmPassword: ""
     });
@@ -48,9 +47,9 @@ const Authentication: React.FC<IProps> = (props) => {
         <div className={style.login}>
             <h4>Login:</h4>
             <label>
-                Login:
-                <input type="text" placeholder="UserName"
-                       onChange={(e) => setLogin({...LoginData, login: e.target.value})}
+                Email:
+                <input type="text" placeholder="UserEmail@example.com"
+                       onChange={(e) => setLogin({...LoginData, email: e.target.value})}
                 />
             </label>
             <label>
@@ -72,14 +71,8 @@ const Authentication: React.FC<IProps> = (props) => {
             <h4>Register:</h4>
             <label>
                 Email:
-                <input type="email" placeholder="username@email.com"
+                <input type="email" placeholder="UserEmail@example.com"
                        onChange={(e) => setRegister({...RegisterData, email: e.target.value})}
-                />
-            </label>
-            <label>
-                Login:
-                <input type="text" placeholder="UserName"
-                       onChange={(e) => setRegister({...RegisterData, login: e.target.value})}
                 />
             </label>
             <label>

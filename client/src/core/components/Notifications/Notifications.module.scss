@@ -4,34 +4,50 @@
   right: 0;
   //width:100%;
   width: 500px;
-  height: 100%;
-  //background: #FFF0F5;
-  background: linear-gradient(
-                  to right top,
-                  rgba(209, 107, 165, .5),
-                  rgba(199, 119, 185, .5),
-                  rgba(186, 131, 202, .5),
-                  rgba(170, 143, 216, .5),
-                  rgba(154, 154, 225, .5),
-                  rgba(138, 167, 236, .5),
-                  rgba(121, 179, 244, .5),
-                  rgba(105, 191, 248, .5),
-                  rgba(82, 207, 254, .5),
-                  rgba(65, 223, 255, .5),
-                  rgba(70, 238, 250, .5),
-                  rgba(95, 251, 241, .5)
-  );
-  color: #24292e;
+  min-height: 100%;
+  //max-height: 100vh;
+  overflow-y: scroll;
+  color: white;
+  background: lighten(#24292e, 5%);
+  //background: linear-gradient(
+  //                to right top,
+  //                rgba(209, 107, 165, .5),
+  //                rgba(199, 119, 185, .5),
+  //                rgba(186, 131, 202, .5),
+  //                rgba(170, 143, 216, .5),
+  //                rgba(154, 154, 225, .5),
+  //                rgba(138, 167, 236, .5),
+  //                rgba(121, 179, 244, .5),
+  //                rgba(105, 191, 248, .5),
+  //                rgba(82, 207, 254, .5),
+  //                rgba(65, 223, 255, .5),
+  //                rgba(70, 238, 250, .5),
+  //                rgba(95, 251, 241, .5)
+  //);
+  //color: #24292e;
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px lighten(#24292e, 5%);
+    background-color: lighten(#24292e, 5%);
+  }
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: lighten(#24292e, 5%);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: lighten(#24292e, 50%);
+    border-radius: 20px;
+  }
   h2 {
     text-align: center;
   }
   .message {
-    //background: #FFE4E1;
-    background: rgba(255, 215, 255, .5);
+    background: lighten(#24292e, 10%);
+    //background: rgba(255, 215, 255, .5);
     margin: 10px;
     padding: 10px;
-    border: 1px dotted coral;
+    border: 1px dotted #24292e;
     border-radius: 10px;
+    min-height: fit-content;
     .head {
       display: flex;
       justify-content: space-between;
@@ -63,7 +79,7 @@
     }
     .body {
       p {
-        word-wrap: break-word;
+        word-wrap: normal;
       }
     }
   }

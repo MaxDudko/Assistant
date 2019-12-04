@@ -1,14 +1,63 @@
-import Express, { Application, Request, Response } from "express";
+import Express, { Request, Response, NextFunction } from "express";
 import Mongoose from "mongoose";
+import path from "path";
 import bodyParser from "body-parser";
+import session from "express-session"
+import cors from "cors";
+import errorHandler from "errorhandler";
+// import * as passport from "./config/passport";
+import Router from "./api/index";
+// import Users from "./models/Users";
 
-const app: Application = Express();
-const port: number = 4000;
+const App = Express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+App.use(cors());
+App.use(require('morgan')('dev'));
+App.use(bodyParser.urlencoded({
+    extended: true
+}));
+App.use(bodyParser.json());
+App.use(Express.static(
+    path.join(__dirname, 'public')
+));
+App.use(session({
+    secret: 'passport-tutorial',
+    cookie: {
+        maxAge: 60000
+    },
+    resave: false,
+    saveUninitialized: false
+}));
 
-Mongoose.connect('mongodb://localhost:27017/AssistantDB', {
+const isProduction = process.env.NODE_ENV === 'production';
+if(!isProduction) {
+    App.use(errorHandler());
+    App.use((err: any, req: Request, res: Response, next: NextFunction) => {
+        res.status(err.status || 500);
+
+        res.json({
+            errors: {
+                message: err.message,
+                error: err,
+            },
+        });
+    });
+}
+
+App.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    res.status(err.status || 500);
+
+    res.json({
+        errors: {
+            message: err.message,
+            error: {},
+        },
+    });
+});
+
+
+Mongoose.Promise = global.Promise;
+Mongoose.connect('mongodb://localhost/AssistantDB',  {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -18,11 +67,11 @@ Mongoose.connect('mongodb://localhost:27017/AssistantDB', {
     .catch(() => {
         console.log('Mongodb connection failed...')
     });
+Mongoose.set('debug', true);
+require('./models/Users');
+require('./config/passport');
+App.use(require('./api/index'));
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Virtual Assistant with many useful functions...');
-});
-
-app.listen(port, () => {
-    console.log(`Server listening on: http://localhost:${port}`)
+App.listen(4000, () => {
+    console.log('Server running on http://localhost:4000/');
 });

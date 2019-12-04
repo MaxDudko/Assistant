@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './App.module.scss';
+import axios from 'axios';
 
 import Authentication from "./components/Authentication/Authentication";
 import Navbar from "./components/Navbar/Navbar";
@@ -36,9 +37,27 @@ class App extends React.Component<{}, IState> {
       moduleSelected: "DashBoard",
   };
 
-  authController(form:string, data:any) {
-      // API(auth) => if(true) => setState()
-      this.setState({isLogin: !this.state.isLogin})
+  authController(form:string, data:object) {
+      if(!form) {
+          this.setState({isLogin: !this.state.isLogin});
+          return;
+      }
+      console.log(data);
+
+      axios.post(`http://localhost:4000/auth/${form}/`, {
+          "user": {
+              ...data
+          }
+      })
+          .then(function (response) {
+              console.log(response);
+              authReady();
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+
+      const authReady = () => this.setState({isLogin: !this.state.isLogin});
   }
 
   viewController() {
