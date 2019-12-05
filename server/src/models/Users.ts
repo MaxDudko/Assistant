@@ -2,14 +2,23 @@ import Mongoose, {Schema} from "mongoose";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 
+import ProfileSchema from "./ProfileSchema";
+import SettingsSchema from "./SettingsSchema";
+import NotificationsSchema from "./NotificationsSchema";
+
 interface IUser extends Mongoose.Document{
     email: string;
     hash: string;
     salt: string;
     password: string;
+    registrationDate: string;
+
+    profile: any,
+    settings: any,
+    notifications: any,
 
     setPassword(password: string): any;
-    validatePassword(password: string): any;
+    validatePassword(password: string): boolean;
     generateJWT(): any;
     toAuthJSON(): any;
 }
@@ -22,6 +31,17 @@ const UsersSchema: Schema = new Mongoose.Schema({
     },
     hash: String,
     salt: String,
+
+    registrationDate: {
+        type: Date,
+        required: true,
+        default: Date.now,
+    },
+
+    profile: ProfileSchema,
+    settings: SettingsSchema,
+    notifications: NotificationsSchema,
+
 });
 
 UsersSchema.methods.setPassword = function(password: string) {

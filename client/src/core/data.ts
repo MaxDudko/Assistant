@@ -17,12 +17,12 @@ const data: any = {
             module: "DashBoard"
         },
         {
-            name: "Task Manger",
+            name: "Task Manager",
             icon: "FaTasks",
             module: "TaskManager"
         },
         {
-            name: "PersonalFinance",
+            name: "Personal Finance",
             icon: "MdMonetizationOn",
             module: "PersonalFinance"
         },

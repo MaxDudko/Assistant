@@ -1,15 +1,21 @@
 import passport from "passport";
 import {Request, Response, NextFunction} from "express";
-import { User } from "../../models/Users";
+import { User } from "../models/Users";
 
-const AuthController = {
-    registerController(req: Request, res: Response) {
+export interface IAppRequest extends Request {
+    payload?: any;
+}
+
+const authController = {
+
+    register(req: Request, res: Response, next: NextFunction) {
         const { body: { user } } = req;
         console.log(req.body);
+
         if(!user.email) {
             return res.status(422).json({
                 errors: {
-                    email: 'is required',
+                    email: 'is Required',
                 },
             });
         }
@@ -17,7 +23,7 @@ const AuthController = {
         if(!user.password) {
             return res.status(422).json({
                 errors: {
-                    password: 'is required',
+                    password: 'is Required',
                 },
             });
         }
@@ -30,14 +36,14 @@ const AuthController = {
             .then(() => res.json({ user: finalUser.toAuthJSON() }));
     },
 
-    loginController(req: Request, res: Response, next: NextFunction) {
+    login(req: Request, res: Response, next: NextFunction) {
         const { body: { user } } = req;
         console.log(req.body);
 
         if(!user.email) {
             return res.status(422).json({
                 errors: {
-                    email: 'is required',
+                    email: 'is Required',
                 },
             });
         }
@@ -45,7 +51,7 @@ const AuthController = {
         if(!user.password) {
             return res.status(422).json({
                 errors: {
-                    password: 'is required',
+                    password: 'is Required',
                 },
             });
         }
@@ -62,12 +68,17 @@ const AuthController = {
                 return res.json({ user: user.toAuthJSON() });
             }
 
-            return status(400).info;
+            return res.status(400).json({
+                errors: {
+                    password: 'is Required',
+                },
+            });
         })(req, res, next);
     },
 
-    getCurrentController(req: Request, res: Response, next: NextFunction) {
+    check(req: IAppRequest, res: Response, next: NextFunction) {
         const { payload: { id } } = req;
+        console.log(req.payload);
 
         return User.findById(id)
             .then((user) => {
@@ -78,6 +89,7 @@ const AuthController = {
                 return res.json({ user: user.toAuthJSON() });
             });
     },
+    
 };
 
-export default AuthController;
+export default authController;

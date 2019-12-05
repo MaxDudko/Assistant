@@ -10,6 +10,7 @@ passport.use(new LocalStrategy({
 }, (email: string, password: string, done: any) => {
     Users.findOne({email})
         .then((user) => {
+            // @ts-ignore
             if(!user || !user.validatePassword(password)) {
                 return done(null, false, {
                     errors: {

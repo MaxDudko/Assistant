@@ -13,7 +13,12 @@ import UserAccount from "./components/UserAccount/UserAccount";
 import data from "./data";
 
 interface IState {
-    isLogin: boolean,
+    isLogin: string | null,
+
+    // profile: any,
+    // settings: any,
+    // notifications: any,
+
     userData: any,
     SidebarItems: any,
     notifications:  any,
@@ -27,7 +32,12 @@ interface IState {
 
 class App extends React.Component<{}, IState> {
   state: IState = {
-      isLogin: true,
+      isLogin: window.localStorage.getItem('token'),
+
+      // profile: [],
+      // settings: [],
+      // notifications: [],
+
       userData: data.user,
       SidebarItems: data.SidebarItems,
       notifications: data.notifications,
@@ -37,11 +47,32 @@ class App extends React.Component<{}, IState> {
       moduleSelected: "DashBoard",
   };
 
-  authController(form:string, data:object) {
+  componentDidMount(): void {
+      const token = this.state.isLogin;
+      console.log(token);
+      axios.get('http://localhost:4000/auth/get/', {
+          headers: {
+              Authorization: `Token ${token}`
+          }
+      })
+          .then(function (response) {
+              console.log(response);
+          })
+          .catch(function (error) {
+              console.log(error);
+              window.localStorage.clear();
+          });
+  }
+
+    authController(form:string, data:object) {
+      // logout
       if(!form) {
-          this.setState({isLogin: !this.state.isLogin});
+          window.localStorage.clear();
+          this.setState({isLogin: null});
           return;
       }
+
+      // login/register
       console.log(data);
 
       axios.post(`http://localhost:4000/auth/${form}/`, {
@@ -51,13 +82,14 @@ class App extends React.Component<{}, IState> {
       })
           .then(function (response) {
               console.log(response);
+              window.localStorage.setItem('token', response.data.user.token);
               authReady();
           })
           .catch(function (error) {
               console.log(error);
           });
 
-      const authReady = () => this.setState({isLogin: !this.state.isLogin});
+      const authReady = () => this.setState({isLogin: window.localStorage.getItem('token')});
   }
 
   viewController() {

@@ -6,7 +6,7 @@ import session from "express-session"
 import cors from "cors";
 import errorHandler from "errorhandler";
 // import * as passport from "./config/passport";
-import Router from "./api/index";
+import Router from "./routes/index";
 // import Users from "./models/Users";
 
 const App = Express();
@@ -21,7 +21,7 @@ App.use(Express.static(
     path.join(__dirname, 'public')
 ));
 App.use(session({
-    secret: 'passport-tutorial',
+    secret: Math.random().toString(36),
     cookie: {
         maxAge: 60000
     },
@@ -70,7 +70,7 @@ Mongoose.connect('mongodb://localhost/AssistantDB',  {
 Mongoose.set('debug', true);
 require('./models/Users');
 require('./config/passport');
-App.use(require('./api/index'));
+App.use(require('./routes/index'));
 
 App.listen(4000, () => {
     console.log('Server running on http://localhost:4000/');
