@@ -9,12 +9,14 @@ const Authentication: React.FC<IProps> = (props) => {
     let [form, selectForm] = React.useState("login");
     const [LoginData, setLogin] = React.useState({
         email: "",
-        password: ""
+        password: "",
+        remember: false,
     });
     const [RegisterData, setRegister] = React.useState({
         email: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        remember: false,
     });
     let [isCorrect, corrected] = React.useState(true);
 
@@ -59,7 +61,9 @@ const Authentication: React.FC<IProps> = (props) => {
                 />
             </label>
             <p>
-                <input type="checkbox" />
+                <input type="checkbox" defaultChecked={LoginData.remember}
+                       onChange={(e) => setLogin({...LoginData, remember: e.target.checked})}
+                />
                  Remember Me
             </p>
             <button onClick={() => authSubmit("login")}>Login</button>
@@ -88,7 +92,9 @@ const Authentication: React.FC<IProps> = (props) => {
                 />
             </label>
             <p>
-                <input type="checkbox" />
+                <input type="checkbox" defaultChecked={RegisterData.remember}
+                       onChange={(e) => setLogin({...RegisterData, remember: e.target.checked})}
+                />
                  Remember Me
             </p>
             <button onClick={() => authSubmit("register")}>Register</button>

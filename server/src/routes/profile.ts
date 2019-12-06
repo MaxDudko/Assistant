@@ -5,7 +5,7 @@ const {get, set} = profileController;
 
 const profileRouter = Express.Router();
 
-profileRouter.get('/get', get);
+profileRouter.post('/get', get);
 profileRouter.post('/set', set);
 
 export default profileRouter;

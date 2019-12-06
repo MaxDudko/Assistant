@@ -31,6 +31,9 @@ const UsersSchema: Schema = new Mongoose.Schema({
     },
     hash: String,
     salt: String,
+    remember: {
+        type: Boolean,
+    },
 
     registrationDate: {
         type: Date,

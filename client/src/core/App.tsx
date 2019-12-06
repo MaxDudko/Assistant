@@ -15,7 +15,7 @@ import data from "./data";
 interface IState {
     isLogin: string | null,
 
-    // profile: any,
+    profile: any,
     // settings: any,
     // notifications: any,
 
@@ -34,7 +34,7 @@ class App extends React.Component<{}, IState> {
   state: IState = {
       isLogin: window.localStorage.getItem('token'),
 
-      // profile: [],
+      profile: [],
       // settings: [],
       // notifications: [],
 
@@ -49,24 +49,39 @@ class App extends React.Component<{}, IState> {
 
   componentDidMount(): void {
       const token = this.state.isLogin;
+      // const remember = (value: boolean) => this.setState({isRemember: value});
       console.log(token);
       axios.get('http://localhost:4000/auth/get/', {
           headers: {
               Authorization: `Token ${token}`
           }
       })
-          .then(function (response) {
+          .then((response) => {
               console.log(response);
+              // remember(response.data.user.remember);
           })
-          .catch(function (error) {
+          .catch((error) => {
               console.log(error);
               window.localStorage.clear();
           });
+      const getProfileData = (data: any) => this.setState({profile: data});
+
+      if(this.state.isLogin) axios.post('http://localhost:4000/profile/get/', {
+          "id": "5dea32625ad09c2cd7c7809a"
+      })
+          .then((response) => {
+              console.log(response);
+              getProfileData(response);
+          })
+          .catch((error) => {
+              console.log(error)
+          })
   }
 
-    authController(form:string, data:object) {
+    authController(form:string, data:any) {
       // logout
       if(!form) {
+          // if(!this.state.isRemember)
           window.localStorage.clear();
           this.setState({isLogin: null});
           return;
@@ -74,7 +89,7 @@ class App extends React.Component<{}, IState> {
 
       // login/register
       console.log(data);
-
+      this.setState({isRemember: data.remember});
       axios.post(`http://localhost:4000/auth/${form}/`, {
           "user": {
               ...data
@@ -84,12 +99,14 @@ class App extends React.Component<{}, IState> {
               console.log(response);
               window.localStorage.setItem('token', response.data.user.token);
               authReady();
+              // if(response.data.user.remember) remember()
           })
           .catch(function (error) {
               console.log(error);
           });
 
       const authReady = () => this.setState({isLogin: window.localStorage.getItem('token')});
+      // const remember = () => this.setState({isRemember: !this.state.isRemember})
   }
 
   viewController() {
