@@ -1,11 +1,11 @@
 import Express, {Request} from "express";
 import profileController from "../controllers/profile";
 
-const {get, set} = profileController;
+const {getProfileData, updateProfileData} = profileController;
 
 const profileRouter = Express.Router();
 
-profileRouter.post('/get', get);
-profileRouter.post('/set', set);
+profileRouter.post('/get', getProfileData);
+profileRouter.post('/update', updateProfileData);
 
 export default profileRouter;

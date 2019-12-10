@@ -58,6 +58,7 @@ class App extends React.Component<{}, IState> {
       })
           .then((response) => {
               console.log(response);
+              // getProfile();
               // remember(response.data.user.remember);
           })
           .catch((error) => {
@@ -66,7 +67,7 @@ class App extends React.Component<{}, IState> {
           });
       const getProfileData = (data: any) => this.setState({profile: data});
 
-      if(this.state.isLogin) axios.post('http://localhost:4000/profile/get/', {
+      const getProfile = () => axios.post('http://localhost:4000/profile/get/', {
           "id": "5dea32625ad09c2cd7c7809a"
       })
           .then((response) => {

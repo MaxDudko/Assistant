@@ -7,9 +7,9 @@ export interface IAppRequest extends Request {
 
 const settingsController = {
 
-    get(req: Request, res: Response) {},
+    getSettings(req: Request, res: Response) {},
 
-    set(req: Request, res: Response) {},
+    updateSettings(req: Request, res: Response) {},
 
 };
 
