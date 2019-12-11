@@ -10,7 +10,7 @@ const authController = {
 
     register(req: Request, res: Response, next: NextFunction) {
         const { body: { user } } = req;
-        console.log(req.body);
+        console.log('/auth/register: ', req.body);
 
         if(!user.email) {
             return res.status(422).json({
@@ -70,7 +70,7 @@ const authController = {
 
     login(req: Request, res: Response, next: NextFunction) {
         const { body: { user } } = req;
-        console.log(req.body);
+        console.log('/auth/login: ', req.body);
 
         if(!user.email) {
             return res.status(422).json({
@@ -110,7 +110,7 @@ const authController = {
 
     check(req: IAppRequest, res: Response, next: NextFunction) {
         const { payload: { id } } = req;
-        console.log(req.payload);
+        console.log('/auth/get: ', req.body);
 
         return User.findById(id)
             .then((user) => {

@@ -43,7 +43,7 @@ const UsersSchema: Schema = new Mongoose.Schema({
 
     profile: ProfileSchema,
     settings: SettingsSchema,
-    notifications: NotificationsSchema,
+    notifications: [NotificationsSchema],
 
 });
 

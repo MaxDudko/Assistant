@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./UserAccount.module.scss";
-import { FaUser, FaPencilAlt } from "react-icons/fa";
+import { FaUser, FaPencilAlt, FaPlusCircle } from "react-icons/fa";
 import { MdAddAPhoto } from "react-icons/md";
 
 interface IProps {
@@ -46,83 +46,133 @@ const UserAccount: React.FC<IProps> = (props) => {
                 <tr className={style.item}>
                     <td className={style.item_name}>id:</td>
                     <td className={style.item_value}>
-                        {props.userData.id}
+                        <span>{props.userData.id}</span>
                     </td>
                 </tr>
                 <tr className={style.item}>
                     <td className={style.item_name}>First Name:</td>
                     <td className={style.item_value}>
-                        {props.userData.firstName}
-                        <FaPencilAlt className={style.item_icon}
-                                     title="Edit First Name"
-                                     onClick={() => firstNameChange(!firstName)}
-                        />
+                        <span style={{display: firstName?"none":"block"}}>{props.userData.firstName}</span>
                         <input style={{display: firstName?"block":"none"}} className={style.dataChange}
                                defaultValue={props.userData.firstName}
                                onChange={(e) => props.userAccountController("firstName", e.target.value)}
                         />
+                        {
+                            firstName ?
+                                <FaPlusCircle className={style.item_icon}
+                                              title="Save First Name"
+                                              onClick={() => firstNameChange(!firstName)}
+                                />
+                                :
+                                <FaPencilAlt className={style.item_icon}
+                                             title="Edit First Name"
+                                             onClick={() => firstNameChange(!firstName)}
+                                />
+                        }
                     </td>
                 </tr>
                 <tr className={style.item}>
                     <td className={style.item_name}>Last Name:</td>
                     <td className={style.item_value}>
-                        {props.userData.lastName}
-                        <FaPencilAlt className={style.item_icon}
-                                     title="Edit Last Name"
-                                     onClick={() => lastNameChange(!lastName)}
-                        />
+                        <span style={{display: lastName?"none":"block"}}>{props.userData.lastName}</span>
                         <input style={{display: lastName?"block":"none"}} className={style.dataChange}
                                defaultValue={props.userData.lastName}
                                onChange={(e) => props.userAccountController("lastName", e.target.value)}
                         />
+                        {
+                            lastName ?
+                                <FaPlusCircle className={style.item_icon}
+                                              title="Save Last Name"
+                                              onClick={() => lastNameChange(!lastName)}
+                                />
+                                :
+                                <FaPencilAlt className={style.item_icon}
+                                             title="Edit Last Name"
+                                             onClick={() => lastNameChange(!lastName)}
+                                />
+                        }
                     </td>
                 </tr>
                 <tr className={style.item}>
                     <td className={style.item_name}>Email:</td>
                     <td className={style.item_value}>
-                        {props.userData.email}
-                        <FaPencilAlt className={style.item_icon}
-                                     title="Edit Email"
-                                     onClick={() => emailChange(!email)}
-                        />
+                        <span style={{display: email?"none":"block"}}>{props.userData.email}</span>
                         <input style={{display: email?"block":"none"}} className={style.dataChange}
                                defaultValue={props.userData.email}
                                onChange={(e) => props.userAccountController("email", e.target.value)}
                         />
+                        {
+                            email ?
+                                <FaPlusCircle className={style.item_icon}
+                                              title="Save Email"
+                                              onClick={() => emailChange(!email)}
+                                />
+                                :
+                                <FaPencilAlt className={style.item_icon}
+                                             title="Edit Email"
+                                             onClick={() => emailChange(!email)}
+                                />
+                        }
                     </td>
                 </tr>
                 <tr className={style.item}>
                     <td className={style.item_name}>Birth Date:</td>
                     <td className={style.item_value}>
-                        {props.userData.birthday}
-                        <FaPencilAlt className={style.item_icon}
-                                     title="Edit Birth Date"
-                                     onClick={() => birthdayChange(!birthday)}
-                        />
+                        <span style={{display: birthday?"none":"block"}}>{props.userData.birthday}</span>
                         <input style={{display: birthday?"block":"none"}} className={style.dataChange}
                                defaultValue={props.userData.birthday}
                                onChange={(e) => props.userAccountController("birthday", e.target.value)}
                         />
+                        {
+                            birthday ?
+                                <FaPlusCircle className={style.item_icon}
+                                              title="Save Birthday Date"
+                                              onClick={() => birthdayChange(!birthday)}
+                                />
+                                :
+                                <FaPencilAlt className={style.item_icon}
+                                             title="Edit Birthday Date"
+                                             onClick={() => birthdayChange(!birthday)}
+                                />
+                        }
                     </td>
                 </tr>
                 <tr className={style.item}>
                     <td className={style.item_name}>Location:</td>
                     <td className={style.item_value}>
-                        {props.userData.location}
-                        <FaPencilAlt className={style.item_icon}
-                                     title="Edit Location"
-                                     onClick={() => locationChange(!location)}
-                        />
+                        <span style={{display: location?"none":"block"}}>{props.userData.location}</span>
                         <input style={{display: location?"block":"none"}} className={style.dataChange}
                                defaultValue={props.userData.location}
                                onChange={(e) => props.userAccountController("location", e.target.value)}
                         />
+                        {
+                            location ?
+								<FaPlusCircle className={style.item_icon}
+										  title="Save Location"
+										  onClick={() => locationChange(!location)}
+								/>
+								:
+                                <FaPencilAlt className={style.item_icon}
+                                             title="Edit Location"
+                                             onClick={() => locationChange(!location)}
+                                />
+                        }
                     </td>
                 </tr>
                 <tr className={style.item}>
                     <td className={style.item_name}>Registration Date:</td>
                     <td className={style.item_value}>
-                        {props.userData.registration}
+                        <span>{new Date(props.userData.registrationDate).toLocaleDateString()}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button className={style.btn}
+                                onClick={() => props.userAccountController()}
+                        >
+                            Update
+                        </button>
                     </td>
                 </tr>
                 </tbody>

@@ -10,16 +10,16 @@ import Notifications from "./components/Notifications/Notifications";
 import Settings from "./components/Settings/Settings";
 import UserAccount from "./components/UserAccount/UserAccount";
 
-import data from "./data";
+import data from "../assets/data";
 
 interface IState {
     isLogin: string | null,
+    id: string | null,
 
     profile: any,
     // settings: any,
     // notifications: any,
 
-    userData: any,
     SidebarItems: any,
     notifications:  any,
     isCollapsed: boolean,
@@ -33,14 +33,14 @@ interface IState {
 class App extends React.Component<{}, IState> {
   state: IState = {
       isLogin: window.localStorage.getItem('token'),
+      id: null,
 
       profile: [],
       // settings: [],
-      // notifications: [],
+      notifications: [],
 
-      userData: data.user,
       SidebarItems: data.SidebarItems,
-      notifications: data.notifications,
+      // notifications: data.notifications,
       isCollapsed: false,
       modalSelected: null,
       settingsSelected: null,
@@ -50,33 +50,52 @@ class App extends React.Component<{}, IState> {
   componentDidMount(): void {
       const token = this.state.isLogin;
       // const remember = (value: boolean) => this.setState({isRemember: value});
-      console.log(token);
+      console.log('token: ', token);
+      if(!token) return;
       axios.get('http://localhost:4000/auth/get/', {
           headers: {
               Authorization: `Token ${token}`
           }
       })
           .then((response) => {
-              console.log(response);
-              // getProfile();
+              console.log('/auth/get: ', response);
+              let id = response.data.user._id;
+              setID(id);
+              getProfile(id);
+              getNotifications(id);
               // remember(response.data.user.remember);
           })
           .catch((error) => {
-              console.log(error);
+              console.log('/auth/get: ', error);
               window.localStorage.clear();
           });
-      const getProfileData = (data: any) => this.setState({profile: data});
 
-      const getProfile = () => axios.post('http://localhost:4000/profile/get/', {
-          "id": "5dea32625ad09c2cd7c7809a"
+      const setID = (id: string) => this.setState({id: id});
+      const setProfileData = (data: any) => this.setState({profile: data});
+      const setNotificationsData = (data: any) => this.setState({notifications: data});
+
+      const getProfile = (id: string) => axios.post('http://localhost:4000/profile/get/', {
+          "id": id
       })
           .then((response) => {
-              console.log(response);
-              getProfileData(response);
+              console.log('/profile/get: ', response);
+              setProfileData(response.data);
           })
           .catch((error) => {
-              console.log(error)
+              console.log('/profile/get: ', error)
+          });
+
+      const getNotifications = (id: string) => axios.post('http://localhost:4000/notifications/get/', {
+          "id": id
+      })
+          .then((response) => {
+              console.log('/notifications/get: ', response);
+              setNotificationsData(response.data);
           })
+          .catch((error) => {
+              console.log('/notifications/get: ', error)
+          });
+
   }
 
     authController(form:string, data:any) {
@@ -96,14 +115,14 @@ class App extends React.Component<{}, IState> {
               ...data
           }
       })
-          .then(function (response) {
-              console.log(response);
+          .then((response) => {
+              console.log(`/auth/${form}: `, response);
               window.localStorage.setItem('token', response.data.user.token);
               authReady();
               // if(response.data.user.remember) remember()
           })
           .catch(function (error) {
-              console.log(error);
+              console.log(`/auth/${form}: `, error);
           });
 
       const authReady = () => this.setState({isLogin: window.localStorage.getItem('token')});
@@ -137,7 +156,7 @@ class App extends React.Component<{}, IState> {
                               settingsSelected={this.state.settingsSelected}
           />,
 
-          UserAccount: <UserAccount userData={this.state.userData}
+          UserAccount: <UserAccount userData={this.state.profile}
                                     userAccountController={this.userAccountController.bind(this)}
           />,
 
@@ -162,9 +181,25 @@ class App extends React.Component<{}, IState> {
   }
 
   userAccountController(key:string, value:string) {
+      if(!key) {
+          axios.post('http://localhost:4000/profile/update/', {
+              "user": {
+              "id": this.state.id,
+                  "profile": {
+                      ...this.state.profile
+              }
+          }
+          })
+              .then((response) => {
+                  console.log('/profile/update: ', response);
+              })
+              .catch((error) => {
+                  console.log('/profile/update: ', error)
+              });
+      }
       this.setState({
-          userData: {
-              ...this.state.userData,
+          profile: {
+              ...this.state.profile,
               [key]: value
           }
       })
@@ -177,8 +212,8 @@ class App extends React.Component<{}, IState> {
                   this.state.isLogin ?
                       <div>
                           <Navbar isLogin={this.state.isLogin}
-                                  userName={this.state.userData.userName}
-                                  avatar={this.state.userData.avatar}
+                                  userName={this.state.profile.userName}
+                                  avatar={this.state.profile.avatar}
                                   notifications={this.state.notifications.length}
                                   selectController={this.selectController.bind(this)}
                                   signOut={this.authController.bind(this)}

@@ -15,11 +15,11 @@ const NotificationsSchema: Schema = new Mongoose.Schema({
         required: true,
     },
     date: {
-        type: Date,
+        type: String,
         required: true,
         default: Date.now,
     },
-    message: {
+    text: {
         type: String,
         required: true
     },

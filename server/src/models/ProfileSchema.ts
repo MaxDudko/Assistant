@@ -10,7 +10,7 @@ const ProfileSchema: Schema = new Mongoose.Schema({
         required: false,
     },
     birthday: {
-        type: Date,
+        type: String,
         required: false,
     },
     location: {
