@@ -26,6 +26,10 @@
       cursor: pointer;
       padding: 0 10px;
       &:hover {
+        text-decoration: underline;
+        text-decoration-color: blue;
+        color: blue;
+        transition: text-decoration 1s, color 1.5s;
       }
     }
     .login, .register {
@@ -43,6 +47,10 @@
         border-radius: 6px;
         border: none;
         outline: 0;
+        //&:focus {
+        //  border-bottom: 1px solid blue;
+        //  transition: 1s;
+        //}
       }
       p {
         display: flex;
@@ -61,6 +69,17 @@
         &:hover {
           cursor: pointer;
           background: lighten(#24292e, 25%);
+        }
+      }
+      .link {
+        margin-top: 20px;
+        text-decoration: none;
+        color: lime;
+        &:hover {
+          text-decoration: underline;
+          text-decoration-color: blue;
+          color: blue;
+          transition: text-decoration 1s, color 1.5s;
         }
       }
       .inCorrect {

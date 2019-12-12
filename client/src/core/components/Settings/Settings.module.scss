@@ -43,6 +43,23 @@
       align-items: flex-start;
     }
   }
+  .btn {
+    background: #24292e;
+    color: white;
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+    height: 100%;
+    writing-mode: vertical-rl;
+    text-align: center;
+    &:hover {
+      background: lighten(#24292e, 1%);
+      border-left: 1px solid blue;
+      color: whitesmoke;
+      text-shadow: 1px 1px 1px blue;
+      transition: 1s;
+    }
+  }
 }
 
 @media (max-width: 720px) {

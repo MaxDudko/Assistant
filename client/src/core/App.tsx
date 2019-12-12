@@ -36,7 +36,7 @@ class App extends React.Component<{}, IState> {
       id: null,
 
       profile: [],
-      // settings: [],
+      settings: [],
       notifications: [],
 
       SidebarItems: data.SidebarItems,
@@ -61,6 +61,7 @@ class App extends React.Component<{}, IState> {
               console.log('/auth/get: ', response);
               let id = response.data.user._id;
               setID(id);
+              // getSettings(id);
               getProfile(id);
               getNotifications(id);
               // remember(response.data.user.remember);
@@ -73,6 +74,7 @@ class App extends React.Component<{}, IState> {
       const setID = (id: string) => this.setState({id: id});
       const setProfileData = (data: any) => this.setState({profile: data});
       const setNotificationsData = (data: any) => this.setState({notifications: data});
+      const setSettingsData = (data: any) => this.setState({settings: data});
 
       const getProfile = (id: string) => axios.post('http://localhost:4000/profile/get/', {
           "id": id
@@ -93,9 +95,17 @@ class App extends React.Component<{}, IState> {
               setNotificationsData(response.data);
           })
           .catch((error) => {
-              console.log('/notifications/get: ', error)
+              console.log('/notifications/get: ', error);
           });
 
+      const getSettings = (id: string) => axios.post('http://localhost:4000/settings/get/', {})
+          .then((response) => {
+              console.log('/settings/get: ', response);
+              setSettingsData(response.data)
+          })
+          .catch((error) => {
+              console.log('/settings/get: ', error);
+          })
   }
 
     authController(form:string, data:any) {
@@ -154,6 +164,7 @@ class App extends React.Component<{}, IState> {
 
           Settings: <Settings selectController={this.selectController.bind(this)}
                               settingsSelected={this.state.settingsSelected}
+                              settingsController={this.selectController.bind(this)}
           />,
 
           UserAccount: <UserAccount userData={this.state.profile}
@@ -203,6 +214,10 @@ class App extends React.Component<{}, IState> {
               [key]: value
           }
       })
+  }
+
+  settingsController() {
+      // axios.post('http://localhost:4000/settings/update/', {})
   }
 
    render() {

@@ -67,6 +67,7 @@ const Authentication: React.FC<IProps> = (props) => {
                  Remember Me
             </p>
             <button onClick={() => authSubmit("login")}>Login</button>
+            <a href="/" className={style.link}>Forgot Password</a>
         </div>
     );
 

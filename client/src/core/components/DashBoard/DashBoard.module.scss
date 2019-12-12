@@ -1,6 +1,6 @@
 .DashBoard {
   height: 100%;
-  background: lighten(#24292e, 80%);
+  background: #24292e;
   overflow: hidden;
   .DashBoardWidgets {
     display: flex;
@@ -17,6 +17,9 @@
 
 @media (max-width: 720px) {
   .DashBoard {
+    .DashBoardWidgets {
+      flex-direction: column;
+    }
   }
   .collapsed_false {
     padding-left: 150px;
