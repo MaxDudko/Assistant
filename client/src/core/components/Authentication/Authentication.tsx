@@ -52,12 +52,14 @@ const Authentication: React.FC<IProps> = (props) => {
                 Email:
                 <input type="text" placeholder="UserEmail@example.com"
                        onChange={(e) => setLogin({...LoginData, email: e.target.value})}
+                       title="max2410zp@gmail.com"
                 />
             </label>
             <label>
                 Password:
                 <input type="password" placeholder="*******"
                        onChange={(e) => setLogin({...LoginData, password: e.target.value})}
+                       title="qwerty"
                 />
             </label>
             <p>

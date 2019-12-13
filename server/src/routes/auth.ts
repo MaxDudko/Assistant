@@ -1,6 +1,6 @@
 import Express, {Request} from "express";
 import authController from "../controllers/auth";
-import auth from "../auth";
+import auth from "../middlewares/auth";
 
 const { register, login, check } = authController;
 

@@ -17,11 +17,10 @@ interface IState {
     id: string | null,
 
     profile: any,
-    // settings: any,
-    // notifications: any,
+    settings: any,
+    notifications: any,
 
     SidebarItems: any,
-    notifications:  any,
     isCollapsed: boolean,
     modalSelected: string | null,
     settingsSelected: string | null,
@@ -40,7 +39,6 @@ class App extends React.Component<{}, IState> {
       notifications: [],
 
       SidebarItems: data.SidebarItems,
-      // notifications: data.notifications,
       isCollapsed: false,
       modalSelected: null,
       settingsSelected: null,

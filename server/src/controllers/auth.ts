@@ -31,6 +31,7 @@ const authController = {
         const finalUser = new User(user);
 
         finalUser.setPassword(user.password);
+        console.log(finalUser);
 
         return finalUser.save()
             .then(() => res.json({ user: finalUser.toAuthJSON() }));

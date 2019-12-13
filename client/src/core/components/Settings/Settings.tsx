@@ -2,6 +2,10 @@ import React from "react";
 import style from "./Settings.module.scss";
 import { FaCogs, FaMobile,FaShieldAlt } from "react-icons/fa";
 
+import General from "./General";
+import Widgets from "./Widgets";
+import Security from "./Security";
+
 interface IProps {
     selectController: any,
     settingsSelected: string | null,
@@ -10,57 +14,10 @@ interface IProps {
 
 const Settings: React.FC<IProps> = (props) => {
 
-    // Need to be put in a separate components!
     const settings:any = {
-        General: (
-            <div className={style.table}>
-                <h4>General Settings:</h4>
-            </div>
-        ),
-        Widgets: (
-            <div className={style.table} style={{display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center"}}>
-                <h4>Widgets Settings:</h4>
-                <div style={{width: "100%", textAlign: "center"}}>
-                    <div>
-                        <p style={{marginBottom: 0}}>DashBoard Settings:</p>
-                        <div style={{border: "1px dashed black", height: "100px", paddingTop: "50px"}}>
-                            ...Settings
-                        </div>
-                    </div>
-                    <div>
-                        <p style={{marginBottom: 0}}>TaskManager Settings:</p>
-                        <div style={{border: "1px dashed black", height: "100px", paddingTop: "50px"}}>
-                            ...Settings
-                        </div>
-                    </div>
-                    <div>
-                        <p style={{marginBottom: 0}}>PersonalFinance Settings:</p>
-                        <div style={{border: "1px dashed black", height: "100px", paddingTop: "50px"}}>
-                            ...Settings
-                        </div>
-                    </div>
-                </div>
-            </div>
-        ),
-        Security: (
-            <div className={style.table} style={{display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center"}}>
-                <h4>Security Settings:</h4>
-                <div style={{width: "100%", textAlign: "center"}}>
-                    <div>
-                        <p style={{marginBottom: 0}}>Change Login/Email:</p>
-                        <div style={{border: "1px dashed black", height: "100px", paddingTop: "50px"}}>
-                            ...Settings
-                        </div>
-                    </div>
-                    <div>
-                        <p style={{marginBottom: 0}}>Change Password:</p>
-                        <div style={{border: "1px dashed black", height: "100px", paddingTop: "50px"}}>
-                            ...Settings
-                        </div>
-                    </div>
-                </div>
-            </div>
-        ),
+        General: <General/>,
+        Widgets: <Widgets/>,
+        Security: <Security/>,
     };
 
     return (
@@ -98,10 +55,3 @@ const Settings: React.FC<IProps> = (props) => {
 };
 
 export default Settings;
-/*
-<span className={style.btn}
-                    onClick={() => props.userAccountController()}
-            >
-                Update
-            </span>
-*/

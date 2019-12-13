@@ -3,29 +3,29 @@ import Mongoose, {Schema} from "mongoose";
 const NotificationsSchema: Schema = new Mongoose.Schema({
     id: {
         type: Number,
-        required: true,
+        // required: true,
     },
     title: {
         type: String,
-        required: true,
+        // required: true,
     },
     from: {
         type: String,
-        required: true,
+        // required: true,
     },
     date: {
         type: String,
-        required: true,
-        default: Date.now,
+        // required: true,
+        // default: Date.now,
     },
     text: {
         type: String,
-        required: true
+        // required: true
     },
     check: {
         type: Boolean,
-        required: true,
-        default: false,
+        // required: true,
+        // default: false,
     },
 });
 

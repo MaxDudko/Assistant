@@ -39,8 +39,22 @@
       width: 100%;
       height: 100%;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      overflow-y: auto;
+      .tableBody {
+        width: 100%;
+        text-align: center;
+        .optionsTitle {
+          margin-bottom: 0;
+        }
+        .optionsBody {
+          border: 1px dashed black;
+          height: 100px;
+          padding-top: 50px;
+        }
+      }
     }
   }
   .btn {

@@ -6,7 +6,7 @@ import session from "express-session"
 import cors from "cors";
 import errorHandler from "errorhandler";
 // import * as passport from "./config/passport";
-import Router from "./routes/index";
+// import Router from "./routes/index";
 // import Users from "./models/Users";
 
 const App = Express();
@@ -57,6 +57,7 @@ App.use((err: any, req: Request, res: Response, next: NextFunction) => {
 
 
 Mongoose.Promise = global.Promise;
+
 Mongoose.connect('mongodb://localhost/AssistantDB',  {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -67,9 +68,13 @@ Mongoose.connect('mongodb://localhost/AssistantDB',  {
     .catch(() => {
         console.log('Mongodb connection failed...')
     });
+
 Mongoose.set('debug', true);
+
 require('./models/Users');
+
 require('./config/passport');
+
 App.use(require('./routes/index'));
 
 App.listen(4000, () => {
