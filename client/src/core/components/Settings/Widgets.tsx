@@ -22,6 +22,12 @@ const Widgets: React.FC<IProps> = (props) => {
                     </div>
                 </div>
                 <div>
+                    <p className={style.optionsTitle}>AgileKanban Settings:</p>
+                    <div className={style.optionsBody}>
+                        ...Settings
+                    </div>
+                </div>
+                <div>
                     <p className={style.optionsTitle}>PersonalFinance Settings:</p>
                     <div className={style.optionsBody}>
                         ...Settings

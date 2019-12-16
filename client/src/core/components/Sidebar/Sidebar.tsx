@@ -3,6 +3,7 @@ import style from "./Sidebar.module.scss";
 import logo from "./../../../assets/img/mern.png";
 import { FaBars, FaTasks } from "react-icons/fa";
 import { MdDashboard, MdMonetizationOn } from "react-icons/md";
+import { GoProject } from "react-icons/go";
 
 interface IProps {
     isCollapsed: boolean,
@@ -40,6 +41,7 @@ const Sidebar: React.FC<IProps> = (props) => {
                         const IconCollection: any = {
                             MdDashboard: <MdDashboard className={style.item_icon} title={name} />,
                             FaTasks: <FaTasks className={style.item_icon} title={name} />,
+                            GoProject: <GoProject className={style.item_icon} title={name} />,
                             MdMonetizationOn: <MdMonetizationOn className={style.item_icon} title={name} />,
                         };
 
