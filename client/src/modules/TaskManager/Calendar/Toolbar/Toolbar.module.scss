@@ -1,0 +1,34 @@
+.Toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #353A40;
+    min-width: 100%;
+    & h2 {
+        margin: 0;
+        padding: 0;
+        color: azure;
+    }
+}
+.Toolbar_left {
+    border-radius: 10px;
+}
+.Toolbar_left:last-child {
+    margin-left: 2vh; 
+}
+.Toolbar_right {
+    border-radius: 10px;
+}
+button {
+    background-color: #353A40;
+    border: none;
+    font-size: 1em;
+    line-height: 1.5;
+    color: #fff;
+    cursor: pointer;
+}
+button:hover {
+    transform: scale(.99);
+    background-color: darken(#2c3e50,80%);
+    font-style: italic;
+}

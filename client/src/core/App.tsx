@@ -42,7 +42,8 @@ class App extends React.Component<{}, IState> {
       isCollapsed: false,
       modalSelected: null,
       settingsSelected: null,
-      moduleSelected: "DashBoard",
+      // moduleSelected: "DashBoard",
+      moduleSelected: "TaskManager",
   };
 
   componentDidMount(): void {

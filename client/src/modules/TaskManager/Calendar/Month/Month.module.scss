@@ -1,0 +1,43 @@
+.table {
+    text-align: center;
+    width: 100%;
+}
+.thead td {
+    border: 1px solid #bcc4e0;
+}
+.td {
+   width: 100px;
+   height: 100px;
+   border: 1px solid #bcc4e0;
+   position: relative;
+}
+.td:hover {
+    transform: scale(.95);
+    box-shadow: inset 2px -2px 5px #9191d4, inset -2px 2px 5px #9191d4;
+    font-style: italic;
+    cursor: pointer;
+}
+.td a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 0;
+    text-decoration: none;
+    color: #000000;
+
+}
+
+.decorate {
+    box-shadow: inset 2px -1px 5px #9191d4;
+}
+.decorateDate {
+  border: 1px dotted red;
+}
+.tasks:empty {
+  display: none;
+}
+.tasks {
+  width: 100%;
+  border: none;
+  background-color: rgba(188, 196, 224, .5);
+}
