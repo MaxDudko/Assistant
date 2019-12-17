@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styles from "./Day.module.scss";
 
 interface IProps {
@@ -16,14 +16,15 @@ const Day: React.FC<IProps> = (props) => {
         props.createCalendar(calendar);
     };
 
+
     const renderThead = () => {
         const data = props.data;
         const currentDate = props.currentDate;
 
         const thead = data.map((day: any, i: number) => <td key={i}>{day.Day + ' ' + day.MonthNumber + '/' + day.Date}</td>);
-        thead.unshift(<td />);
+        // thead.unshift(<td />);
         const day = currentDate.split(' ').slice(1, 2);
-        return <tr className={styles.thead}><td /><td>{day}</td></tr>;
+        return <tr className={styles.thead}><td/><td>{day}</td></tr>;
     };
 
     const renderTable = () => {

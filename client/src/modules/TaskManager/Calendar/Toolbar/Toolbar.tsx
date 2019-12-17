@@ -1,11 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styles from './Toolbar.module.scss';
+import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
+import moment from "moment";
 
 interface IProps {
     currentDate: string,
     changeSelect: any,
     createCalendar: any,
     period: string,
+    isCurrentMonth: boolean,
 }
 
 const Toolbar: React.FC<IProps> = (props) => {
@@ -26,17 +29,25 @@ const Toolbar: React.FC<IProps> = (props) => {
 
     return (
         <div className={styles.Toolbar}>
-            <div className={styles.Toolbar_left}>
-                <button onClick={() => props.createCalendar('prev')}> ◀ </button>
-                <button onClick={() => props.createCalendar('next')}> ▶ </button>
-                <button onClick={() => props.createCalendar('')}>today</button>
-            </div>
-            <h2>{renderTitle()}</h2>
-            <div className={styles.Toolbar_right}>
-                <button onClick={() => click('month')}>month</button>
-                <button onClick={() => click('week')}>week</button>
-                <button onClick={() => click('day')}>day</button>
-            </div>
+            {/*<div className={styles.Toolbar_left}>*/}
+                <button onClick={() => props.createCalendar('prev')}> <FaArrowCircleLeft/> </button>
+                <h2>
+                    {
+                        props.currentDate === moment().format('DD MMMM YYYY') ?
+                            renderTitle()
+                            :
+                            <button onClick={() => props.createCalendar('')}>today</button>
+                    }
+                </h2>
+                <button onClick={() => props.createCalendar('next')}> <FaArrowCircleRight/> </button>
+                {/*<button onClick={() => props.createCalendar('')}>today</button>*/}
+            {/*</div>*/}
+            {/*<h2>{renderTitle()}</h2>*/}
+            {/*<div className={styles.Toolbar_right}>*/}
+            {/*    <button onClick={() => click('month')}>month</button>*/}
+            {/*    <button onClick={() => click('week')}>week</button>*/}
+            {/*    <button onClick={() => click('day')}>day</button>*/}
+            {/*</div>*/}
         </div>
     )
 };

@@ -1,6 +1,6 @@
 .Toolbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: #353A40;
     min-width: 100%;
@@ -12,9 +12,10 @@
 }
 .Toolbar_left {
     border-radius: 10px;
+    display: flex;
 }
 .Toolbar_left:last-child {
-    margin-left: 2vh; 
+    margin-left: 2vh;
 }
 .Toolbar_right {
     border-radius: 10px;
@@ -22,13 +23,13 @@
 button {
     background-color: #353A40;
     border: none;
-    font-size: 1em;
+    font-size: 25px;
     line-height: 1.5;
     color: #fff;
     cursor: pointer;
+    display: flex;
 }
 button:hover {
     transform: scale(.99);
     background-color: darken(#2c3e50,80%);
-    font-style: italic;
 }

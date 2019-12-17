@@ -14,7 +14,6 @@
 .td:hover {
     transform: scale(.95);
     box-shadow: inset 2px -2px 5px #9191d4, inset -2px 2px 5px #9191d4;
-    font-style: italic;
     cursor: pointer;
 }
 .td a {
@@ -24,6 +23,7 @@
     margin-top: 0;
     text-decoration: none;
     color: #000000;
+    padding: 5px;
 
 }
 

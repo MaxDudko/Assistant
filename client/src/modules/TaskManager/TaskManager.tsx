@@ -10,12 +10,16 @@ import data from "../../assets/data";
 interface IState {
     isLogin: boolean,
     page: string,
-    period: string,
-    next: number,
-    prev: number,
+    period: any,
+    next: any,
+    prev: any,
     moment: any,
-    data: object,
-    tasks: object,
+    currentDate: string,
+    isCurrentMonth: boolean,
+    currentDay: string,
+    data: any,
+    tasks: [],
+    [key: string]: any
 }
 
 class TaskManager extends React.Component<{}, IState>{
@@ -26,13 +30,16 @@ class TaskManager extends React.Component<{}, IState>{
         next: 0,
         prev: 0,
         moment: moment(),
+        currentDate: "",
+        isCurrentMonth: true,
+        currentDay: "",
         data: [],
         tasks: data.tasks,
     };
 
-    selectPage(page: string) {
+    currentMonthCheck(page: string) {
         this.setState({
-            page: page
+            isCurrentMonth: !this.state.isCurrentMonth
         })
     }
     // renderContent() {
@@ -86,6 +93,7 @@ class TaskManager extends React.Component<{}, IState>{
         let prevDate;
         let nextDate;
         let currentDate;
+        let currentDay;
         let select = this.state.period;
         let next = this.state.next;
         let prev = this.state.prev;
@@ -94,20 +102,23 @@ class TaskManager extends React.Component<{}, IState>{
             prev++;
             next--;
             currentDate = moment().subtract(prev, select).format('DD MMMM YYYY');
-            prevDate = moment().subtract(prev, select).startOf(select).startOf('week');
-            nextDate = moment().subtract(prev, select).endOf(select).endOf('week');
+            currentDay = moment().subtract(prev, select).format('dddd');
+            prevDate = moment().subtract(prev, select).startOf(select).startOf('isoWeek');
+            nextDate = moment().subtract(prev, select).endOf(select).endOf('isoWeek');
         } else if(change === 'next') {
             prev--;
             next++;
             currentDate = moment().add(next, select).format('DD MMMM YYYY');
-            prevDate = moment().add(next, select).startOf(select).startOf('week');
-            nextDate = moment().add(next, select).endOf(select).endOf('week');
+            currentDay = moment().subtract(next, select).format('dddd');
+            prevDate = moment().add(next, select).startOf(select).startOf('isoWeek');
+            nextDate = moment().add(next, select).endOf(select).endOf('isoWeek');
         } else {
             prev = 0;
             next = 0;
             currentDate = moment().format('DD MMMM YYYY');
-            prevDate = moment().startOf(select).startOf('week');
-            nextDate = moment().endOf(select).endOf('week');
+            currentDay = moment().format('dddd');
+            prevDate = moment().startOf(select).startOf('isoWeek');
+            nextDate = moment().endOf(select).endOf('isoWeek');
         }
         /*
                 const hoursPerDay = 24;
@@ -142,7 +153,7 @@ class TaskManager extends React.Component<{}, IState>{
         })
     }
 
-    addTask(date, time, caption, description) {
+    addTask(date: string, time: string, caption: string, description: string) {
         const data = this.state.tasks;
         const newTask = {
             date: date,
@@ -150,10 +161,10 @@ class TaskManager extends React.Component<{}, IState>{
             caption: caption,
             description: description
         };
-        data.push(newTask);
+        // data.push(newTask);
 
         this.setState({
-            tasks: data
+            tasks: Object.assign(data, newTask)
         })
     }
 
@@ -171,7 +182,26 @@ class TaskManager extends React.Component<{}, IState>{
                             <MdPlaylistAdd />
                         </span>
                     </div>
-                    <div className={style.list}></div>
+                    <div className={style.list}>
+                        <div className={style.task}>
+                            <h4>Task 1</h4>
+                            <div className={style.description}>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+                        </div>
+                        <div className={style.task}>
+                            <h4>Task 1</h4>
+                            <div className={style.description}>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+                        </div>
+                        <div className={style.task}>
+                            <h4>Task 1</h4>
+                            <div className={style.description}>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className={style.rightSide}>
                     <div>
@@ -179,6 +209,7 @@ class TaskManager extends React.Component<{}, IState>{
                                  changeSelect={this.changeSelect.bind(this)}
                                  createCalendar={this.createCalendar.bind(this)}
                                  currentDate ={this.state.currentDate}
+                                 isCurrentMonth={this.state.isCurrentMonth}
                         />
                         <Calendar period={this.state.period}
                                   data={this.state.data}
@@ -187,6 +218,7 @@ class TaskManager extends React.Component<{}, IState>{
                                   createCalendar={this.createCalendar.bind(this)}
                                   addTask={this.addTask.bind(this)}
                                   tasks={this.state.tasks}
+                                  currentMonthCheck={this.currentMonthCheck.bind(this)}
                         />
                     </div>
                 </div>

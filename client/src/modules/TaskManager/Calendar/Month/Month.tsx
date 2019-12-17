@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styles from './Month.module.scss';
 import moment from 'moment';
 // import Task from '../../common/Task/Task';
@@ -9,6 +9,7 @@ interface IProps {
     currentDate: string,
     calendar: string,
     tasks: object,
+    currentMonthCheck: any,
 }
 
 const Month: React.FC<IProps> = (props) => {
@@ -20,12 +21,14 @@ const Month: React.FC<IProps> = (props) => {
     };
 
     const renderThead = () => {
-        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thurthday', 'Friday', 'Saturday'];
+        const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thurthday', 'Friday', 'Saturday', 'Sunday'];
         const thead = daysOfWeek.map((day, index) => <td key={index}>{day}</td>);
         return <tr className={styles.thead}>{thead}</tr>;
     };
      
     const renderTbody = () => {
+        // const calendar = props.calendar;
+        // props.createCalendar(calendar);
         const data = props.data;
         const currentDate = props.currentDate;
 
@@ -35,6 +38,7 @@ const Month: React.FC<IProps> = (props) => {
            let tdClass = null;
            if(td.Month === currentDate.split(" ")[1] && `${td.Date} ${td.Month} ${td.Year}` === moment().format('DD MMMM YYYY')) {
                tdClass = decorate + " " + decorateDate;
+               // props.currentMonthCheck()
            } else if (td.Month === currentDate.split(" ")[1]) {
                tdClass = decorate;
            }

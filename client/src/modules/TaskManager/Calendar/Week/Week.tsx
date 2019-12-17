@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styles from './Week.module.scss';
-// import Task from "../../common/Task/Task";
 
 interface IProps {
     data: any,
@@ -19,7 +18,7 @@ const Week: React.FC<IProps> = (props) => {
 
     const renderThead = () => {
         const data = props.data;
-        // const currentDate = this.props.currentDate;
+        const currentDate = props.currentDate;
 
         const thead = data.map((day: any, i: number) => <td key={i}>{day.Day + ' ' + day.MonthNumber + '/' + day.Date}</td>);
         thead.unshift(<td />);
@@ -28,20 +27,20 @@ const Week: React.FC<IProps> = (props) => {
 
     const renderTable = () => {
         const data = props.data;
-        // const currentDate = this.props.currentDate;
+        const currentDate = props.currentDate;
         const hours = [...Array(24).keys()].map((i) => i < 10 ? '0' + i + ':00' : i + ':00');
 
-        // const decorateStyles = (td) => {
-        //     const decorate = styles.decorate;
-        //     if(td.monthYear === currentDate) return decorate;
-        // };
+        const decorateStyles = (td: any) => {
+            const decorate = styles.decorate;
+            if(td.monthYear === currentDate) return decorate;
+        };
 
         const tdDays = hours.map((hour, i) => (
             <tr key={i}>
                 <td className={styles.td} key={i+'0'} >{hour}</td>
                 {
                     data.map((day: any, i: number) => (
-                        <td className={styles.td} key={i} >
+                        <td className={styles.td} key={1000*i} >
                             {/*{*/}
                             {/*    this.props.tasks.map((task, i) => (*/}
                             {/*    day.yearMonthDay ===  task.date && hour ===  task.time ?*/}
