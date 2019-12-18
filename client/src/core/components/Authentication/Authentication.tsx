@@ -8,14 +8,15 @@ interface IProps {
 const Authentication: React.FC<IProps> = (props) => {
     let [form, selectForm] = React.useState("login");
     const [LoginData, setLogin] = React.useState({
-        login: "",
-        password: ""
+        email: "",
+        password: "",
+        remember: false,
     });
     const [RegisterData, setRegister] = React.useState({
         email: "",
-        login: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        remember: false,
     });
     let [isCorrect, corrected] = React.useState(true);
 
@@ -48,22 +49,27 @@ const Authentication: React.FC<IProps> = (props) => {
         <div className={style.login}>
             <h4>Login:</h4>
             <label>
-                Login:
-                <input type="text" placeholder="UserName"
-                       onChange={(e) => setLogin({...LoginData, login: e.target.value})}
+                Email:
+                <input type="text" placeholder="UserEmail@example.com"
+                       onChange={(e) => setLogin({...LoginData, email: e.target.value})}
+                       title="max2410zp@gmail.com"
                 />
             </label>
             <label>
                 Password:
                 <input type="password" placeholder="*******"
                        onChange={(e) => setLogin({...LoginData, password: e.target.value})}
+                       title="qwerty"
                 />
             </label>
             <p>
-                <input type="checkbox" />
+                <input type="checkbox" defaultChecked={LoginData.remember}
+                       onChange={(e) => setLogin({...LoginData, remember: e.target.checked})}
+                />
                  Remember Me
             </p>
             <button onClick={() => authSubmit("login")}>Login</button>
+            <a href="/" className={style.link}>Forgot Password</a>
         </div>
     );
 
@@ -72,14 +78,8 @@ const Authentication: React.FC<IProps> = (props) => {
             <h4>Register:</h4>
             <label>
                 Email:
-                <input type="email" placeholder="username@email.com"
+                <input type="email" placeholder="UserEmail@example.com"
                        onChange={(e) => setRegister({...RegisterData, email: e.target.value})}
-                />
-            </label>
-            <label>
-                Login:
-                <input type="text" placeholder="UserName"
-                       onChange={(e) => setRegister({...RegisterData, login: e.target.value})}
                 />
             </label>
             <label>
@@ -95,7 +95,9 @@ const Authentication: React.FC<IProps> = (props) => {
                 />
             </label>
             <p>
-                <input type="checkbox" />
+                <input type="checkbox" defaultChecked={RegisterData.remember}
+                       onChange={(e) => setLogin({...RegisterData, remember: e.target.checked})}
+                />
                  Remember Me
             </p>
             <button onClick={() => authSubmit("register")}>Register</button>

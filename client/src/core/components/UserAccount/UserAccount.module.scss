@@ -3,23 +3,25 @@
   top: 0;
   width: 500px;
   height: 100%;
-  //background: #FFF0F5;
-  background: linear-gradient(
-                  to right top,
-                  rgba(209, 107, 165, .5),
-                  rgba(199, 119, 185, .5),
-                  rgba(186, 131, 202, .5),
-                  rgba(170, 143, 216, .5),
-                  rgba(154, 154, 225, .5),
-                  rgba(138, 167, 236, .5),
-                  rgba(121, 179, 244, .5),
-                  rgba(105, 191, 248, .5),
-                  rgba(82, 207, 254, .5),
-                  rgba(65, 223, 255, .5),
-                  rgba(70, 238, 250, .5),
-                  rgba(95, 251, 241, .5)
-  );
-  color: #24292e;
+  background: lighten(#24292e, 5%);
+  display: flex;
+  justify-content: space-between;
+  //background: linear-gradient(
+  //                to right top,
+  //                rgba(209, 107, 165, .5),
+  //                rgba(199, 119, 185, .5),
+  //                rgba(186, 131, 202, .5),
+  //                rgba(170, 143, 216, .5),
+  //                rgba(154, 154, 225, .5),
+  //                rgba(138, 167, 236, .5),
+  //                rgba(121, 179, 244, .5),
+  //                rgba(105, 191, 248, .5),
+  //                rgba(82, 207, 254, .5),
+  //                rgba(65, 223, 255, .5),
+  //                rgba(70, 238, 250, .5),
+  //                rgba(95, 251, 241, .5)
+  //);
+  color: white;
   .head {
     display: flex;
     flex-direction: column;
@@ -34,12 +36,25 @@
   .body {
     padding: 20px;
     .item {
-
       &_name {
         color: lighten(#24292e, 30%);
         margin-right: 10px;
       }
-      &_value {}
+      &_value {
+        display: flex;
+        span {
+          width: 200px;
+          padding-left: 10px;
+        }
+      }
+      .dataChange {
+        background: transparent;
+        color: white;
+        border: none;
+        font-size: 16px;
+        border-bottom: 1px solid blue;
+        padding-left: 10px;
+      }
       &_icon {
         margin-left: 5px;
         cursor: pointer;
@@ -48,6 +63,24 @@
       }
     }
   }
+  .btn {
+    background: #24292e;
+    color: white;
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+    height: 100%;
+    writing-mode: vertical-rl;
+    text-align: center;
+    &:hover {
+      background: lighten(#24292e, 1%);
+      border-left: 1px solid blue;
+      color: whitesmoke;
+      text-shadow: 1px 1px 1px blue;
+      transition: 1s;
+    }
+  }
+
 }
 
 @media (max-width: 720px) {

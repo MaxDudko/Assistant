@@ -2,30 +2,22 @@ import React from "react";
 import style from "./Settings.module.scss";
 import { FaCogs, FaMobile,FaShieldAlt } from "react-icons/fa";
 
+import General from "./General";
+import Widgets from "./Widgets";
+import Security from "./Security";
+
 interface IProps {
     selectController: any,
     settingsSelected: string | null,
+    settingsController: any,
 }
 
 const Settings: React.FC<IProps> = (props) => {
 
-    // Need to be put in a separate component!
     const settings:any = {
-        General: (
-            <div className={style.table}>
-                <h4>General Settings:</h4>
-            </div>
-        ),
-        Widgets: (
-            <div className={style.table}>
-                <h4>Widgets Settings:</h4>
-            </div>
-        ),
-        Security: (
-            <div className={style.table}>
-                <h4>Security Settings:</h4>
-            </div>
-        ),
+        General: <General/>,
+        Widgets: <Widgets/>,
+        Security: <Security/>,
     };
 
     return (
@@ -53,6 +45,11 @@ const Settings: React.FC<IProps> = (props) => {
                         settings[props.settingsSelected]
                 }
             </div>
+            <span className={style.btn}
+                onClick={() => props.settingsController()}
+            >
+                Update
+            </span>
         </div>
     )
 };

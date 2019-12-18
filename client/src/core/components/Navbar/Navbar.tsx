@@ -3,7 +3,7 @@ import style from "./Navbar.module.scss";
 import { FaSignOutAlt, FaCogs, FaBell, FaUser } from "react-icons/fa";
 
 interface IProps {
-    isLogin: boolean,
+    isLogin: string | null,
     signOut: any,
     userName: string,
     notifications: number,

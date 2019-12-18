@@ -3,6 +3,7 @@ import style from "./DashBoard.module.scss";
 
 import TaskManager from "../../../modules/TaskManager/TaskManager";
 import PersonalFinance from "../../../modules/PersonalFinance/PersonalFinance";
+import AgileKanban from "../../../modules/AgileKanban/AgileKanban";
 
 interface IProps {
     moduleSelected: string,
@@ -16,6 +17,7 @@ const DashBoard: React.FC<IProps> = (props) => {
     const Module: any = {
         TaskManager: <TaskManager />,
         PersonalFinance: <PersonalFinance />,
+        AgileKanban: <AgileKanban />,
     };
 
     return (
@@ -26,6 +28,7 @@ const DashBoard: React.FC<IProps> = (props) => {
                     :
                     <div className={style.DashBoardWidgets}>
                         <TaskManager/>
+                        <AgileKanban/>
                         <PersonalFinance/>
                     </div>
             }

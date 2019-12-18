@@ -1,12 +1,57 @@
 .TaskManager {
   width: 100%;
   height: 100%;
-  border: 1px dotted rgba(0, 0, 255, 1);
-  border-radius: 10px;
-  background: rgba(0, 0, 255, .1);
-  h1 {
-    color: rgba(0, 0, 255, 1);
-    text-shadow: 2px 2px 1px rgba(0, 0, 0, .5);
-    text-align: center;
+  background: lighten(#24292e, 70%);
+  display: flex;
+  justify-content: space-between;
+  .leftSide {
+    width: 50%;
+    .menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #353A40;
+      color: white;
+      //position: absolute;
+      //top: 0;
+      //z-index: 100;
+      width: 100%;
+      height: 28px;
+      text-align: center;
+      .title {
+        padding-left: 50px;
+      }
+      .categoryType {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        flex-grow: 1;
+        &:hover {
+          background: darken(#24292e, 10%);
+          transition: 1s;
+        }
+      }
+      .categoryAdd {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 0 10px;
+        font-size: 30px;
+        &:hover {
+          background: darken(#24292e, 10%);
+          transition: 1s;
+        }
+      }
+    }
   }
+  .rightSide {
+    width: 50%;
+  }
+  //div {
+  //  border: 1px solid black;
+  //}
 }
