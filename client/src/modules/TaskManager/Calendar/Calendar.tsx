@@ -12,7 +12,6 @@ interface IProps {
     createCalendar: any,
     moment: string,
     // calendar: string,
-    addTask: any,
     currentMonthCheck: any,
     changeSelect: any,
     isCurrentMonth: boolean,

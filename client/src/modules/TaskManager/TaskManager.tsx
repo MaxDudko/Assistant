@@ -9,8 +9,6 @@ import Category from "./Category/Category";
 import AddTask from "./AddTask/AddTask";
 
 interface IState {
-    isLogin: boolean,
-    page: string,
     period: any,
     next: any,
     prev: any,
@@ -19,14 +17,15 @@ interface IState {
     isCurrentMonth: boolean,
     currentDay: string,
     data: any,
-    tasks: [],
-    [key: string]: any
+    categories: string[],
+    selectedCategory: string,
+    list: [],
+    tasks: {},
+    [key: string]: any,
 }
 
 class TaskManager extends React.Component<{}, IState>{
     state: IState = {
-        isLogin: true,
-        page: 'calendar',
         period: 'month',
         next: 0,
         prev: 0,
@@ -35,6 +34,9 @@ class TaskManager extends React.Component<{}, IState>{
         isCurrentMonth: true,
         currentDay: "",
         data: [],
+        categories: [],
+        selectedCategory: "All",
+        list: [],
         tasks: data.tasks,
     };
 
@@ -43,42 +45,11 @@ class TaskManager extends React.Component<{}, IState>{
             isCurrentMonth: !this.state.isCurrentMonth
         })
     }
-    // renderContent() {
-    //     const page = this.state.page;
-    //     if (page === "calendar") {
-    //         return(
-    //             <div>
-    //                 <Toolbar period={this.state.period}
-    //                          changeSelect={this.changeSelect.bind(this)}
-    //                          createCalendar={this.createCalendar.bind(this)}
-    //                          currentDate ={this.state.currentDate}
-    //                 />
-    //                 <Calendar period={this.state.period}
-    //                           data={this.state.data}
-    //                           moment={this.state.moment}
-    //                           currentDate ={this.state.currentDate}
-    //                           createCalendar={this.createCalendar.bind(this)}
-    //                           addTask={this.addTask.bind(this)}
-    //                           tasks={this.state.tasks}
-    //                 />
-    //             </div>
-    //         )
-    //     } else if (page === 'taskList') {
-    //         return(
-    //             <TaskList data={this.props.data}
-    //                       currentDate ={this.props.currentDate}
-    //                       createCalendar={this.props.createCalendar}
-    //                       calendar={this.props.period}
-    //                       addTask={this.addTask.bind(this)}
-    //                       tasks={this.state.tasks}
-    //             />
-    //         )
-    //
-    //     }
-    // }
+
 
     componentDidMount() {
         this.createCalendar("");
+        this.getCategories();
     }
 
     changeSelect(select: string) {
@@ -86,7 +57,6 @@ class TaskManager extends React.Component<{}, IState>{
             period: select,
             data: [],
         });
-        //this.createCalendar(null, select);
     }
 
     createCalendar(change: string) {
@@ -121,16 +91,6 @@ class TaskManager extends React.Component<{}, IState>{
             prevDate = moment().startOf(select).startOf('isoWeek');
             nextDate = moment().endOf(select).endOf('isoWeek');
         }
-        /*
-                const hoursPerDay = 24;
-                const time = [];
-                let formattedTime;
-                for(let i = 0; i <= hoursPerDay; i++) {
-                    formattedTime = moment().subtract(i, "hours").format("hA");
-                    time.unshift(formattedTime);
-                }
-        */
-
 
         while (prevDate.isBefore(nextDate)) {
             data.push({
@@ -154,27 +114,59 @@ class TaskManager extends React.Component<{}, IState>{
         })
     }
 
-    addTask(date: string, time: string, caption: string, description: string) {
-        const data = this.state.tasks;
-        const newTask = {
-            date: date,
-            time: time,
-            caption: caption,
-            description: description
-        };
-        // data.push(newTask);
+    getCategories() {
+        let categories = Object.keys(this.state.tasks);
+        this.setState({categories: categories})
+    }
 
+    selectCategory(category: string) {
         this.setState({
-            tasks: Object.assign(data, newTask)
+            selectedCategory: category
         })
     }
+
+    setCategories(name: string) {
+        let categories = [...this.state.categories, name];
+        this.setState({categories: categories});
+
+        // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
+    }
+
+    deleteCategories(name: string) {
+        let categoris = this.state.categories.filter(e => e !== name);
+        this.setState({categories: categoris});
+
+        // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
+    }
+
+    // addTask(date: string, time: string, caption: string, description: string) {
+    //     const data = this.state.tasks;
+    //     const newTask = {
+    //         date: date,
+    //         time: time,
+    //         caption: caption,
+    //         description: description
+    //     };
+    //
+    //     this.setState({
+    //         tasks: Object.assign(data, newTask)
+    //     })
+    // }
+
+
 
     render() {
         return (
             <div className={style.TaskManager}>
                 <div className={style.leftSide}>
-                    <Category/>
-                    <ToDoList/>
+                    <Category categories={this.state.categories}
+                              setCategories={this.setCategories.bind(this)}
+                              deleteCategories={this.deleteCategories.bind(this)}
+                              selectCategories={this.selectCategory.bind(this)}
+                    />
+                    <ToDoList selectedCategory={this.state.selectedCategory}
+                              tasks={this.state.tasks}
+                    />
                     <AddTask/>
                 </div>
                 <div className={style.rightSide}>
@@ -186,7 +178,6 @@ class TaskManager extends React.Component<{}, IState>{
                                   isCurrentMonth={this.state.isCurrentMonth}
                                   data={this.state.data}
                                   moment={this.state.moment}
-                                  addTask={this.addTask.bind(this)}
                                   tasks={this.state.tasks}
                                   currentMonthCheck={this.currentMonthCheck.bind(this)}
                         />

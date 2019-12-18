@@ -104,7 +104,9 @@ class App extends React.Component<{}, IState> {
           })
           .catch((error) => {
               console.log('/settings/get: ', error);
-          })
+          });
+
+      
   }
 
     authController(form:string, data:any) {

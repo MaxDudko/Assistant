@@ -80,69 +80,54 @@ const data: any = {
             check: false,
         },
     ],
-    tasks: [
-        // for example
-        {
-            date: "2019-09-07",
-            time: "15:20",
-            caption: "Learn Node.js",
-            description: null,
-        },
-        {
-            date: "2019-09-05",
-            time: "20:30",
-            caption: "Drink beer",
-            description: null,
-        },
-        {
-            date: "2019-09-17",
-            time: "20:20",
-            caption: "Learn React",
-            description: null,
-        },
-        {
-            date: "2019-09-08",
-            time: "03:00",
-            caption: "Drink beer",
-            description: null,
-        },
-        {
-            date: "2019-09-10",
-            time: "09:30",
-            caption: "Work on project",
-            description: null,
-        },
-        {
-            date: "2019-09-15",
-            time: "19:50",
-            caption: "Drink beer",
-            description: null,
-        },
-        {
-            date: "2019-09-20",
-            time: "12:20",
-            caption: "Learn Redux",
-            description: null,
-        },
-        {
-            date: "2019-09-25",
-            time: "16:20",
-            caption: "Learn React",
-            description: null,
-        },
-        {
-            date: "2019-09-29",
-            time: "03:00",
-            caption: "Work on project",
-            description: null,
-        },
-        {
-            date: "2019-10-01",
-            time: "03:00",
-            caption: "Work on project",
-            description: null,
-        },
-    ],
+    tasks: {
+        "Life": [
+            {
+                title: "Call John",
+                create: "18.12.2019",
+                date: "30.12.2019",
+                duration: "30 minutes",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt!!!"
+            },
+            {
+                title: "Buy NewYear`s Presents",
+                create: "15.12.2019",
+                date: "25.12.2019",
+                duration: "2 hours",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+                title: "Go to party",
+                create: "20.12.2019",
+                date: "31.12.2019",
+                duration: "",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            },
+        ],
+        "Work": [
+            {
+                title: "Work on BackEnd",
+                create: "25.12.2019",
+                date: "10.01.2020",
+                duration: "2 days",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            },
+            {
+                title: "End Project",
+                create: "20.12.2019",
+                date: "20.01.2020",
+                duration: "",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            },
+            {
+                title: "Start New Project",
+                create: "26.12.2019",
+                date: "15.02.2020",
+                duration: "3 months",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            },
+        ],
+    },
 };
 
 export default data;

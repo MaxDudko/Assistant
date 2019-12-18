@@ -4,9 +4,9 @@
   background: lighten(#24292e, 70%);
   display: flex;
   justify-content: space-between;
+  overflow-y: scroll;
   .leftSide {
     width: 50%;
-
   }
   .rightSide {
     width: 50%;
@@ -14,4 +14,15 @@
   //div {
   //  border: 1px solid black;
   //}
+}
+@media (max-width: 720px) {
+  .TaskManager {
+    flex-direction: column;
+    .leftSide, .rightSide {
+      width: 100%;
+    }
+    .leftSide {
+      display: flex;
+    }
+  }
 }
