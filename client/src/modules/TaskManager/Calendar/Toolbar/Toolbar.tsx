@@ -30,16 +30,16 @@ const Toolbar: React.FC<IProps> = (props) => {
     return (
         <div className={styles.Toolbar}>
             {/*<div className={styles.Toolbar_left}>*/}
-                <button onClick={() => props.createCalendar('prev')}> <FaArrowCircleLeft/> </button>
+                <button className={styles.btn} onClick={() => props.createCalendar('prev')}> <FaArrowCircleLeft/> </button>
                 <h2>
                     {
                         props.currentDate === moment().format('DD MMMM YYYY') ?
-                            renderTitle()
+                            <button className={styles.btn}>{props.currentDate}</button>
                             :
-                            <button onClick={() => props.createCalendar('')}>today</button>
+                            <button className={styles.btn} onClick={() => props.createCalendar('')}> to Current Month </button>
                     }
                 </h2>
-                <button onClick={() => props.createCalendar('next')}> <FaArrowCircleRight/> </button>
+                <button className={styles.btn} onClick={() => props.createCalendar('next')}> <FaArrowCircleRight/> </button>
                 {/*<button onClick={() => props.createCalendar('')}>today</button>*/}
             {/*</div>*/}
             {/*<h2>{renderTitle()}</h2>*/}

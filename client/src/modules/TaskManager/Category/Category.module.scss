@@ -1,0 +1,41 @@
+.Category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #353A40;
+  color: white;
+  //position: absolute;
+  //top: 0;
+  //z-index: 100;
+  width: 100%;
+  height: 28px;
+  text-align: center;
+  .title {
+    padding-left: 50px;
+  }
+  .categoryType {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-grow: 1;
+    &:hover {
+      background: darken(#24292e, 10%);
+      transition: 1s;
+    }
+  }
+  .categoryAdd {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 30px;
+    &:hover {
+      background: darken(#24292e, 10%);
+      transition: 1s;
+    }
+  }
+}

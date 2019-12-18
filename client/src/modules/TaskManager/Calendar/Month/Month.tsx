@@ -7,18 +7,20 @@ interface IProps {
     createCalendar: any,
     data: any,
     currentDate: string,
-    calendar: string,
+    // calendar: string,
     tasks: object,
     currentMonthCheck: any,
+    period: string,
+    moment: any,
 }
 
 const Month: React.FC<IProps> = (props) => {
 
 
-    const componentDidMount = () => {
-        const calendar = props.calendar;
-        props.createCalendar(calendar);
-    };
+    // const componentDidMount = () => {
+    //     const calendar = props.calendar;
+    //     props.createCalendar(calendar);
+    // };
 
     const renderThead = () => {
         const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thurthday', 'Friday', 'Saturday', 'Sunday'];

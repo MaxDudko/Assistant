@@ -1,11 +1,12 @@
 import React from "react";
 import moment from "moment";
 import style from "./TaskManager.module.scss";
-import { MdPlaylistAdd } from "react-icons/md";
-import Toolbar from "./Calendar/Toolbar/Toolbar";
 import Calendar from "./Calendar/Calendar";
 
 import data from "../../assets/data";
+import ToDoList from "./ToDoList/ToDoList";
+import Category from "./Category/Category";
+import AddTask from "./AddTask/AddTask";
 
 interface IState {
     isLogin: boolean,
@@ -172,50 +173,19 @@ class TaskManager extends React.Component<{}, IState>{
         return (
             <div className={style.TaskManager}>
                 <div className={style.leftSide}>
-                    <div className={style.menu}>
-                        <span className={style.title}>Category:</span>
-                        <span className={style.categoryType}>All</span>
-                        <span className={style.categoryType}>Life</span>
-                        <span className={style.categoryType}>Work</span>
-                        <span className={style.categoryType}>Other</span>
-                        <span className={style.categoryAdd}>
-                            <MdPlaylistAdd />
-                        </span>
-                    </div>
-                    <div className={style.list}>
-                        <div className={style.task}>
-                            <h4>Task 1</h4>
-                            <div className={style.description}>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </div>
-                        </div>
-                        <div className={style.task}>
-                            <h4>Task 1</h4>
-                            <div className={style.description}>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </div>
-                        </div>
-                        <div className={style.task}>
-                            <h4>Task 1</h4>
-                            <div className={style.description}>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <Category/>
+                    <ToDoList/>
+                    <AddTask/>
                 </div>
                 <div className={style.rightSide}>
                     <div>
-                        <Toolbar period={this.state.period}
-                                 changeSelect={this.changeSelect.bind(this)}
-                                 createCalendar={this.createCalendar.bind(this)}
-                                 currentDate ={this.state.currentDate}
-                                 isCurrentMonth={this.state.isCurrentMonth}
-                        />
                         <Calendar period={this.state.period}
+                                  changeSelect={this.changeSelect.bind(this)}
+                                  createCalendar={this.createCalendar.bind(this)}
+                                  currentDate ={this.state.currentDate}
+                                  isCurrentMonth={this.state.isCurrentMonth}
                                   data={this.state.data}
                                   moment={this.state.moment}
-                                  currentDate ={this.state.currentDate}
-                                  createCalendar={this.createCalendar.bind(this)}
                                   addTask={this.addTask.bind(this)}
                                   tasks={this.state.tasks}
                                   currentMonthCheck={this.currentMonthCheck.bind(this)}
