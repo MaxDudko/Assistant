@@ -4,23 +4,58 @@ import Task from "./Task/Task";
 
 interface IProps {
     selectedCategory: string,
-    tasks: {},
+    tasks: any,
+    categories: string[],
+    changeTask: any,
 }
 
 const ToDoList: React.FC<IProps> = (props) => {
+
     return(
         <div className={style.ToDoList}>
-            <h4>{props.selectedCategory}</h4>
-            {/*{*/}
-            {/*    props.tasks[props.selectedCategory].map((el: {}, i: number) => {*/}
+            <h4 className={style.category}>{props.selectedCategory}</h4>
+            {/*<div className={style.menu}>*/}
+            {/*    <span className={style.btn}></span>*/}
+            {/*</div>*/}
+            {
+                props.selectedCategory === "All" ?
+                    props.categories.map((category:any, i:number) => {
+                        return [
+                            props.tasks[category].map((task: any, i: number) => {
+                                return[
+                                    <Task key={i}
+                                          index={i}
+                                          category={category}
+                                          title={task.title}
+                                          priority={task.priority}
+                                          created={task.created}
+                                          start={task.start}
+                                          end={task.end}
+                                          description={task.description}
+                                          changeTask={props.changeTask}
+                                    />
+                                ]
+                            })
+                        ]
+                    })
+                    :
+                    props.tasks[props.selectedCategory].map((task: any, i: number) => {
+                        return[
+                            <Task key={i}
+                                  index={i}
+                                  category={props.selectedCategory}
+                                  title={task.title}
+                                  priority={task.priority}
+                                  created={task.created}
+                                  start={task.start}
+                                  end={task.end}
+                                  description={task.description}
+                                  changeTask={props.changeTask}
+                            />
+                        ]
+                    })
+            }
 
-            {/*    })*/}
-            {/*}*/}
-            <Task/>
-            <Task/>
-            <Task/>
-            <Task/>
-            <Task/>
         </div>
     )
 };

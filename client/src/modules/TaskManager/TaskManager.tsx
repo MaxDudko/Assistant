@@ -7,6 +7,7 @@ import data from "../../assets/data";
 import ToDoList from "./ToDoList/ToDoList";
 import Category from "./Category/Category";
 import AddTask from "./AddTask/AddTask";
+import axios from "axios";
 
 interface IState {
     period: any,
@@ -20,7 +21,9 @@ interface IState {
     categories: string[],
     selectedCategory: string,
     list: [],
-    tasks: {},
+    tasks: any,
+    // categoryTasks: [],
+
     [key: string]: any,
 }
 
@@ -38,6 +41,7 @@ class TaskManager extends React.Component<{}, IState>{
         selectedCategory: "All",
         list: [],
         tasks: data.tasks,
+        // categoryTasks: [],
     };
 
     currentMonthCheck(page: string) {
@@ -139,21 +143,46 @@ class TaskManager extends React.Component<{}, IState>{
         // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
     }
 
-    // addTask(date: string, time: string, caption: string, description: string) {
-    //     const data = this.state.tasks;
-    //     const newTask = {
-    //         date: date,
-    //         time: time,
-    //         caption: caption,
-    //         description: description
-    //     };
-    //
-    //     this.setState({
-    //         tasks: Object.assign(data, newTask)
-    //     })
-    // }
+    getTasks() {
+        let category = this.state.selectedCategory;
 
+        let tasks = this.state.tasks[category];
+    }
 
+    changeTask(index: number, category: string, name:string, value:string) {
+        // if(!key) {
+        //     axios.post('http://localhost:4000/profile/update/', {
+        //         "user": {
+        //             "id": this.state.id,
+        //             "profile": {
+        //                 ...this.state.profile
+        //             }
+        //         }
+        //     })
+        //         .then((response) => {
+        //             console.log('/profile/update: ', response);
+        //         })
+        //         .catch((error) => {
+        //             console.log('/profile/update: ', error)
+        //         });
+        // }
+        // let edit = this.state.tasks[this.state.selectedCategory][index];
+        // edit[name] = value;
+
+        console.log(index, category, name, value);
+        // let category = this.state.selectedCategory;
+        let tasks = this.state.tasks;
+        tasks[category][index][name] = value;
+        this.setState({
+            tasks: {
+                ...this.state.tasks,
+                tasks
+            }
+        });
+        if(!name && !value) {
+            // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
+        }
+    }
 
     render() {
         return (
@@ -166,11 +195,12 @@ class TaskManager extends React.Component<{}, IState>{
                     />
                     <ToDoList selectedCategory={this.state.selectedCategory}
                               tasks={this.state.tasks}
+                              categories={this.state.categories}
+                              changeTask={this.changeTask.bind(this)}
                     />
                     <AddTask/>
                 </div>
                 <div className={style.rightSide}>
-                    <div>
                         <Calendar period={this.state.period}
                                   changeSelect={this.changeSelect.bind(this)}
                                   createCalendar={this.createCalendar.bind(this)}
@@ -181,7 +211,6 @@ class TaskManager extends React.Component<{}, IState>{
                                   tasks={this.state.tasks}
                                   currentMonthCheck={this.currentMonthCheck.bind(this)}
                         />
-                    </div>
                 </div>
             </div>
         );

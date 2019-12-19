@@ -1,6 +1,16 @@
 .ToDoList {
   padding: 0 20px;
-  //overflow-y: scroll;
+  overflow-y: auto;
+  margin-bottom: 50px;
+  margin-top: 10px;
+  .category {
+    background: rgba(162, 164, 215, 0.5);
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 0;
+    margin-top: 18px;
+  }
 }
 @media (max-width: 720px) {
   .ToDoList {

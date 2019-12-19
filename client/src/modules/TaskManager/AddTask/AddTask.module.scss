@@ -1,1 +1,31 @@
-.AddTask {}
+.AddTask {
+  .btn {
+    text-align: center;
+    border: 1px dashed #9191d4;
+    cursor: pointer;
+    color: #9191d4;
+    padding: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    &:hover {
+      border: 1px solid #9191d4;
+      background: rgba(145, 145, 212, .4);
+      text-decoration: underline;
+      text-shadow: -1px 0 rgba(0, 0, 0, .4), 0 1px rgba(0, 0, 0, .4), 1px 0 rgba(0, 0, 0, .4), 0 -1px rgba(0, 0, 0, .4);
+      transition: 1s;
+    }
+  }
+  .form {
+    padding: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    border: 1px dashed #9191d4;
+    .row {
+      display: flex;
+      justify-content: space-between;
+
+    }
+  }
+}

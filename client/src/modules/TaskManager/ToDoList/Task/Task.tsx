@@ -1,16 +1,137 @@
 import React from "react";
 import style from "./Task.module.scss";
+import {IoMdStar} from "react-icons/io";
 
 interface IProps {
-
+    title: string,
+    priority: number,
+    created: string,
+    start: string,
+    end: string,
+    description: string,
+    changeTask: any,
+    index: number,
+    category: string,
 }
 
 const Task: React.FC<IProps> = (props) => {
+    let [priority, priorityChange] = React.useState(props.priority);
+    let [show, edit] = React.useState(false);
+
+    const getPriority = () => {
+        let stars = [];
+        for(let i = 1; i <= 5; i++) {
+            i <= priority ?
+                stars.push(
+                    <IoMdStar key={i}
+                              style={{color: "gold"}}
+                              // onClick={() => {
+                              //     priorityChange(priority - i);
+                              //     props.changeTask(props.index, props.category, "priority", priority)
+                              // }}
+                    />
+                )
+                :
+                stars.push(
+                    <IoMdStar key={i}
+                              style={{color: "gray"}}
+                              // onClick={() =>{
+                              //     priorityChange(priority + i);
+                              //     props.changeTask(props.index, props.category, "priority", priority)
+                              // }}
+                    />
+                )
+        }
+        return stars;
+    };
+
     return(
         <div className={style.Task}>
-            <h4>Task XXX</h4>
+            <h4 className={style.title}>
+                {
+                    show ?
+                        <input className={style.input}
+                               type="text"
+                               placeholder="Task Name"
+                               name="title"
+                               onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
+                        />
+                        :
+                        props.title
+                }
+                <span className={style.stars}>
+                    {
+                        show ?
+                            <input type="number"
+                                   defaultValue={props.priority}
+                                   name="priority"
+                                   onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
+                            />
+                            :
+                            getPriority()
+                    }
+                </span>
+            </h4>
+            <div className={style.term}>
+                <div>
+                    <i>Start: </i>
+                    {
+                        show ?
+                            <input className={style.input}
+                                   type="datetime-local"
+                                   placeholder="Start Date"
+                                   name="start"
+                                   onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
+                            />
+                            :
+                            <b>{props.start}</b>
+                    }
+                </div>
+                <div>
+                    <i>End: </i>
+                    {
+                        show ?
+                            <input className={style.input}
+                                   type="datetime-local"
+                                   placeholder="End Date"
+                                   name="end"
+                                   onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
+                            />
+                            :
+                            <b>{props.end}</b>
+                    }
+                </div>
+            </div>
             <div className={style.description}>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                {
+                    show ?
+                        <textarea className={style.input}
+                                  cols={10}
+                               placeholder="Task Description..."
+                               name="description"
+                               onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
+                        />
+                        :
+                        <p>{props.description}</p>
+                }
+               <span>
+                   <i>Created: </i>
+                   {props.created}
+               </span>
+            </div>
+            <div className={style.menu}>
+                <span className={style.btn}
+                      onClick={() => edit(!show)}
+                >
+                    Edit
+                </span>
+                <span className={style.btn}
+                      onClick={() => props.changeTask()}
+                >
+                    Save
+                </span>
+                <span className={style.btn}>Done</span>
+                <span className={style.btn}>Delete</span>
             </div>
         </div>
     )
