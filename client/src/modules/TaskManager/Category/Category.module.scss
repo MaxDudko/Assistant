@@ -39,6 +39,7 @@
       &:hover {
         background: darken(#24292e, 10%);
         transition: 1s;
+        color: #9191d4;
       }
     }
     .btn {
@@ -47,6 +48,7 @@
       &:hover {
         transition: 1s;
         background: darken(#24292e, 10%);
+        color: #9191d4;
       }
       &:last-child {
         border-right: 1px solid lighten(#24292e, 20%);
@@ -64,6 +66,7 @@
     border-right: 1px solid lighten(#24292e, 20%);
     &:hover {
       background: darken(#24292e, 10%);
+      color: #A2A4D7;
       transition: 1s;
     }
     .dropdown {
@@ -82,7 +85,7 @@
     flex-direction: column;
     order: 2;
     height: 100vh;
-    width: auto;
+    width: 60px;
     position: fixed;
     right: 0;
     .categoryType {

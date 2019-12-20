@@ -2,6 +2,7 @@ import React from "react";
 import style from "./DashBoard.module.scss";
 
 import TaskManager from "../../../modules/TaskManager/TaskManager";
+import WidgetTM from "../../../modules/TaskManager/WidgetTM/WidgetTM";
 import PersonalFinance from "../../../modules/PersonalFinance/PersonalFinance";
 import AgileKanban from "../../../modules/AgileKanban/AgileKanban";
 
@@ -27,7 +28,8 @@ const DashBoard: React.FC<IProps> = (props) => {
                     Module[props.moduleSelected]
                     :
                     <div className={style.DashBoardWidgets}>
-                        <TaskManager/>
+                        <WidgetTM/>
+                        {/*<TaskManager />*/}
                         <AgileKanban/>
                         <PersonalFinance/>
                     </div>

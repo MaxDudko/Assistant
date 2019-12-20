@@ -85,25 +85,22 @@ const data: any = {
             {
                 title: "Call John",
                 priority: 3,
-                created: "18.12.2019 18:00",
-                start: "30.12.2019 16:20",
-                end: "30 minutes",
+                created: "18.12.2019",
+                date: "30.12.2019 16:20",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt!!!"
             },
             {
                 title: "Buy NewYear`s Presents",
                 priority: 5,
-                created: "15.12.2019 15:00",
-                start: "25.12.2019 13:00",
-                end: "2 hours",
+                created: "15.12.2019",
+                date: "25.12.2019 13:00",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
             },
             {
                 title: "Go to party",
                 priority: 0,
-                created: "20.12.2019 19:00",
-                start: "31.12.2019 20:00",
-                end: "",
+                created: "20.12.2019",
+                date: "31.12.2019 20:00",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
         ],
@@ -111,25 +108,22 @@ const data: any = {
             {
                 title: "Work on BackEnd",
                 priority: 0,
-                created: "25.12.2019 14:30",
-                start: "10.01.2020 10:00",
-                end: "2 days",
+                created: "25.12.2019",
+                date: "10.01.2020 10:00",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
             {
                 title: "End Project",
                 priority: 5,
-                created: "20.12.2019 13:10",
-                start: "20.01.2020 18:00",
-                end: "",
+                created: "20.12.2019",
+                date: "20.01.2020 18:00",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
             {
                 title: "Start New Project",
                 priority: 4,
-                created: "26.12.2019 17:45",
-                start: "15.02.2020 10:00",
-                end: "3 months",
+                created: "26.12.2019",
+                date: "15.02.2020 10:00",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
         ],

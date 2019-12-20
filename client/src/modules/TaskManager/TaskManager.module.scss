@@ -1,7 +1,8 @@
 .TaskManager {
   width: 100%;
   height: 100%;
-  background: lighten(#24292e, 70%);
+  //background: lighten(#24292e, 70%);
+  background: #24292e;
   display: flex;
   justify-content: space-between;
   overflow-y: scroll;

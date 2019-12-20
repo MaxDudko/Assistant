@@ -6,7 +6,7 @@
   .category {
     background: rgba(162, 164, 215, 0.5);
     text-align: center;
-    border-radius: 5px;
+    border-radius: 0  0 5px 5px;
     padding: 5px;
     margin-bottom: 0;
     margin-top: 18px;
@@ -15,5 +15,6 @@
 @media (max-width: 720px) {
   .ToDoList {
     padding: 0;
+    width: calc(100% - 60px);
   }
 }

@@ -198,7 +198,6 @@ class TaskManager extends React.Component<{}, IState>{
                               categories={this.state.categories}
                               changeTask={this.changeTask.bind(this)}
                     />
-                    <AddTask/>
                 </div>
                 <div className={style.rightSide}>
                         <Calendar period={this.state.period}

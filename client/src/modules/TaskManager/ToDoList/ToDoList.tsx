@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./ToDoList.module.scss";
 import Task from "./Task/Task";
+import AddTask from "../AddTask/AddTask";
 
 interface IProps {
     selectedCategory: string,
@@ -29,8 +30,7 @@ const ToDoList: React.FC<IProps> = (props) => {
                                           title={task.title}
                                           priority={task.priority}
                                           created={task.created}
-                                          start={task.start}
-                                          end={task.end}
+                                          date={task.date}
                                           description={task.description}
                                           changeTask={props.changeTask}
                                     />
@@ -47,8 +47,7 @@ const ToDoList: React.FC<IProps> = (props) => {
                                   title={task.title}
                                   priority={task.priority}
                                   created={task.created}
-                                  start={task.start}
-                                  end={task.end}
+                                  date={task.date}
                                   description={task.description}
                                   changeTask={props.changeTask}
                             />
@@ -56,6 +55,7 @@ const ToDoList: React.FC<IProps> = (props) => {
                     })
             }
 
+            <AddTask/>
         </div>
     )
 };

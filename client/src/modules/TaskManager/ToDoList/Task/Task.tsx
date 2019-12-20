@@ -6,8 +6,7 @@ interface IProps {
     title: string,
     priority: number,
     created: string,
-    start: string,
-    end: string,
+    date: string,
     description: string,
     changeTask: any,
     index: number,
@@ -47,70 +46,67 @@ const Task: React.FC<IProps> = (props) => {
 
     return(
         <div className={style.Task}>
-            <h4 className={style.title}>
+            <div className={style.title}>
                 {
                     show ?
-                        <input className={style.input}
-                               type="text"
-                               placeholder="Task Name"
-                               name="title"
-                               onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
-                        />
+                        <label>
+                            Title:
+                            <input className={style.input}
+                                   type="text"
+                                   placeholder="Task Name"
+                                   name="title"
+                                   onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
+                            />
+                        </label>
                         :
-                        props.title
+                        <b>{props.title}</b>
                 }
                 <span className={style.stars}>
                     {
                         show ?
-                            <input type="number"
-                                   defaultValue={props.priority}
-                                   name="priority"
-                                   onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
-                            />
+                            <label style={{display: "flex", flexDirection: "row"}}>
+                                Priority:
+                                <input type="checkbox" />
+                                <input type="checkbox" />
+                                <input type="checkbox" />
+                                <input type="checkbox" />
+                                <input type="checkbox" />
+                            </label>
                             :
                             getPriority()
                     }
                 </span>
-            </h4>
+            </div>
             <div className={style.term}>
                 <div>
-                    <i>Start: </i>
                     {
                         show ?
-                            <input className={style.input}
-                                   type="datetime-local"
-                                   placeholder="Start Date"
-                                   name="start"
-                                   onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
-                            />
+                            <label>
+                                Date:
+                                <input className={style.input}
+                                       type="datetime-local"
+                                       placeholder={props.date}
+                                       name="date"
+                                       onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
+                                />
+                            </label>
                             :
-                            <b>{props.start}</b>
-                    }
-                </div>
-                <div>
-                    <i>End: </i>
-                    {
-                        show ?
-                            <input className={style.input}
-                                   type="datetime-local"
-                                   placeholder="End Date"
-                                   name="end"
-                                   onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
-                            />
-                            :
-                            <b>{props.end}</b>
+                            <i>{props.date}</i>
                     }
                 </div>
             </div>
             <div className={style.description}>
                 {
                     show ?
-                        <textarea className={style.input}
-                                  cols={10}
-                               placeholder="Task Description..."
-                               name="description"
-                               onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
-                        />
+                        <label>
+                            Descriptions:
+                            <textarea className={style.input}
+                                      cols={10}
+                                      placeholder={props.description}
+                                      name="description"
+                                      onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
+                            />
+                        </label>
                         :
                         <p>{props.description}</p>
                 }
