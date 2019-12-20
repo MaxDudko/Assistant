@@ -1,0 +1,114 @@
+.Category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #353A40;
+  color: white;
+  //position: absolute;
+  //top: 0;
+  //z-index: 100;
+  //width: 100%;
+  height: 28px;
+  text-align: center;
+  position: fixed;
+  width: 44.5%;
+  .title {
+    padding-left: 15px;
+  }
+  .categoryType {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    &:first-child {
+      border-right: 1px solid lighten(#24292e, 20%);
+      //padding-left: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 28px;
+      &:hover {
+        transition: 1s;
+        background: darken(#24292e, 10%);
+      }
+    }
+    .name {
+      padding: 5px 0;
+      flex-grow: 1;
+      &:hover {
+        background: darken(#24292e, 10%);
+        transition: 1s;
+        color: #9191d4;
+      }
+    }
+    .btn {
+      padding: 6px 10px 4px 10px;
+      height: 28px;
+      &:hover {
+        transition: 1s;
+        background: darken(#24292e, 10%);
+        color: #9191d4;
+      }
+      &:last-child {
+        border-right: 1px solid lighten(#24292e, 20%);
+      }
+    }
+  }
+  .categoryAdd {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 30px;
+    border-right: 1px solid lighten(#24292e, 20%);
+    &:hover {
+      background: darken(#24292e, 10%);
+      color: #A2A4D7;
+      transition: 1s;
+    }
+    .dropdown {
+      display: flex;
+      font-size: 18px;
+      align-items: center;
+      margin-right: 10px;
+      transition: 1s;
+      background: #353A40;
+      height: 100%;
+    }
+  }
+}
+@media (max-width: 720px) {
+  .Category {
+    flex-direction: column;
+    order: 2;
+    height: 100vh;
+    width: 60px;
+    position: fixed;
+    right: 0;
+    .categoryType {
+      flex-direction: column;
+      width: 100%;
+      min-height: 60px;
+      height: auto;
+      border-bottom: 1px solid lighten(#24292e, 20%);
+      div:last-child {
+        display: flex;
+      }
+      &:first-child {
+        border-right: none;
+        margin: 0;
+      }
+      .btn {
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+    .categoryAdd {
+      border-right: none;
+    }
+  }
+}

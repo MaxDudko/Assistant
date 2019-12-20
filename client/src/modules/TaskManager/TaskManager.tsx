@@ -1,15 +1,15 @@
 import React from "react";
 import moment from "moment";
 import style from "./TaskManager.module.scss";
-import { MdPlaylistAdd } from "react-icons/md";
-import Toolbar from "./Calendar/Toolbar/Toolbar";
 import Calendar from "./Calendar/Calendar";
 
 import data from "../../assets/data";
+import ToDoList from "./ToDoList/ToDoList";
+import Category from "./Category/Category";
+import AddTask from "./AddTask/AddTask";
+import axios from "axios";
 
 interface IState {
-    isLogin: boolean,
-    page: string,
     period: any,
     next: any,
     prev: any,
@@ -18,14 +18,17 @@ interface IState {
     isCurrentMonth: boolean,
     currentDay: string,
     data: any,
-    tasks: [],
-    [key: string]: any
+    categories: string[],
+    selectedCategory: string,
+    list: [],
+    tasks: any,
+    // categoryTasks: [],
+
+    [key: string]: any,
 }
 
 class TaskManager extends React.Component<{}, IState>{
     state: IState = {
-        isLogin: true,
-        page: 'calendar',
         period: 'month',
         next: 0,
         prev: 0,
@@ -34,7 +37,11 @@ class TaskManager extends React.Component<{}, IState>{
         isCurrentMonth: true,
         currentDay: "",
         data: [],
+        categories: [],
+        selectedCategory: "All",
+        list: [],
         tasks: data.tasks,
+        // categoryTasks: [],
     };
 
     currentMonthCheck(page: string) {
@@ -42,42 +49,11 @@ class TaskManager extends React.Component<{}, IState>{
             isCurrentMonth: !this.state.isCurrentMonth
         })
     }
-    // renderContent() {
-    //     const page = this.state.page;
-    //     if (page === "calendar") {
-    //         return(
-    //             <div>
-    //                 <Toolbar period={this.state.period}
-    //                          changeSelect={this.changeSelect.bind(this)}
-    //                          createCalendar={this.createCalendar.bind(this)}
-    //                          currentDate ={this.state.currentDate}
-    //                 />
-    //                 <Calendar period={this.state.period}
-    //                           data={this.state.data}
-    //                           moment={this.state.moment}
-    //                           currentDate ={this.state.currentDate}
-    //                           createCalendar={this.createCalendar.bind(this)}
-    //                           addTask={this.addTask.bind(this)}
-    //                           tasks={this.state.tasks}
-    //                 />
-    //             </div>
-    //         )
-    //     } else if (page === 'taskList') {
-    //         return(
-    //             <TaskList data={this.props.data}
-    //                       currentDate ={this.props.currentDate}
-    //                       createCalendar={this.props.createCalendar}
-    //                       calendar={this.props.period}
-    //                       addTask={this.addTask.bind(this)}
-    //                       tasks={this.state.tasks}
-    //             />
-    //         )
-    //
-    //     }
-    // }
+
 
     componentDidMount() {
         this.createCalendar("");
+        this.getCategories();
     }
 
     changeSelect(select: string) {
@@ -85,7 +61,6 @@ class TaskManager extends React.Component<{}, IState>{
             period: select,
             data: [],
         });
-        //this.createCalendar(null, select);
     }
 
     createCalendar(change: string) {
@@ -120,16 +95,6 @@ class TaskManager extends React.Component<{}, IState>{
             prevDate = moment().startOf(select).startOf('isoWeek');
             nextDate = moment().endOf(select).endOf('isoWeek');
         }
-        /*
-                const hoursPerDay = 24;
-                const time = [];
-                let formattedTime;
-                for(let i = 0; i <= hoursPerDay; i++) {
-                    formattedTime = moment().subtract(i, "hours").format("hA");
-                    time.unshift(formattedTime);
-                }
-        */
-
 
         while (prevDate.isBefore(nextDate)) {
             data.push({
@@ -153,74 +118,98 @@ class TaskManager extends React.Component<{}, IState>{
         })
     }
 
-    addTask(date: string, time: string, caption: string, description: string) {
-        const data = this.state.tasks;
-        const newTask = {
-            date: date,
-            time: time,
-            caption: caption,
-            description: description
-        };
-        // data.push(newTask);
+    getCategories() {
+        let categories = Object.keys(this.state.tasks);
+        this.setState({categories: categories})
+    }
 
+    selectCategory(category: string) {
         this.setState({
-            tasks: Object.assign(data, newTask)
+            selectedCategory: category
         })
+    }
+
+    setCategories(name: string) {
+        let categories = [...this.state.categories, name];
+        this.setState({categories: categories});
+
+        // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
+    }
+
+    deleteCategories(name: string) {
+        let categoris = this.state.categories.filter(e => e !== name);
+        this.setState({categories: categoris});
+
+        // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
+    }
+
+    getTasks() {
+        let category = this.state.selectedCategory;
+
+        let tasks = this.state.tasks[category];
+    }
+
+    changeTask(index: number, category: string, name:string, value:string) {
+        // if(!key) {
+        //     axios.post('http://localhost:4000/profile/update/', {
+        //         "user": {
+        //             "id": this.state.id,
+        //             "profile": {
+        //                 ...this.state.profile
+        //             }
+        //         }
+        //     })
+        //         .then((response) => {
+        //             console.log('/profile/update: ', response);
+        //         })
+        //         .catch((error) => {
+        //             console.log('/profile/update: ', error)
+        //         });
+        // }
+        // let edit = this.state.tasks[this.state.selectedCategory][index];
+        // edit[name] = value;
+
+        console.log(index, category, name, value);
+        // let category = this.state.selectedCategory;
+        let tasks = this.state.tasks;
+        tasks[category][index][name] = value;
+        this.setState({
+            tasks: {
+                ...this.state.tasks,
+                tasks
+            }
+        });
+        if(!name && !value) {
+            // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
+        }
     }
 
     render() {
         return (
             <div className={style.TaskManager}>
                 <div className={style.leftSide}>
-                    <div className={style.menu}>
-                        <span className={style.title}>Category:</span>
-                        <span className={style.categoryType}>All</span>
-                        <span className={style.categoryType}>Life</span>
-                        <span className={style.categoryType}>Work</span>
-                        <span className={style.categoryType}>Other</span>
-                        <span className={style.categoryAdd}>
-                            <MdPlaylistAdd />
-                        </span>
-                    </div>
-                    <div className={style.list}>
-                        <div className={style.task}>
-                            <h4>Task 1</h4>
-                            <div className={style.description}>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </div>
-                        </div>
-                        <div className={style.task}>
-                            <h4>Task 1</h4>
-                            <div className={style.description}>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </div>
-                        </div>
-                        <div className={style.task}>
-                            <h4>Task 1</h4>
-                            <div className={style.description}>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <Category categories={this.state.categories}
+                              setCategories={this.setCategories.bind(this)}
+                              deleteCategories={this.deleteCategories.bind(this)}
+                              selectCategories={this.selectCategory.bind(this)}
+                    />
+                    <ToDoList selectedCategory={this.state.selectedCategory}
+                              tasks={this.state.tasks}
+                              categories={this.state.categories}
+                              changeTask={this.changeTask.bind(this)}
+                    />
                 </div>
                 <div className={style.rightSide}>
-                    <div>
-                        <Toolbar period={this.state.period}
-                                 changeSelect={this.changeSelect.bind(this)}
-                                 createCalendar={this.createCalendar.bind(this)}
-                                 currentDate ={this.state.currentDate}
-                                 isCurrentMonth={this.state.isCurrentMonth}
-                        />
                         <Calendar period={this.state.period}
+                                  changeSelect={this.changeSelect.bind(this)}
+                                  createCalendar={this.createCalendar.bind(this)}
+                                  currentDate ={this.state.currentDate}
+                                  isCurrentMonth={this.state.isCurrentMonth}
                                   data={this.state.data}
                                   moment={this.state.moment}
-                                  currentDate ={this.state.currentDate}
-                                  createCalendar={this.createCalendar.bind(this)}
-                                  addTask={this.addTask.bind(this)}
                                   tasks={this.state.tasks}
                                   currentMonthCheck={this.currentMonthCheck.bind(this)}
                         />
-                    </div>
                 </div>
             </div>
         );
