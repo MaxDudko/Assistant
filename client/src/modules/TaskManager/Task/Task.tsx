@@ -8,14 +8,19 @@ interface IProps {
     created: string,
     date: string,
     description: string,
-    changeTask: any,
+    updateTask: any,
     index: number,
     category: string,
 }
 
 const Task: React.FC<IProps> = (props) => {
-    let [priority, priorityChange] = React.useState(props.priority);
     let [show, edit] = React.useState(false);
+    let [priority, priorityChange] = React.useState(props.priority);
+    let [title, titleChange] = React.useState(props.title);
+    let [date, dateChange] = React.useState(props.date);
+    let [description, descriptionChange] = React.useState(props.description);
+    let [created, createdChange] = React.useState(props.created);
+    let [category, categoryChange] = React.useState(props.category);
 
     const getPriority = () => {
         let stars = [];
@@ -24,20 +29,39 @@ const Task: React.FC<IProps> = (props) => {
                 stars.push(
                     <IoMdStar key={i}
                               style={{color: "gold"}}
-                              // onClick={() => {
-                              //     priorityChange(priority - i);
-                              //     props.changeTask(props.index, props.category, "priority", priority)
-                              // }}
                     />
                 )
                 :
                 stars.push(
                     <IoMdStar key={i}
                               style={{color: "gray"}}
-                              // onClick={() =>{
-                              //     priorityChange(priority + i);
-                              //     props.changeTask(props.index, props.category, "priority", priority)
-                              // }}
+                    />
+                )
+        }
+        return stars;
+    };
+
+    const setPriority = () => {
+        let stars = [<span style={{fontSize: "12px"}}>Priority: </span>];
+        for(let i = 1; i <= 5; i++) {
+            i <= priority ?
+                stars.push(
+                    <IoMdStar key={i}
+                              style={{color: "gold"}}
+                              onClick={() => {
+                                  priorityChange(i);
+                                  // props.updateTask(props.index, props.category, "priority", priority)
+                              }}
+                    />
+                )
+                :
+                stars.push(
+                    <IoMdStar key={i}
+                              style={{color: "gray"}}
+                              onClick={() =>{
+                                  priorityChange(i);
+                                  // props.updateTask(props.index, props.category, "priority", priority)
+                              }}
                     />
                 )
         }
@@ -55,7 +79,7 @@ const Task: React.FC<IProps> = (props) => {
                                    type="text"
                                    placeholder="Task Name"
                                    name="title"
-                                   onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
+                                   onChange={(e) => titleChange(e.target.value)}
                             />
                         </label>
                         :
@@ -64,14 +88,7 @@ const Task: React.FC<IProps> = (props) => {
                 <span className={style.stars}>
                     {
                         show ?
-                            <label style={{display: "flex", flexDirection: "row"}}>
-                                Priority:
-                                <input type="checkbox" />
-                                <input type="checkbox" />
-                                <input type="checkbox" />
-                                <input type="checkbox" />
-                                <input type="checkbox" />
-                            </label>
+                            setPriority()
                             :
                             getPriority()
                     }
@@ -87,7 +104,7 @@ const Task: React.FC<IProps> = (props) => {
                                        type="datetime-local"
                                        placeholder={props.date}
                                        name="date"
-                                       onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
+                                       onChange={(e) => dateChange(e.target.value)}
                                 />
                             </label>
                             :
@@ -104,7 +121,7 @@ const Task: React.FC<IProps> = (props) => {
                                       cols={10}
                                       placeholder={props.description}
                                       name="description"
-                                      onChange={(e) => props.changeTask(props.index, props.category, e.target.name, e.target.value)}
+                                      onChange={(e) => descriptionChange(e.target.value)}
                             />
                         </label>
                         :
@@ -119,10 +136,20 @@ const Task: React.FC<IProps> = (props) => {
                 <span className={style.btn}
                       onClick={() => edit(!show)}
                 >
-                    Edit
+                    {show ? "Cancel" : "Edit"}
                 </span>
                 <span className={style.btn}
-                      onClick={() => props.changeTask()}
+                      onClick={() => {
+                          props.updateTask(category, props.index, {
+                              title: title,
+                              category: category,
+                              priority: priority,
+                              date: date,
+                              description: description,
+                              created: created
+                          });
+                          edit(!show);
+                      }}
                 >
                     Save
                 </span>

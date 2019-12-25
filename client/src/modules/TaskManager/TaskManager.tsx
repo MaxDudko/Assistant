@@ -8,6 +8,7 @@ import ToDoList from "./ToDoList/ToDoList";
 import Category from "./Category/Category";
 import AddTask from "./AddTask/AddTask";
 import axios from "axios";
+import Popup from "../../core/components/Popup/Popup";
 
 interface IState {
     period: any,
@@ -23,6 +24,8 @@ interface IState {
     list: [],
     tasks: any,
     // categoryTasks: [],
+    popupShow: boolean,
+    popupData: any,
 
     [key: string]: any,
 }
@@ -41,6 +44,8 @@ class TaskManager extends React.Component<{}, IState>{
         selectedCategory: "All",
         list: [],
         tasks: data.tasks,
+        popupShow: false,
+        popupData: {},
         // categoryTasks: [],
     };
 
@@ -149,7 +154,7 @@ class TaskManager extends React.Component<{}, IState>{
         let tasks = this.state.tasks[category];
     }
 
-    changeTask(index: number, category: string, name:string, value:string) {
+    updateTask(category: string, index: number, data:{}) {
         // if(!key) {
         //     axios.post('http://localhost:4000/profile/update/', {
         //         "user": {
@@ -169,19 +174,45 @@ class TaskManager extends React.Component<{}, IState>{
         // let edit = this.state.tasks[this.state.selectedCategory][index];
         // edit[name] = value;
 
-        console.log(index, category, name, value);
+        console.log(category, index, data);
         // let category = this.state.selectedCategory;
         let tasks = this.state.tasks;
-        tasks[category][index][name] = value;
+        tasks[category][index] = data;
         this.setState({
             tasks: {
                 ...this.state.tasks,
                 tasks
             }
         });
-        if(!name && !value) {
             // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
-        }
+    }
+
+    createTask(category: string, data:{}) {
+        console.log(category, data);
+        let tasks = this.state.tasks;
+        tasks[category][tasks[category].length] = data;
+        console.log(category, tasks);
+        this.setState({
+            tasks: {
+                ...this.state.tasks,
+                tasks
+            }
+        })
+    }
+
+    showPopup(data: {}) {
+        console.log(data);
+        data ?
+            this.setState({
+                popupShow: !this.state.popupShow,
+            })
+            :
+            this.setState({
+                popupShow: !this.state.popupShow,
+                popupData: data
+            })
+
+
     }
 
     render() {
@@ -192,11 +223,13 @@ class TaskManager extends React.Component<{}, IState>{
                               setCategories={this.setCategories.bind(this)}
                               deleteCategories={this.deleteCategories.bind(this)}
                               selectCategories={this.selectCategory.bind(this)}
+                              showPopup={this.showPopup.bind(this)}
                     />
                     <ToDoList selectedCategory={this.state.selectedCategory}
                               tasks={this.state.tasks}
                               categories={this.state.categories}
-                              changeTask={this.changeTask.bind(this)}
+                              updateTask={this.updateTask.bind(this)}
+                              createTask={this.createTask.bind(this)}
                     />
                 </div>
                 <div className={style.rightSide}>
@@ -211,6 +244,12 @@ class TaskManager extends React.Component<{}, IState>{
                                   currentMonthCheck={this.currentMonthCheck.bind(this)}
                         />
                 </div>
+                {
+                    this.state.popupShow ?
+                        <Popup data={this.state.popupData}/>
+                        :
+                        null
+                }
             </div>
         );
     }

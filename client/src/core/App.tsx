@@ -9,6 +9,7 @@ import DashBoard from "./components/DashBoard/DashBoard";
 import Notifications from "./components/Notifications/Notifications";
 import Settings from "./components/Settings/Settings";
 import UserAccount from "./components/UserAccount/UserAccount";
+import Popup from "./components/Popup/Popup";
 
 import data from "../assets/data";
 
@@ -25,6 +26,7 @@ interface IState {
     modalSelected: string | null,
     settingsSelected: string | null,
     moduleSelected: string,
+    popupShow: boolean,
     [key: string]: any
 
 }
@@ -44,6 +46,7 @@ class App extends React.Component<{}, IState> {
       settingsSelected: null,
       // moduleSelected: "DashBoard",
       moduleSelected: "TaskManager",
+      popupShow: false,
   };
 
   componentDidMount(): void {
@@ -251,6 +254,15 @@ class App extends React.Component<{}, IState> {
                                       :
                                       null
                               }
+                              {/*{*/}
+                              {/*    this.state.popupShow ?*/}
+                              {/*        <Popup question={"Are you sure want to bla-bla-bla?"}*/}
+                              {/*               yes={null}*/}
+                              {/*               no={null}*/}
+                              {/*        />*/}
+                              {/*        :*/}
+                              {/*        null*/}
+                              {/*}*/}
                           </div>
                       </div>
                       :

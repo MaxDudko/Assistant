@@ -3,7 +3,7 @@ import style from "./WidgetTM.module.scss";
 import {FaTasks} from "react-icons/fa";
 import Calendar from "../Calendar/Calendar";
 import data from "./../../../assets/data";
-import Task from "../ToDoList/Task/Task";
+import Task from "../Task/Task";
 import Category from "../Category/Category";
 
 interface IProps {
@@ -36,7 +36,7 @@ const WidgetTM: React.FC<IProps> = (props) => {
                                           created={task.created}
                                           date={task.date}
                                           description={task.description}
-                                          changeTask={null}
+                                          updateTask={null}
                                     />
                                 ]
                             })

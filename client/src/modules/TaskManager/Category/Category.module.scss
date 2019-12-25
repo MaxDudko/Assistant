@@ -45,10 +45,16 @@
     .btn {
       padding: 6px 10px 4px 10px;
       height: 28px;
+      &:nth-child(1):hover {
+        color: lime;
+      }
+      &:nth-child(2):hover {
+        color: red;
+      }
       &:hover {
         transition: 1s;
         background: darken(#24292e, 10%);
-        color: #9191d4;
+        //color: #9191d4;
       }
       &:last-child {
         border-right: 1px solid lighten(#24292e, 20%);
@@ -69,14 +75,31 @@
       color: #A2A4D7;
       transition: 1s;
     }
-    .dropdown {
-      display: flex;
-      font-size: 18px;
-      align-items: center;
-      margin-right: 10px;
-      transition: 1s;
-      background: #353A40;
-      height: 100%;
+  }
+  .dropdown {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin-right: 10px;
+    transition: 1s;
+    background: #353A40;
+    height: 100%;
+    .btn {
+      //position: relative;
+      //right: 20px;
+      color: white;
+      font-size: 20px;
+      margin-left: 4px;
+      &:hover {
+        cursor: pointer;
+        transition: 1s;
+      }
+      &:nth-child(2):hover {
+        color: lime;
+      }
+      &:nth-child(3):hover {
+        color: red;
+      }
     }
   }
 }
