@@ -32,13 +32,24 @@
     box-shadow: inset 2px -1px 5px #9191d4;
 }
 .decorateDate {
-  border: 1px dotted red;
+  border: 1px solid lime;
+  box-shadow: inset 4px -4px 5px #9191d4, inset -4px 4px 5px #9191d4;
+  a {
+    //font-weight: bold;
+    color: lime;
+  }
 }
-.tasks:empty {
-  display: none;
-}
-.tasks {
-  width: 100%;
-  border: none;
-  background-color: rgba(188, 196, 224, .5);
+
+.task {
+  display: flex;
+  flex-direction: column;
+  span:nth-child(1) {
+    color: white;
+    font-size: 12px;
+  }
+  span:nth-child(2) {
+    color: white;
+    font-size: 12px;
+    text-decoration: overline;
+  }
 }

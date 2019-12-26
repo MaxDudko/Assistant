@@ -1,18 +1,38 @@
 .AddTask {
-  text-align: center;
-  color: #9191d4;
-  background: rgba(162, 164, 215, .5);
-  border: 1px dashed #9191d4;
-  border-radius: 10px;
-  //margin-top: 20px;
+  margin-top: 25px;
+}
+.btnAddTask {
+  border-radius: 5px;
   cursor: pointer;
+  text-align: center;
+  border: 1px dotted lime;
+  color: lime;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
+    &:hover {
+      border-style: solid;
+      background: rgba(0, 255, 0, .4);
+      box-shadow: inset 2px -1px 5px lime, inset -2px 1px 5px lime;
+      text-shadow: -1px 0 rgba(0, 0, 0, .4), 0 1px rgba(0, 0, 0, .4), 1px 0 rgba(0, 0, 0, .4), 0 -1px rgba(0, 0, 0, .4);
+      text-decoration: underline;
+      transition: 1s;
+    }
 }
 .NewTask {
+  text-align: center;
+  border-radius: 10px;
+  margin-top: 20px;
+  cursor: pointer;
   padding: 10px;
   //background: rgba(162, 164, 215, .5);
-  border-radius: 10px;
-  color: #353A40;
+  border: 1px solid #9191d4;
+  color: #9191d4;
+  &:hover {
+    transform: scale(.999);
+    box-shadow: inset 2px -1px 5px #9191d4, inset -2px 1px 5px #9191d4;
+  }
   i {
     font-size: 12px;
   }
@@ -25,15 +45,17 @@
     align-items: flex-start;
     font-size: 12px;
   }
-  input, textarea {
+  input, textarea, select {
     background: transparent;
     outline: none;
     border-radius: 5px;
     border: 1px dotted #A2A4D7;
     padding: 4px;
+    caret-color: #9191d4;
+    color: #9191d4;
   }
   input::placeholder, textarea::placeholder {
-
+    color: #A2A4D7;
   }
   .title {
     display: flex;
@@ -79,23 +101,25 @@
       width: 70px;
       text-align: center;
       &:nth-child(1) {
-        border: 1px dashed lime;
-        color: lime;
-        &:hover {
-          border-style: solid;
-          background: rgba(0, 255, 0, .4);
-          text-shadow: -1px 0 rgba(0, 0, 0, .4), 0 1px rgba(0, 0, 0, .4), 1px 0 rgba(0, 0, 0, .4), 0 -1px rgba(0, 0, 0, .4);
-          text-decoration: underline;
-          transition: 1s;
-        }
-      }
-      &:nth-child(2) {
-        border: 1px dashed red;
+        border: 1px dotted red;
         color: red;
         &:hover {
           border-style: solid;
           background: rgba(255, 0, 0, .4);
           text-shadow: -1px 0 rgba(0, 0, 0, .4), 0 1px rgba(0, 0, 0, .4), 1px 0 rgba(0, 0, 0, .4), 0 -1px rgba(0, 0, 0, .4);
+          box-shadow: inset 2px -1px 5px red, inset -2px 1px 5px red;
+          text-decoration: underline;
+          transition: 1s;
+        }
+      }
+      &:nth-child(2) {
+        border: 1px dotted lime;
+        color: lime;
+        &:hover {
+          border-style: solid;
+          background: rgba(0, 255, 0, .4);
+          text-shadow: -1px 0 rgba(0, 0, 0, .4), 0 1px rgba(0, 0, 0, .4), 1px 0 rgba(0, 0, 0, .4), 0 -1px rgba(0, 0, 0, .4);
+          box-shadow: inset 2px -1px 5px lime, inset -2px 1px 5px lime;
           text-decoration: underline;
           transition: 1s;
         }

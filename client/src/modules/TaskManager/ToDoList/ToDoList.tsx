@@ -15,10 +15,6 @@ const ToDoList: React.FC<IProps> = (props) => {
 
     return(
         <div className={style.ToDoList}>
-            <h4 className={style.category}>{props.selectedCategory}</h4>
-            {/*<div className={style.menu}>*/}
-            {/*    <span className={style.btn}></span>*/}
-            {/*</div>*/}
             <AddTask createTask={props.createTask}
                      selectedCategory={props.selectedCategory}
                      categories={props.categories}

@@ -14,11 +14,14 @@
     text-align: center;
   }
   .message {
-    background: lighten(#24292e, 10%);
+    //background: lighten(#24292e, 10%);
+    -webkit-backdrop-filter: blur(1px);
+    backdrop-filter: blur(1px);
     //background: rgba(255, 215, 255, .5);
+    box-shadow: inset 2px -1px 5px #24292e, inset -2px 1px 5px #24292e;
     margin: 10px;
     padding: 10px;
-    border: 1px dotted #24292e;
+    //border: 1px dotted #24292e;
     border-radius: 10px;
     min-height: fit-content;
     .head {

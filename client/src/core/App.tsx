@@ -9,7 +9,7 @@ import DashBoard from "./components/DashBoard/DashBoard";
 import Notifications from "./components/Notifications/Notifications";
 import Settings from "./components/Settings/Settings";
 import UserAccount from "./components/UserAccount/UserAccount";
-import Popup from "./components/Popup/Popup";
+// import Popup from "./components/Popup/Popup";
 
 import data from "../assets/data";
 
@@ -242,6 +242,7 @@ class App extends React.Component<{}, IState> {
                                        viewController={this.viewController.bind(this)}
                                        SidebarItems={this.state.SidebarItems}
                                        selectController={this.selectController.bind(this)}
+                                       moduleSelected={this.state.moduleSelected}
                               />
                               <DashBoard moduleSelected={this.state.moduleSelected}
                                          isCollapsed={this.state.isCollapsed}

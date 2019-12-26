@@ -86,21 +86,21 @@ const data: any = {
                 title: "Call John",
                 priority: 3,
                 created: "18.12.2019",
-                date: "30.12.2019 16:20",
+                date: "2019-12-30T16:20",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt!!!"
             },
             {
                 title: "Buy NewYear`s Presents",
                 priority: 5,
                 created: "15.12.2019",
-                date: "25.12.2019 13:00",
+                date: "2019-12-25T13:00",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
             },
             {
                 title: "Go to party",
                 priority: 0,
                 created: "20.12.2019",
-                date: "31.12.2019 20:00",
+                date: "2019-12-31T20:00",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
         ],
@@ -109,21 +109,21 @@ const data: any = {
                 title: "Work on BackEnd",
                 priority: 0,
                 created: "25.12.2019",
-                date: "10.01.2020 10:00",
+                date: "2020-01-10T10:00",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
             {
                 title: "End Project",
                 priority: 5,
                 created: "20.12.2019",
-                date: "20.01.2020 18:00",
+                date: "2020-01-20T18:00",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
             {
                 title: "Start New Project",
                 priority: 4,
                 created: "26.12.2019",
-                date: "15.02.2020 10:00",
+                date: "2020-02-15T10:00",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
         ],

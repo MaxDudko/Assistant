@@ -42,7 +42,7 @@ const Task: React.FC<IProps> = (props) => {
     };
 
     const setPriority = () => {
-        let stars = [<span style={{fontSize: "12px"}}>Priority: </span>];
+        let stars = [<span style={{fontSize: "12px"}} key={ Math.random()}>Priority: </span>];
         for(let i = 1; i <= 5; i++) {
             i <= priority ?
                 stars.push(
@@ -133,28 +133,31 @@ const Task: React.FC<IProps> = (props) => {
                </span>
             </div>
             <div className={style.menu}>
-                <span className={style.btn}
+                <span className={`${style.btn} ${show ? style.red : style.lime}`}
                       onClick={() => edit(!show)}
                 >
                     {show ? "Cancel" : "Edit"}
                 </span>
-                <span className={style.btn}
-                      onClick={() => {
-                          props.updateTask(category, props.index, {
-                              title: title,
-                              category: category,
-                              priority: priority,
-                              date: date,
-                              description: description,
-                              created: created
-                          });
-                          edit(!show);
-                      }}
-                >
-                    Save
-                </span>
-                <span className={style.btn}>Done</span>
-                <span className={style.btn}>Delete</span>
+                {
+                    show ?
+						<span className={`${style.btn} ${style.lime}`}
+							  onClick={() => {
+                                  props.updateTask(category, props.index, {
+                                      title: title,
+                                      category: category,
+                                      priority: priority,
+                                      date: date,
+                                      description: description,
+                                      created: created
+                                  });
+                                  edit(!show);
+                              }}
+                        >
+                            Save
+						</span>
+                        :
+                        <span className={`${style.btn} ${style.red}`}>Delete</span>
+                }
             </div>
         </div>
     )

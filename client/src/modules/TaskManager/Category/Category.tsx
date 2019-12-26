@@ -11,6 +11,7 @@ interface IProps {
     deleteCategories: any,
     selectCategories: any,
     showPopup: any,
+    selectedCategory: string,
 }
 
 const Category: React.FC<IProps> = (props) => {
@@ -22,7 +23,7 @@ const Category: React.FC<IProps> = (props) => {
         <div className={style.Category}>
             {/*<span className={style.title}>Category:</span>*/}
             <div className={style.categoryType}>
-                <span className={style.categoryType}
+                <span className={`${style.categoryType} ${props.selectedCategory === "All" ? style.selected : ''}`}
                       onClick={() => props.selectCategories("All")}
                 >
                     All
@@ -33,7 +34,7 @@ const Category: React.FC<IProps> = (props) => {
                     return [
                         <div className={style.categoryType} key={i}>
 
-                            <span className={style.name}
+                            <span className={`${style.name} ${props.selectedCategory === name ? style.selected : ''}`}
                                   onClick={() => props.selectCategories(name)}
                             >
                                 {

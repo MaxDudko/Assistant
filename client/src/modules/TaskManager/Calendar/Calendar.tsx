@@ -16,12 +16,14 @@ interface IProps {
     changeSelect: any,
     isCurrentMonth: boolean,
     // calendar: string
+    categories: string[],
+    selectedCategory: string,
 }
 
 const Calendar: React.FC<IProps> = (props) => {
+    let [isMonth, change] = React.useState(true);
 
     const renderCalendar = () => {
-
     };
 
     return (
@@ -31,16 +33,25 @@ const Calendar: React.FC<IProps> = (props) => {
                      createCalendar={props.createCalendar}
                      currentDate ={props.currentDate}
                      isCurrentMonth={props.isCurrentMonth}
+                     moment={props.moment}
             />
-            <Month period={props.period}
-                      data={props.data}
-                      moment={props.moment}
-                      currentDate ={props.currentDate}
-                      createCalendar={props.createCalendar}
-                      tasks={props.tasks}
-                      currentMonthCheck={props.currentMonthCheck}
-                   // calendar={props.calendar}
-            />
+            {
+                isMonth ?
+                    <Month period={props.period}
+                           data={props.data}
+                           moment={props.moment}
+                           currentDate ={props.currentDate}
+                           createCalendar={props.createCalendar}
+                           tasks={props.tasks}
+                           currentMonthCheck={props.currentMonthCheck}
+                           categories={props.categories}
+                           selectedCategory={props.selectedCategory}
+                        // calendar={props.calendar}
+                    />
+                    :
+                    <Day
+                    />
+            }
         </div>
     )
 };

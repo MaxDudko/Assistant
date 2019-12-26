@@ -6,9 +6,8 @@ import Calendar from "./Calendar/Calendar";
 import data from "../../assets/data";
 import ToDoList from "./ToDoList/ToDoList";
 import Category from "./Category/Category";
-import AddTask from "./AddTask/AddTask";
 import axios from "axios";
-import Popup from "../../core/components/Popup/Popup";
+// import Popup from "../../core/components/Popup/Popup";
 
 interface IState {
     period: any,
@@ -59,6 +58,7 @@ class TaskManager extends React.Component<{}, IState>{
     componentDidMount() {
         this.createCalendar("");
         this.getCategories();
+        console.log(moment("2020-02-20T20:10").format("DD MMMM YYYY"))
     }
 
     changeSelect(select: string) {
@@ -224,6 +224,7 @@ class TaskManager extends React.Component<{}, IState>{
                               deleteCategories={this.deleteCategories.bind(this)}
                               selectCategories={this.selectCategory.bind(this)}
                               showPopup={this.showPopup.bind(this)}
+                              selectedCategory={this.state.selectedCategory}
                     />
                     <ToDoList selectedCategory={this.state.selectedCategory}
                               tasks={this.state.tasks}
@@ -242,14 +243,16 @@ class TaskManager extends React.Component<{}, IState>{
                                   moment={this.state.moment}
                                   tasks={this.state.tasks}
                                   currentMonthCheck={this.currentMonthCheck.bind(this)}
+                                  categories={this.state.categories}
+                                  selectedCategory={this.state.selectedCategory}
                         />
                 </div>
-                {
-                    this.state.popupShow ?
-                        <Popup data={this.state.popupData}/>
-                        :
-                        null
-                }
+                {/*{*/}
+                {/*    this.state.popupShow ?*/}
+                {/*        <Popup data={this.state.popupData}/>*/}
+                {/*        :*/}
+                {/*        null*/}
+                {/*}*/}
             </div>
         );
     }

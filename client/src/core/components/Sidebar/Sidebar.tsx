@@ -10,6 +10,7 @@ interface IProps {
     viewController: any,
     SidebarItems: any,
     selectController: any,
+    moduleSelected: string,
 }
 
 const Sidebar: React.FC<IProps> = (props) => {
@@ -46,7 +47,7 @@ const Sidebar: React.FC<IProps> = (props) => {
                         };
 
                         return (
-                            <p className={style.item} key={index}
+                            <p className={`${style.item} ${props.moduleSelected === item.module ? style.selected : ""}`} key={index}
                                onClick={() => props.selectController("moduleSelected", module)}
                             >
 

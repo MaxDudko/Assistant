@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import style from "./AddTask.module.scss";
 import {IoMdStar} from "react-icons/io";
 
@@ -18,11 +18,11 @@ const AddTask: React.FC<IProps> = (props) => {
     let [category, categoryChange] = React.useState(props.categories[0]);
 
     const setPriority = () => {
-        let stars = [<span style={{fontSize: "12px"}}>Priority: </span>];
+        let stars = [<span style={{fontSize: "12px"}} key={ Math.random()}>Priority: </span>];
         for(let i = 1; i <= 5; i++) {
             i <= priority ?
                 stars.push(
-                    <IoMdStar key={i}
+                    <IoMdStar key={i + Math.random()}
                               style={{color: "gold"}}
                               onClick={() => {
                                   priorityChange(i);
@@ -31,7 +31,7 @@ const AddTask: React.FC<IProps> = (props) => {
                 )
                 :
                 stars.push(
-                    <IoMdStar key={i}
+                    <IoMdStar key={i + Math.random()}
                               style={{color: "gray"}}
                               onClick={() =>{
                                   priorityChange(i);
@@ -69,7 +69,7 @@ const AddTask: React.FC<IProps> = (props) => {
                                 <select onChange={(e) => categoryChange(e.target.value)}>
                                     {
                                         props.categories.map((e, i) => (
-                                            <option value={e} key={i}>
+                                            <option value={e} key={i + Math.random()}>
                                                 {e}
                                             </option>
                                         ))
@@ -98,6 +98,11 @@ const AddTask: React.FC<IProps> = (props) => {
                         </div>
                         <div className={style.menu}>
                             <span className={style.btn}
+                                  onClick={() => show(!isShow)}
+                            >
+                                Cancel
+                            </span>
+                            <span className={style.btn}
                                   onClick={() => {
                                       props.createTask(category, {
                                           title: title,
@@ -108,20 +113,14 @@ const AddTask: React.FC<IProps> = (props) => {
                                           created: created,
                                       });
                                       show(!isShow);
-                                  }
-                                  }
+                                  }}
                             >
                                 Save
-                            </span>
-                            <span className={style.btn}
-                                  onClick={() => show(!isShow)}
-                            >
-                                Cancel
                             </span>
                         </div>
                     </div>
                     :
-                    <b className={style.btn}
+                    <b className={style.btnAddTask}
                         onClick={() => show(!isShow)}
                     >
                         Add New Task

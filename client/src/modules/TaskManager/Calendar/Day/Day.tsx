@@ -7,8 +7,14 @@ interface IProps {
 
 const Day: React.FC<IProps> = (props) => {
     return(
-        <div className={style.AddTask}>
-            Day
+        <div className={style.Day}>
+            <table>
+                <thead>
+                {
+
+                }
+                </thead>
+            </table>
         </div>
     )
 };
