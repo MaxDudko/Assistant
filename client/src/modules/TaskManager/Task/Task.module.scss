@@ -1,0 +1,113 @@
+.Task {
+  padding: 10px;
+  margin-top: 10px;
+  //-webkit-backdrop-filter: blur(1px);
+  //backdrop-filter: blur(1px);
+  border-radius: 10px;
+  //box-shadow: inset 2px -1px 5px #9191d4, inset -2px 1px 5px #9191d4;
+  border: 1px solid #9191d4;
+  color: #9191d4;
+  &:hover {
+    transform: scale(.999);
+    box-shadow: inset 2px -1px 5px #9191d4, inset -2px 1px 5px #9191d4;
+  }
+  i {
+    font-size: 12px;
+  }
+  b {
+    font-size: 18px;
+  }
+  label {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+  }
+  input, textarea, select {
+    background: transparent;
+    outline: none;
+    border-radius: 5px;
+    border: 1px dotted #A2A4D7;
+    padding: 4px;
+    caret-color: #9191d4;
+    color: #9191d4;
+  }
+  input::placeholder, textarea::placeholder {
+    color: #A2A4D7;
+  }
+  .title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    .stars {
+      margin-left: 20px;
+      display: flex;
+      align-items: center;
+      * {
+        cursor: pointer;
+      }
+    }
+  }
+  .term {
+    display: flex;
+    justify-content: flex-end;
+    div {
+      width: max-content;
+    }
+  }
+  .description {
+    font-style: italic;
+    margin: 16px 0;
+    textarea {
+      width: 100%;
+      height: 100px;
+    }
+    span {
+      display: flex;
+      justify-content: flex-end;
+      font-size: 12px;
+    }
+  }
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    .btn {
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 70px;
+      text-align: center;
+    }
+    .lime {
+      border: 1px dotted lime;
+      color: lime;
+      &:hover {
+        border-style: solid;
+        background: rgba(0, 255, 0, .4);
+        text-shadow: -1px 0 rgba(0, 0, 0, .4), 0 1px rgba(0, 0, 0, .4), 1px 0 rgba(0, 0, 0, .4), 0 -1px rgba(0, 0, 0, .4);
+        box-shadow: inset 2px -1px 5px lime, inset -2px 1px 5px lime;
+        text-decoration: underline;
+        transition: 1s;
+      }
+    }
+    .red {
+      border: 1px dotted red;
+      color: red;
+      &:hover {
+        border-style: solid;
+        background: rgba(255, 0, 0, .4);
+        text-shadow: -1px 0 rgba(0, 0, 0, .4), 0 1px rgba(0, 0, 0, .4), 1px 0 rgba(0, 0, 0, .4), 0 -1px rgba(0, 0, 0, .4);
+        box-shadow: inset 2px -1px 5px red, inset -2px 1px 5px red;
+        text-decoration: underline;
+        transition: 1s;
+      }
+    }
+  }
+}
+@media (max-width: 720px) {
+  .Task .title .stars {
+    margin: 0;
+    min-width: 40%;
+    text-align: right;
+  }
+}

@@ -11,18 +11,16 @@ interface IProps {
     currentDate: string,
     createCalendar: any,
     moment: string,
-    // calendar: string,
     currentMonthCheck: any,
     changeSelect: any,
     isCurrentMonth: boolean,
-    // calendar: string
+    categories: string[],
+    selectedCategory: string,
 }
 
 const Calendar: React.FC<IProps> = (props) => {
-
-    const renderCalendar = () => {
-
-    };
+    let [isMonth, change] = React.useState(true);
+    let [date, setDate] = React.useState(props.currentDate);
 
     return (
         <div className={styles.calendar}>
@@ -31,16 +29,33 @@ const Calendar: React.FC<IProps> = (props) => {
                      createCalendar={props.createCalendar}
                      currentDate ={props.currentDate}
                      isCurrentMonth={props.isCurrentMonth}
+                     moment={props.moment}
+                     isMonth={isMonth}
+                     date={date}
+                     calendar={change.bind(Calendar)}
             />
-            <Month period={props.period}
-                      data={props.data}
-                      moment={props.moment}
-                      currentDate ={props.currentDate}
-                      createCalendar={props.createCalendar}
-                      tasks={props.tasks}
-                      currentMonthCheck={props.currentMonthCheck}
-                   // calendar={props.calendar}
-            />
+            {
+                isMonth ?
+                    <Month period={props.period}
+                           data={props.data}
+                           moment={props.moment}
+                           currentDate ={props.currentDate}
+                           createCalendar={props.createCalendar}
+                           tasks={props.tasks}
+                           currentMonthCheck={props.currentMonthCheck}
+                           categories={props.categories}
+                           selectedCategory={props.selectedCategory}
+                           setDate={setDate.bind(Calendar)}
+                           calendar={change.bind(Calendar)}
+                           isMonth={isMonth}
+                    />
+                    :
+                    <Day tasks={props.tasks}
+                         selectedCategory={props.selectedCategory}
+                         categories={props.categories}
+                         date={date}
+                    />
+            }
         </div>
     )
 };

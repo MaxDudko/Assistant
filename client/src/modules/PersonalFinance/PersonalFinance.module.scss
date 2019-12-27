@@ -1,7 +1,6 @@
 .PersonalFinance {
   width: 100%;
-  height: 100%;
-  border: 1px dotted rgba(0, 255, 0, 1);
+  height: calc(100vh - 50px);
   border-radius: 10px;
   background: rgba(0, 255, 0, .1);
   h1 {
