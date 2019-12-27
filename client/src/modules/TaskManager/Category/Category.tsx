@@ -2,7 +2,6 @@ import React from "react";
 import style from "./Category.module.scss";
 import {MdPlaylistAdd, MdDoneAll} from "react-icons/md";
 import {FaRegEdit} from "react-icons/fa";
-// import {TiDeleteOutline} from "react-icons/ti";
 import {GiSplitCross} from "react-icons/gi";
 
 interface IProps {

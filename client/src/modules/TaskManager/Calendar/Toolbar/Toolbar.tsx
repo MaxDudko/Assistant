@@ -9,6 +9,9 @@ interface IProps {
     period: string,
     isCurrentMonth: boolean,
     moment: any,
+    isMonth: boolean,
+    date: any,
+    calendar: any,
 }
 
 const Toolbar: React.FC<IProps> = (props) => {
@@ -18,9 +21,17 @@ const Toolbar: React.FC<IProps> = (props) => {
             <button className={styles.btn} onClick={() => props.createCalendar('prev')}> <FaArrowCircleLeft/> </button>
             <h2>
                 <button className={styles.btn}
-                        onClick={() => props.createCalendar('')}
+                        onClick={() => {
+                            props.createCalendar('');
+                            if(!props.isMonth) props.calendar(!props.isMonth);
+                        }}
                 >
-                    {props.moment.format('DD MMMM YYYY')}
+                    {
+                        props.isMonth ?
+                            <span>{props.moment.format('DD MMMM YYYY')}</span>
+                            :
+                            <span>{props.date}</span>
+                    }
                 </button>
             </h2>
             <button className={styles.btn} onClick={() => props.createCalendar('next')}> <FaArrowCircleRight/> </button>

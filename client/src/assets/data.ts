@@ -103,12 +103,26 @@ const data: any = {
                 date: "2019-12-31T20:00",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
+            {
+                title: "Start Sport training",
+                priority: 5,
+                created: "30.12.2019",
+                date: "2020-01-06T09:00",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt!!!"
+            },
+            {
+                title: "Go to party",
+                priority: 3,
+                created: "02.01.2020",
+                date: "2020-01-25T18:00",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt!!!"
+            }
         ],
         "Work": [
             {
                 title: "Work on BackEnd",
                 priority: 0,
-                created: "25.12.2019",
+                created: "08.01.2020",
                 date: "2020-01-10T10:00",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
@@ -127,6 +141,29 @@ const data: any = {
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
         ],
+        "Birthdays": [
+            {
+                title: "John Doe birthday",
+                priority: 5,
+                created: "27.12.2019",
+                date: "2020-01-09T12:00",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt!!!"
+            },
+            {
+                title: "Jane birthday",
+                priority: 5,
+                created: "27.12.2019",
+                date: "2020-01-22T12:00",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt!!!"
+            },
+            {
+                title: "Mr. Smith birthday",
+                priority: 5,
+                created: "27.12.2019",
+                date: "2020-01-30T12:00",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt!!!"
+            },
+        ]
     },
 };
 

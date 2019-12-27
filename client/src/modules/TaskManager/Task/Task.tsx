@@ -19,8 +19,8 @@ const Task: React.FC<IProps> = (props) => {
     let [title, titleChange] = React.useState(props.title);
     let [date, dateChange] = React.useState(props.date);
     let [description, descriptionChange] = React.useState(props.description);
-    let [created, createdChange] = React.useState(props.created);
-    let [category, categoryChange] = React.useState(props.category);
+    let [created] = React.useState(props.created);
+    let [category] = React.useState(props.category);
 
     const getPriority = () => {
         let stars = [];
