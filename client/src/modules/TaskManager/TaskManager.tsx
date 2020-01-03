@@ -27,7 +27,11 @@ interface IState {
     [key: string]: any,
 }
 
-class TaskManager extends React.Component<{}, IState>{
+interface IProps {
+    id: string,
+}
+
+class TaskManager extends React.Component<IProps, IState>{
     state: IState = {
         period: 'month',
         next: 0,
@@ -39,6 +43,7 @@ class TaskManager extends React.Component<{}, IState>{
         categories: [],
         selectedCategory: "All",
         list: [],
+        // tasks: [],
         tasks: data.tasks,
         popupShow: false,
         popupData: {},
@@ -50,10 +55,19 @@ class TaskManager extends React.Component<{}, IState>{
         })
     }
 
+    componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any): void {
+        // this.getTasks(this.props.id);
+        console.log(this.state.tasks)
+    }
+    componentWillReceiveProps(nextProps: Readonly<IProps>, nextContext: any): void {
+        // this.getTasks(this.props.id);
+        this.getCategories();
+    }
 
     componentDidMount() {
         this.createCalendar("");
-        this.getCategories();
+        // if(this.props.id) this.getTasks(this.props.id);
+        // this.getCategories();
     }
 
     showPopup(data: {}) {
@@ -130,7 +144,10 @@ class TaskManager extends React.Component<{}, IState>{
     }
 
     getCategories() {
-        let categories = Object.keys(this.state.tasks);
+        let categories: any = [];
+        this.state.tasks.map((task: any, index: number) => {
+            if(!categories.includes(task.category)) categories.push(task.category)
+        });
         this.setState({categories: categories})
     }
 
@@ -154,36 +171,53 @@ class TaskManager extends React.Component<{}, IState>{
         // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
     }
 
+    getTasks(id: string) {
+        axios.post('http://localhost:4000/tasks/get/', {
+            "id": id
+        })
+            .then((response) => {
+                console.log('/tasks/get: ', response);
+                this.setState({tasks: response.data})
+            })
+            .catch((error) => {
+                console.log('/tasks/get: ', error)
+            });
+    }
 
-    updateTask(category: string, index: number, data:{}) {
+    updateTask(index: number, data:{}) {
 
-        console.log(category, index, data);
+        console.log(index, data);
 
         let tasks = this.state.tasks;
-        tasks[category][index] = data;
+        tasks[index] = data;
         this.setState({
-            tasks: {
-                ...this.state.tasks,
-                tasks
-            }
+            tasks: tasks
         });
             // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
     }
 
-    createTask(category: string, data:{}) {
+    createTask(data: {}) {
 
-        console.log(category, data);
+        console.log(data);
 
         let tasks = this.state.tasks;
-        tasks[category][tasks[category].length] = data;
+        tasks[tasks.length] = data;
         this.setState({
-            tasks: {
-                ...this.state.tasks,
-                tasks
-            }
-        })
-    }
+            tasks: tasks
+        });
 
+        axios.post('http://localhost:4000/tasks/create/', {
+            "id": this.props.id,
+            "task": data
+
+        })
+            .then((response) => {
+                console.log('/profile/get: ', response);
+            })
+            .catch((error) => {
+                console.log('/profile/get: ', error)
+            });
+    }
 
     render() {
         return (

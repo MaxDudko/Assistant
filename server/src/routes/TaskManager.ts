@@ -5,7 +5,7 @@ const {getTasks, setTask, updateTask, deleteTask} = TaskManagerController;
 
 const TaskManagerRouter = Express.Router();
 
-TaskManagerRouter.get('/get', getTasks);
+TaskManagerRouter.post('/get', getTasks);
 TaskManagerRouter.post('/create', setTask);
 TaskManagerRouter.post('/update', updateTask);
 TaskManagerRouter.delete('/delete', deleteTask);

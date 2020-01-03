@@ -14,7 +14,7 @@ Router.use('/profile', profileRouter);
 Router.use('/settings', settingsRouter);
 Router.use('/notifications', notificationsRouter);
 
-Router.use('/TaskManager', TaskManagerRouter);
+Router.use('/tasks', TaskManagerRouter);
 
 export default Router;
 module.exports = Router;

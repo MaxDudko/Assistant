@@ -9,6 +9,7 @@ import AgileKanban from "../../../modules/AgileKanban/AgileKanban";
 interface IProps {
     moduleSelected: string,
     isCollapsed: boolean,
+    id: string,
 }
 
 const DashBoard: React.FC<IProps> = (props) => {
@@ -16,10 +17,12 @@ const DashBoard: React.FC<IProps> = (props) => {
     let isCollapsed = props.isCollapsed ? style.collapsed_true : style.collapsed_false;
 
     const Module: any = {
-        TaskManager: <TaskManager />,
+        TaskManager: <TaskManager id={props.id}/>,
         PersonalFinance: <PersonalFinance />,
         AgileKanban: <AgileKanban />,
     };
+
+
 
     return (
         <div className={style.DashBoard + ` ${isCollapsed}`}>
@@ -28,7 +31,7 @@ const DashBoard: React.FC<IProps> = (props) => {
                     Module[props.moduleSelected]
                     :
                     <div className={style.DashBoardWidgets}>
-                        <WidgetTM/>
+                        <WidgetTM />
                         {/*<TaskManager />*/}
                         <AgileKanban/>
                         <PersonalFinance/>

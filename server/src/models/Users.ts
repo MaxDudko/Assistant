@@ -6,7 +6,7 @@ import ProfileSchema from "./ProfileSchema";
 import SettingsSchema from "./SettingsSchema";
 import NotificationsSchema from "./NotificationsSchema";
 
-import TaskManagerSchema from "./TaskManagerSchema";
+import TaskSchema from "./TaskSchema";
 
 interface IUser extends Mongoose.Document{
     email: string;
@@ -19,7 +19,7 @@ interface IUser extends Mongoose.Document{
     settings: any,
     notifications: any,
 
-    TaskManager: any,
+    tasks: any,
 
     setPassword(password: string): any;
     validatePassword(password: string): boolean;
@@ -49,9 +49,7 @@ const UsersSchema: Schema = new Mongoose.Schema({
     settings: SettingsSchema,
     notifications: [NotificationsSchema],
 
-    TaskManager: {
-        category: [TaskManagerSchema],
-    },
+    tasks: [TaskSchema],
 
 });
 

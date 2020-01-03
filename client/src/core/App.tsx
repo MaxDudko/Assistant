@@ -15,7 +15,7 @@ import data from "../assets/data";
 
 interface IState {
     isLogin: string | null,
-    id: string | null,
+    id: string,
 
     profile: any,
     settings: any,
@@ -34,7 +34,7 @@ interface IState {
 class App extends React.Component<{}, IState> {
   state: IState = {
       isLogin: window.localStorage.getItem('token'),
-      id: null,
+      id: "",
 
       profile: [],
       settings: [],
@@ -66,6 +66,7 @@ class App extends React.Component<{}, IState> {
               // getSettings(id);
               getProfile(id);
               getNotifications(id);
+              // this.getTasks(id);
               // remember(response.data.user.remember);
           })
           .catch((error) => {
@@ -120,7 +121,7 @@ class App extends React.Component<{}, IState> {
           this.setState({isLogin: null});
           return;
       }
-
+      const setID = (id: string) => this.setState({id: id});
       // login/register
       console.log(data);
       this.setState({isRemember: data.remember});
@@ -133,6 +134,8 @@ class App extends React.Component<{}, IState> {
               console.log(`/auth/${form}: `, response);
               window.localStorage.setItem('token', response.data.user.token);
               authReady();
+              let id = response.data.user._id;
+              setID(id);
               // if(response.data.user.remember) remember()
           })
           .catch(function (error) {
@@ -224,6 +227,19 @@ class App extends React.Component<{}, IState> {
       // axios.post('http://localhost:4000/settings/update/', {})
   }
 
+    getTasks(id: string) {
+        axios.post('http://localhost:4000/tasks/get/', {
+            "id": id
+        })
+            .then((response) => {
+                console.log('/tasks/get: ', response);
+                this.setState({tasks: response})
+            })
+            .catch((error) => {
+                console.log('/tasks/get: ', error)
+            });
+    }
+
    render() {
       return(
           <div className={style.App}>
@@ -246,6 +262,7 @@ class App extends React.Component<{}, IState> {
                               />
                               <DashBoard moduleSelected={this.state.moduleSelected}
                                          isCollapsed={this.state.isCollapsed}
+                                         id={this.state.id}
                               />
                               {
                                   this.state.modalSelected !== null ?

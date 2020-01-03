@@ -17,6 +17,9 @@ const AddTask: React.FC<IProps> = (props) => {
     let [created, createdChange] = React.useState(Date.now);
     let [category, categoryChange] = React.useState(props.categories[0]);
 
+    const onChangeHandler = (e: any) => {
+        categoryChange(e.target.value)
+    };
     const setPriority = () => {
         let stars = [<span style={{fontSize: "12px"}} key={ Math.random()}>Priority: </span>];
         for(let i = 1; i <= 5; i++) {
@@ -68,9 +71,9 @@ const AddTask: React.FC<IProps> = (props) => {
                                 Category:
                                 <select onChange={(e) => categoryChange(e.target.value)}>
                                     {
-                                        props.categories.map((e, i) => (
-                                            <option value={e} key={i + Math.random()}>
-                                                {e}
+                                        props.categories.map((val, i) => (
+                                            <option value={val} key={i + Math.random()}>
+                                                {val}
                                             </option>
                                         ))
                                     }
@@ -104,7 +107,7 @@ const AddTask: React.FC<IProps> = (props) => {
                             </span>
                             <span className={style.btn}
                                   onClick={() => {
-                                      props.createTask(category, {
+                                      props.createTask({
                                           title: title,
                                           category: category,
                                           priority: priority,

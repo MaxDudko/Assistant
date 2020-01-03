@@ -28,39 +28,33 @@ const Day: React.FC<IProps> = (props) => {
                                 >
                                     {
                                         props.selectedCategory === "All" ?
-                                            props.categories.map((category:any) => {
-                                                if(!props.tasks[category]) return null;
-                                                return [
-                                                    props.tasks[category].map((task: any, i: number) => {
-                                                        if(
-                                                            moment(task.date).format('DD MMMM YYYY') === props.date
-                                                            &&
-                                                            task.date.split("T")[1].split(":")[0] === `${e < 10 ? '0'+e : e.toString()}`
-                                                        ) return(
-                                                            <span key={i} className={style.task}>
-                                                                <span>{task.title}</span>
-                                                                <span>{task.date.split("T")[1]}</span>
-                                                            </span>
-                                                        )
-                                                    })
-                                                ]
+                                            props.tasks.map((task: any, i: number) => {
+                                                if(
+                                                    moment(task.date).format('DD MMMM YYYY') === props.date
+                                                    &&
+                                                    task.date.split("T")[1].split(":")[0] === `${e < 10 ? '0'+e : e.toString()}`
+                                                ) return(
+                                                    <span key={i} className={style.task}>
+                                                        <span>{task.title}</span>
+                                                        <span>{task.date.split("T")[1]}</span>
+                                                    </span>
+                                                )
                                             })
                                             :
-                                            props.tasks[props.selectedCategory] ?
-                                                props.tasks[props.selectedCategory].map((task: any, i: number) => {
-                                                    if(
-                                                        moment(task.date).format('DD MMMM YYYY') === props.date
-                                                        &&
-                                                        task.date.split("T")[1].split(":")[0] === e.toString()
-                                                    ) return(
-                                                        <span key={i} className={style.task}>
-                                                            <span>{task.title}</span>
-                                                            <span>{task.date.split("T")[1]}</span>
-                                                        </span>
-                                                    )
-                                                })
-                                                :
-                                                null
+                                            props.tasks.map((task: any, i: number) => {
+                                                if(
+                                                    moment(task.date).format('DD MMMM YYYY') === props.date
+                                                    &&
+                                                    task.date.split("T")[1].split(":")[0] === `${e < 10 ? '0'+e : e.toString()}`
+                                                    &&
+                                                    task.category === props.selectedCategory
+                                                ) return(
+                                                    <span key={i} className={style.task}>
+                                                        <span>{task.title}</span>
+                                                        <span>{task.date.split("T")[1]}</span>
+                                                    </span>
+                                                )
+                                            })
                                     }
                                 </td>
                             </tr>

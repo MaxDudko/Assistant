@@ -26,11 +26,12 @@ const WidgetTM: React.FC<IProps> = (props) => {
                 {
                     categories.map((category:any, i:number) => {
                         return [
-                            tasks[category].map((task: any, i: number) => {
+                            tasks.map((task: any, i: number) => {
                                 return[
                                     <Task key={i}
                                           index={i}
                                           category={category}
+                                          categories={categories}
                                           title={task.title}
                                           priority={task.priority}
                                           created={task.created}

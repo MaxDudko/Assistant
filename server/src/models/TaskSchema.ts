@@ -1,7 +1,11 @@
 import Mongoose, {Schema} from "mongoose";
 
-const TaskManagerSchema: Schema = new Mongoose.Schema({
+const TaskSchema: Schema = new Mongoose.Schema({
     title: String,
+    category: {
+        required: true,
+        type: String,
+    },
     priority: Number,
     date: Date,
     description: String,
@@ -11,4 +15,4 @@ const TaskManagerSchema: Schema = new Mongoose.Schema({
     }
 });
 
-export default TaskManagerSchema;
+export default TaskSchema;

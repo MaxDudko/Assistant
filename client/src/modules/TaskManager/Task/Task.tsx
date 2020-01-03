@@ -11,6 +11,7 @@ interface IProps {
     updateTask: any,
     index: number,
     category: string,
+    categories: string[],
 }
 
 const Task: React.FC<IProps> = (props) => {
@@ -20,7 +21,8 @@ const Task: React.FC<IProps> = (props) => {
     let [date, dateChange] = React.useState(props.date);
     let [description, descriptionChange] = React.useState(props.description);
     let [created] = React.useState(props.created);
-    let [category] = React.useState(props.category);
+    // let [category] = React.useState(props.category);
+    let [category, categoryChange] = React.useState(props.categories[0]);
 
     const getPriority = () => {
         let stars = [];
@@ -98,6 +100,20 @@ const Task: React.FC<IProps> = (props) => {
                 <div>
                     {
                         show ?
+							<div>
+                            <label>
+								Category:
+								<select onChange={(e) => categoryChange(e.target.value)}>
+                                    {
+                                        props.categories.map((e: string, i: number) => (
+                                            <option value={e} key={i + Math.random()}
+                                            >
+                                                {e}
+                                            </option>
+                                        ))
+                                    }
+								</select>
+							</label>
                             <label>
                                 Date:
                                 <input className={style.input}
@@ -107,6 +123,7 @@ const Task: React.FC<IProps> = (props) => {
                                        onChange={(e) => dateChange(e.target.value)}
                                 />
                             </label>
+                            </div>
                             :
                             <i>{props.date}</i>
                     }
@@ -142,7 +159,7 @@ const Task: React.FC<IProps> = (props) => {
                     show ?
 						<span className={`${style.btn} ${style.lime}`}
 							  onClick={() => {
-                                  props.updateTask(category, props.index, {
+                                  props.updateTask(props.index, {
                                       title: title,
                                       category: category,
                                       priority: priority,
