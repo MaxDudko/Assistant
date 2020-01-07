@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Sidebar.module.scss";
-import logo from "./../../../assets/img/mern.png";
+import logo from "../../assets/img/mern.png";
 import { FaBars, FaTasks } from "react-icons/fa";
 import { MdDashboard, MdMonetizationOn } from "react-icons/md";
 import { GoProject } from "react-icons/go";
