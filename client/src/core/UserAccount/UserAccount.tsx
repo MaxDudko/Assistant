@@ -2,10 +2,13 @@ import React from "react";
 import style from "./UserAccount.module.scss";
 import { FaUser, FaPencilAlt, FaPlusCircle } from "react-icons/fa";
 import { MdAddAPhoto } from "react-icons/md";
+import {connect} from "react-redux";
+import {IReduxState} from "../../store/reducers";
 
 interface IProps {
-    userData: any,
-    userAccountController: any,
+    id: string,
+    profile: {[key: string]: string},
+    setProfileData: any,
 }
 
 const UserAccount: React.FC<IProps> = (props) => {
@@ -22,10 +25,10 @@ const UserAccount: React.FC<IProps> = (props) => {
                 <div className={style.head}>
                     <div>
                         {
-                            props.userData.avatar ?
-                                <img src={props.userData.avatar} alt={props.userData.userName} title={`Nice Photo, ${props.userData.userName} 😉`}/>
+                            props.profile.avatar ?
+                                <img src={props.profile.avatar} alt={props.profile.userName} title={`Nice Photo, ${props.profile.userName} 😉`}/>
                                 :
-                                <FaUser title={props.userData.userName} />
+                                <FaUser title={props.profile.userName} />
                         }
                         <MdAddAPhoto style={{cursor: "pointer"}}
                                      title="Change Photo"
@@ -34,7 +37,7 @@ const UserAccount: React.FC<IProps> = (props) => {
                         {/*<input type="file" style={{display: avatar?"block":"none"}}*/}
                         {/*       onChange={(e) => props.userAccountController("avatar", e.target.value)}/>*/}
                     </div>
-                    <h4>{props.userData.firstName} {props.userData.lastName}</h4>
+                    <h4>{props.profile.firstName} {props.profile.lastName}</h4>
                 </div>
                 <table className={style.body}>
                     <thead>
@@ -47,16 +50,16 @@ const UserAccount: React.FC<IProps> = (props) => {
                     <tr className={style.item}>
                         <td className={style.item_name}>id:</td>
                         <td className={style.item_value}>
-                            <span>{props.userData.id}</span>
+                            <span>{props.profile.id}</span>
                         </td>
                     </tr>
                     <tr className={style.item}>
                         <td className={style.item_name}>First Name:</td>
                         <td className={style.item_value}>
-                            <span style={{display: firstName?"none":"block"}}>{props.userData.firstName}</span>
+                            <span style={{display: firstName?"none":"block"}}>{props.profile.firstName}</span>
                             <input style={{display: firstName?"block":"none"}} className={style.dataChange}
-                                   defaultValue={props.userData.firstName}
-                                   onChange={(e) => props.userAccountController("firstName", e.target.value)}
+                                   defaultValue={props.profile.firstName}
+                                   onChange={(e) => props.setProfileData({firstName: e.target.value})}
                             />
                             {
                                 firstName ?
@@ -75,10 +78,10 @@ const UserAccount: React.FC<IProps> = (props) => {
                     <tr className={style.item}>
                         <td className={style.item_name}>Last Name:</td>
                         <td className={style.item_value}>
-                            <span style={{display: lastName?"none":"block"}}>{props.userData.lastName}</span>
+                            <span style={{display: lastName?"none":"block"}}>{props.profile.lastName}</span>
                             <input style={{display: lastName?"block":"none"}} className={style.dataChange}
-                                   defaultValue={props.userData.lastName}
-                                   onChange={(e) => props.userAccountController("lastName", e.target.value)}
+                                   defaultValue={props.profile.lastName}
+                                   onChange={(e) => props.setProfileData({lastName: e.target.value})}
                             />
                             {
                                 lastName ?
@@ -97,10 +100,10 @@ const UserAccount: React.FC<IProps> = (props) => {
                     <tr className={style.item}>
                         <td className={style.item_name}>Email:</td>
                         <td className={style.item_value}>
-                            <span style={{display: email?"none":"block"}}>{props.userData.email}</span>
+                            <span style={{display: email?"none":"block"}}>{props.profile.email}</span>
                             <input style={{display: email?"block":"none"}} className={style.dataChange}
-                                   defaultValue={props.userData.email}
-                                   onChange={(e) => props.userAccountController("email", e.target.value)}
+                                   defaultValue={props.profile.email}
+                                   onChange={(e) => props.setProfileData({email: e.target.value})}
                             />
                             {
                                 email ?
@@ -119,10 +122,10 @@ const UserAccount: React.FC<IProps> = (props) => {
                     <tr className={style.item}>
                         <td className={style.item_name}>Birth Date:</td>
                         <td className={style.item_value}>
-                            <span style={{display: birthday?"none":"block"}}>{props.userData.birthday}</span>
+                            <span style={{display: birthday?"none":"block"}}>{props.profile.birthday}</span>
                             <input style={{display: birthday?"block":"none"}} className={style.dataChange}
-                                   defaultValue={props.userData.birthday}
-                                   onChange={(e) => props.userAccountController("birthday", e.target.value)}
+                                   defaultValue={props.profile.birthday}
+                                   onChange={(e) => props.setProfileData({birthday: e.target.value})}
                             />
                             {
                                 birthday ?
@@ -141,10 +144,10 @@ const UserAccount: React.FC<IProps> = (props) => {
                     <tr className={style.item}>
                         <td className={style.item_name}>Location:</td>
                         <td className={style.item_value}>
-                            <span style={{display: location?"none":"block"}}>{props.userData.location}</span>
+                            <span style={{display: location?"none":"block"}}>{props.profile.location}</span>
                             <input style={{display: location?"block":"none"}} className={style.dataChange}
-                                   defaultValue={props.userData.location}
-                                   onChange={(e) => props.userAccountController("location", e.target.value)}
+                                   defaultValue={props.profile.location}
+                                   onChange={(e) => props.setProfileData({location: e.target.value})}
                             />
                             {
                                 location ?
@@ -163,14 +166,14 @@ const UserAccount: React.FC<IProps> = (props) => {
                     <tr className={style.item}>
                         <td className={style.item_name}>Registration Date:</td>
                         <td className={style.item_value}>
-                            <span>{new Date(props.userData.registrationDate).toLocaleDateString()}</span>
+                            <span>{new Date(props.profile.registrationDate).toLocaleDateString()}</span>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <span className={style.btn}
-                    onClick={() => props.userAccountController()}
+                    onClick={() => props.setProfileData(props.profile, props.id)}
             >
                 Update
             </span>
@@ -178,4 +181,24 @@ const UserAccount: React.FC<IProps> = (props) => {
     )
 };
 
-export default UserAccount;
+export default connect((state: IReduxState) => {
+    return {
+        id: state.auth.id,
+        profile: state.profile.profile_data,
+    };
+}, (dispatch) => {
+    return {
+        setProfileData(data: {[key: string]: string}, id: string) {
+            dispatch({
+                type: "SET_PROFILE_DATA",
+                payload: {
+                    data: data,
+                    id: id,
+                    path: "/profile/update/",
+                    typed: "UPDATE_PROFILE_DATA"
+                }
+            });
+        }
+    }
+})(UserAccount)
+

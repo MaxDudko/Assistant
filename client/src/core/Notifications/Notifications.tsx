@@ -1,10 +1,12 @@
 import React from "react";
 import style from "./Notifications.module.scss";
 import {AiOutlineClose} from "react-icons/ai";
+import {connect} from "react-redux";
+import {IReduxState} from "../../store/reducers";
 
 interface IProps {
-    notifications: any,
-    notificationsController: any,
+    notifications: {[key: string]: string}[],
+    deleteMessage: any,
 }
 
 const Notifications: React.FC<IProps> = (props) => {
@@ -17,7 +19,7 @@ const Notifications: React.FC<IProps> = (props) => {
                             <span className={style.id}>#{message.id}</span>
                             {message.title}
                             <span className={style.menu}>
-                                <AiOutlineClose className={style.btn} onClick={() => props.notificationsController(message.id)} />
+                                <AiOutlineClose className={style.btn} onClick={() => props.deleteMessage(message.id)} />
                             </span>
                         </b>
                         <span className={style.subtitle}>from: <a href="/#">{message.from}</a></span>
@@ -44,4 +46,19 @@ const Notifications: React.FC<IProps> = (props) => {
     )
 };
 
-export default Notifications;
+export default connect((state: IReduxState) => {
+    return {
+        notifications: state.notifications.notifications_data,
+    };
+}, (dispatch) => {
+    return {
+        deleteMessage(id: number) {
+            dispatch({
+                type: "DELETE_MESSAGE",
+                payload: {
+                    id: id,
+                }
+            })
+        }
+    }
+})(Notifications)

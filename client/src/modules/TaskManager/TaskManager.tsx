@@ -57,7 +57,7 @@ class TaskManager extends React.Component<IProps, IState>{
 
     componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any): void {
         // this.getTasks(this.props.id);
-        console.log(this.state.tasks)
+        // console.log(this.state.tasks)
     }
     componentWillReceiveProps(nextProps: Readonly<IProps>, nextContext: any): void {
         // this.getTasks(this.props.id);

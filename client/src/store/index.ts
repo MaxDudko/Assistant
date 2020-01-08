@@ -1,18 +1,10 @@
-import { combineReducers, compose, createStore, applyMiddleware } from 'redux'
-import { persistReducer, persistStore } from 'redux-persist'
+import {compose, createStore, applyMiddleware} from 'redux'
+import {persistReducer, persistStore} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { ICoreState, coreReducer } from './reducers/coreReducer';
+import {reducers, IReduxState} from "./reducers";
 
 import createSagaMiddleware from 'redux-saga'
-import rootSaga from './sagas/rootSaga';
-
-const reducers = combineReducers({
-    coreReducer
-});
-
-export interface IReduxState{
-    coreReducer: ICoreState
-}
+import rootSaga from './middlewares/rootSaga';
 
 const persistConfig = {
     key: 'root',
@@ -29,7 +21,7 @@ const middlewares = compose(
     reduxDevTools
 );
 
-export const store = createStore(reducers, middlewares);
+export const store = createStore<IReduxState, any, any, any>(reducers, middlewares);
 // export const store = createStore<IReduxState, any, any, any>(persistedReducer, middlewares);
 
 sagaMiddleware.run(rootSaga);

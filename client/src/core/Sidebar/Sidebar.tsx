@@ -4,10 +4,12 @@ import logo from "../../assets/img/mern.png";
 import { FaBars, FaTasks } from "react-icons/fa";
 import { MdDashboard, MdMonetizationOn } from "react-icons/md";
 import { GoProject } from "react-icons/go";
+import {connect} from "react-redux";
+import {IReduxState} from "../../store/reducers";
 
 interface IProps {
-    isCollapsed: boolean,
-    viewController: any,
+    isCollapsedSidebar: boolean,
+    collapseSidebar: any,
     SidebarItems: any,
     selectController: any,
     moduleSelected: string,
@@ -15,7 +17,7 @@ interface IProps {
 
 const Sidebar: React.FC<IProps> = (props) => {
 
-    let isCollapsed = props.isCollapsed ? style.collapsed_true : style.collapsed_false;
+    let isCollapsed = props.isCollapsedSidebar ? style.collapsed_true : style.collapsed_false;
 
     return (
         <div className={`${style.Sidebar} ${isCollapsed}`}>
@@ -29,7 +31,7 @@ const Sidebar: React.FC<IProps> = (props) => {
                     Assistant
                 </span>
                 <FaBars className={style.collapsed_icon}
-                        onClick={() => props.viewController()}
+                        onClick={() => props.collapseSidebar()}
                 />
             </div>
             <div className={style.list}>
@@ -62,4 +64,30 @@ const Sidebar: React.FC<IProps> = (props) => {
     )
 };
 
-export default Sidebar;
+export default connect((state: IReduxState) => {
+    return {
+        isCollapsedSidebar: state.common.isCollapsedSidebar,
+        moduleSelected: state.common.moduleSelected,
+    };
+}, (dispatch) => {
+    return {
+        collapseSidebar() {
+            dispatch({
+                type: "COLLAPSE_SIDEBAR",
+                payload: {
+
+                }
+            })
+        },
+        selectController(key: string, name: string) {
+            dispatch({
+                type: "SELECT_CONTROLLER",
+                payload: {
+                    key: key,
+                    name: name
+                }
+            })
+        }
+    }
+})(Sidebar)
+
