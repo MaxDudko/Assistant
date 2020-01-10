@@ -14,7 +14,6 @@ import UserAccount from "./UserAccount/UserAccount";
 
 import data from "../assets/data";
 import {IReduxState} from "../store/reducers";
-import {getProfileData} from "../store/actions/profile"
 
 interface IState {
     // isLogin: string | null,
@@ -171,7 +170,17 @@ export default connect((state: IReduxState) => {
                 }
             })
         },
-        getProfileData,
+        getProfileData(id: string) {
+            dispatch({type: "GET_PROFILE_DATA", payload: {id: id, path: 'profile/get/', typed: "RECEIVED_PROFILE_DATA"} });
+            dispatch({
+                type: "GET_PROFILE_DATA",
+                payload: {
+                    id: id,
+                    path: '/profile/get/',
+                    typed: "RECEIVED_PROFILE_DATA"
+                }
+            });
+        },
         getNotificationsData(id: string) {
             dispatch({
                 type: "GET_NOTIFICATIONS_DATA",

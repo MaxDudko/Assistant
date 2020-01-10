@@ -9,7 +9,6 @@ interface IProps {
     setCategories: any,
     deleteCategories: any,
     selectCategories: any,
-    showPopup: any,
     selectedCategory: string,
 }
 

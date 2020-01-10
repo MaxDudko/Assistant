@@ -70,20 +70,6 @@ class TaskManager extends React.Component<IProps, IState>{
         // this.getCategories();
     }
 
-    showPopup(data: {}) {
-        console.log(data);
-        data ?
-            this.setState({
-                popupShow: !this.state.popupShow,
-            })
-            :
-            this.setState({
-                popupShow: !this.state.popupShow,
-                popupData: data
-            })
-
-
-    }
 
     changeSelect(select: string) {
         this.setState({
@@ -227,7 +213,6 @@ class TaskManager extends React.Component<IProps, IState>{
                               setCategories={this.setCategories.bind(this)}
                               deleteCategories={this.deleteCategories.bind(this)}
                               selectCategories={this.selectCategory.bind(this)}
-                              showPopup={this.showPopup.bind(this)}
                               selectedCategory={this.state.selectedCategory}
                     />
                     <ToDoList selectedCategory={this.state.selectedCategory}
