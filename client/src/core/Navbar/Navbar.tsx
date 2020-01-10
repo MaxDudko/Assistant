@@ -46,15 +46,15 @@ export default connect((state: IReduxState) => {
     };
 }, (dispatch) => {
     return {
-        authController(form: string, data: {[key: string]: string}) {
-            dispatch({
-                type: "AUTH_CONTROLLER",
-                payload: {
-                    form: form,
-                    data: data
-                }
-            })
-        },
+        // authController(form: string, data: {[key: string]: string}) {
+        //     dispatch({
+        //         type: "AUTH_CONTROLLER",
+        //         payload: {
+        //             form: form,
+        //             data: data
+        //         }
+        //     })
+        // },
         selectController(key: string, name: string) {
             dispatch({
                 type: "SELECT_CONTROLLER",

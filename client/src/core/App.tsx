@@ -14,9 +14,10 @@ import UserAccount from "./UserAccount/UserAccount";
 
 import data from "../assets/data";
 import {IReduxState} from "../store/reducers";
+import {getProfileData} from "../store/actions/profile"
 
 interface IState {
-    isLogin: string | null,
+    // isLogin: string | null,
 
     SidebarItems: any,
     [key: string]: any
@@ -33,13 +34,13 @@ interface IProps {
 
 class App extends React.Component<IProps, IState> {
   state: IState = {
-      isLogin: window.localStorage.getItem('token'),
+      // isLogin: window.localStorage.getItem('token'),
 
       SidebarItems: data.SidebarItems,
   };
 
   componentDidMount(): void {
-      const token = this.state.isLogin;
+      const token = window.localStorage.getItem('token');
       // const remember = (value: boolean) => this.setState({isRemember: value});
       console.log('token: ', token);
       if(!token) return;
@@ -66,7 +67,7 @@ class App extends React.Component<IProps, IState> {
       if(!form) {
           // if(!this.state.isRemember)
           window.localStorage.clear();
-          this.setState({isLogin: null});
+          // this.setState({isLogin: null});
           return;
       }
       // const setID = (id: string) => this.setState({id: id});
@@ -92,26 +93,13 @@ class App extends React.Component<IProps, IState> {
       // const remember = () => this.setState({isRemember: !this.state.isRemember})
   }
 
-  // selectController(key: any, selected: string) {
-  //     if(key === "modalSelected") {
-  //         this.state[key] === selected ?
-  //             this.setState({[key]: null})
-  //             :
-  //             this.setState({[key]: selected})
-  //     } else {
-  //         this.setState({[key]: selected})
-  //     }
-  // }
-
   openModal() {
       let modal = this.props.modalSelected;
 
       const allModals: { [key: string]: any } = {
-          Notifications: <Notifications />,
-
-          Settings: <Settings />,
-
-          UserAccount: <UserAccount />,
+          Notifications: <Notifications/>,
+          Settings: <Settings/>,
+          UserAccount: <UserAccount/>,
 
       };
 
@@ -136,9 +124,9 @@ class App extends React.Component<IProps, IState> {
       return(
           <div className={style.App}>
               {
-                  this.state.isLogin ?
+                  window.localStorage.getItem('token') ?
                       <div>
-                          <Navbar isLogin={this.state.isLogin} />
+                          <Navbar isLogin={this.state.isLogin} authController={this.authController.bind(this)} />
                           <div className={style.wrapper}>
                               <Sidebar SidebarItems={this.state.SidebarItems}/>
                               <DashBoard id={this.props.id}
@@ -154,7 +142,7 @@ class App extends React.Component<IProps, IState> {
                           </div>
                       </div>
                       :
-                      <Authentication />
+                      <Authentication authController={this.authController.bind(this)}/>
               }
           </div>
       )
@@ -183,16 +171,7 @@ export default connect((state: IReduxState) => {
                 }
             })
         },
-        getProfileData(id: string) {
-            dispatch({
-                type: "GET_PROFILE_DATA",
-                payload: {
-                    id: id,
-                    path: '/profile/get/',
-                    typed: "RECEIVED_PROFILE_DATA"
-                }
-            });
-        },
+        getProfileData,
         getNotificationsData(id: string) {
             dispatch({
                 type: "GET_NOTIFICATIONS_DATA",

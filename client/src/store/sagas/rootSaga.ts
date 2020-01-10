@@ -37,7 +37,41 @@ function* updateData(action: any) {
         });
 }
 
+function* isLogin (action: any) {
+    const check = axios.get('http://localhost:4000/auth/get/', {
+        headers: {
+            Authorization: `Token ${action.payload.token}`
+        }
+    })
+        .then((response) => {
+            console.log('/auth/get: ', response);
+            let id = response.data.user._id;
+            // this.props.getProfileData(id);
+            // this.props.getNotificationsData(id);
+        })
+        .catch((error) => {
+            console.log('/auth/get: ', error);
+            window.localStorage.clear();
+        });
+}
+
 function* coreSaga() {
+    // axios.get('http://localhost:4000/auth/get/', {
+    //     headers: {
+    //         Authorization: `Token ${action.payload.token}`
+    //     }
+    // })
+    //     .then((response) => {
+    //         console.log('/auth/get: ', response);
+    //         let id = response.data.user._id;
+    //         this.props.setID(id);
+    //         this.props.getProfileData(id);
+    //         this.props.getNotificationsData(id);
+    //     })
+    //     .catch((error) => {
+    //         console.log('/auth/get: ', error);
+    //         window.localStorage.clear();
+    //     });
     yield takeEvery('GET_PROFILE_DATA', getData);
     yield takeEvery('GET_NOTIFICATIONS_DATA', getData);
     yield takeEvery('SET_PROFILE_DATA', updateData);

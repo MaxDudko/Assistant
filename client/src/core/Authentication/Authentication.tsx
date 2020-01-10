@@ -135,14 +135,14 @@ export default connect((state: IReduxState) => {
     return {};
 }, (dispatch) => {
     return {
-        authController(form: string, data: {[key: string]: string}) {
-            dispatch({
-                type: "AUTH_CONTROLLER",
-                payload: {
-                    form: form,
-                    data: data
-                }
-            })
-        },
+        // authController(form: string, data: {[key: string]: string}) {
+        //     dispatch({
+        //         type: "AUTH_CONTROLLER",
+        //         payload: {
+        //             form: form,
+        //             data: data
+        //         }
+        //     })
+        // },
     }
 })(Authentication)
