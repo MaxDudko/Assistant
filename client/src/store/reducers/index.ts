@@ -6,6 +6,9 @@ import {notifications, INotificationsState} from "./notifications";
 import {settings, ISettingsState} from "./settings";
 import {common, ICommonState} from "./common";
 
+import {calendar, ICalendarState} from "./calendar";
+import {tasks, ITasksState} from "./tasks";
+
 
 export const reducers = combineReducers({
     auth,
@@ -13,6 +16,9 @@ export const reducers = combineReducers({
     notifications,
     settings,
     common,
+
+    calendar,
+    tasks,
 });
 
 export interface IReduxState{
@@ -21,4 +27,7 @@ export interface IReduxState{
     notifications: INotificationsState,
     settings: ISettingsState,
     common: ICommonState,
+
+    calendar: ICalendarState,
+    tasks: ITasksState,
 }

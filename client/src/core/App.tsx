@@ -10,10 +10,13 @@ import DashBoard from "./DashBoard/DashBoard";
 import Notifications from "./Notifications/Notifications";
 import Settings from "./Settings/Settings";
 import UserAccount from "./UserAccount/UserAccount";
-// import Popup from "./components/Popup/Popup";
 
 import data from "../assets/data";
 import {IReduxState} from "../store/reducers";
+
+import {getProfileData} from "../store/actions/profile";
+import {setID} from "../store/actions/auth";
+import {getNotificationsData} from "../store/actions/notifications";
 
 interface IState {
     // isLogin: string | null,
@@ -128,8 +131,7 @@ class App extends React.Component<IProps, IState> {
                           <Navbar isLogin={this.state.isLogin} authController={this.authController.bind(this)} />
                           <div className={style.wrapper}>
                               <Sidebar SidebarItems={this.state.SidebarItems}/>
-                              <DashBoard id={this.props.id}
-                              />
+                              <DashBoard />
                               {
                                   this.state.modalSelected !== null ?
                                       <div className={style.modal}>
@@ -162,34 +164,8 @@ export default connect((state: IReduxState) => {
         //         payload: {}
         //     })
         // },
-        setID(id: string) {
-            dispatch({
-                type: "SET_ID",
-                payload: {
-                    id: id,
-                }
-            })
-        },
-        getProfileData(id: string) {
-            dispatch({type: "GET_PROFILE_DATA", payload: {id: id, path: 'profile/get/', typed: "RECEIVED_PROFILE_DATA"} });
-            dispatch({
-                type: "GET_PROFILE_DATA",
-                payload: {
-                    id: id,
-                    path: '/profile/get/',
-                    typed: "RECEIVED_PROFILE_DATA"
-                }
-            });
-        },
-        getNotificationsData(id: string) {
-            dispatch({
-                type: "GET_NOTIFICATIONS_DATA",
-                payload: {
-                    id: id,
-                    path: '/notifications/get/',
-                    typed: "RECEIVED_NOTIFICATIONS_DATA"
-                }
-            });
-        },
+        setID: (id: string) => dispatch(setID(id)),
+        getProfileData: (id: string) => dispatch(getProfileData(id)),
+        getNotificationsData: (id: string) => dispatch(getNotificationsData(id)),
     }
 })(App)

@@ -4,6 +4,8 @@ import {AiOutlineClose} from "react-icons/ai";
 import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
 
+import {deleteMessage} from "../../store/actions/notifications";
+
 interface IProps {
     notifications: {[key: string]: string}[],
     deleteMessage: any,
@@ -52,13 +54,6 @@ export default connect((state: IReduxState) => {
     };
 }, (dispatch) => {
     return {
-        deleteMessage(id: number) {
-            dispatch({
-                type: "DELETE_MESSAGE",
-                payload: {
-                    id: id,
-                }
-            })
-        }
+        deleteMessage: (id: string) => dispatch(deleteMessage(id)),
     }
 })(Notifications)

@@ -11,8 +11,6 @@ export const auth = (state:IAuthState = initialState, action: any) => {
               ...state,
               id: action.payload.id
             };
-        case 'AUTH_CONTROLLER':
-            return state;
         default:
             return state;
     }

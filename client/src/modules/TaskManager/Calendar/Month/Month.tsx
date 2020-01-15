@@ -50,7 +50,6 @@ const Month: React.FC<IProps> = (props) => {
                 }}
             >
                 <a href="/">{td.Date}</a>
-                <i style={{color: "red"}}>{td.Month}</i>
                 {
                     props.selectedCategory === "All" ?
                         props.tasks.map((task: any, i: number) => {

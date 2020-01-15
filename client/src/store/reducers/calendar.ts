@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export interface IProfileState {
+export interface ICalendarState {
     next: any,
     prev: any,
     moment: any,
@@ -16,7 +16,8 @@ export const initialState = {
     isCurrentMonth: true,
     data: [],
 };
-export const profile = (state:IProfileState = initialState, action: any) => {
+
+export const calendar = (state:ICalendarState = initialState, action: any) => {
     switch (action.type) {
         case 'CURRENT_MONTH_CHECK':
             return {
@@ -29,6 +30,8 @@ export const profile = (state:IProfileState = initialState, action: any) => {
                 period: action.payload.select,
                 data: [],
             };
+        case 'CREATE_CALENDAR':
+
         default:
             return state;
     }

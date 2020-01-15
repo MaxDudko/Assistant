@@ -11,7 +11,6 @@ import {IReduxState} from "../../store/reducers";
 interface IProps {
     moduleSelected: string,
     isCollapsedSidebar: boolean,
-    id: string,
 }
 
 const DashBoard: React.FC<IProps> = (props) => {
@@ -19,7 +18,7 @@ const DashBoard: React.FC<IProps> = (props) => {
     let isCollapsed = props.isCollapsedSidebar ? style.collapsed_true : style.collapsed_false;
 
     const Module: any = {
-        TaskManager: <TaskManager id={props.id}/>,
+        TaskManager: <TaskManager />,
         PersonalFinance: <PersonalFinance />,
         AgileKanban: <AgileKanban />,
     };

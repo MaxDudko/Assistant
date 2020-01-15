@@ -12,7 +12,6 @@ interface IProps {
     createCalendar: any,
     moment: string,
     currentMonthCheck: any,
-    changeSelect: any,
     isCurrentMonth: boolean,
     categories: string[],
     selectedCategory: string,
@@ -25,7 +24,6 @@ const Calendar: React.FC<IProps> = (props) => {
     return (
         <div className={styles.calendar}>
             <Toolbar period={props.period}
-                     changeSelect={props.changeSelect}
                      createCalendar={props.createCalendar}
                      currentDate ={props.currentDate}
                      isCurrentMonth={props.isCurrentMonth}

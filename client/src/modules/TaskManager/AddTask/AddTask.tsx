@@ -1,8 +1,13 @@
 import React from "react";
 import style from "./AddTask.module.scss";
 import {IoMdStar} from "react-icons/io";
+import {connect} from "react-redux";
+import {IReduxState} from "../../../store/reducers";
+
+import {createTask} from "../../../store/actions/tasks";
 
 interface IProps {
+    id: string,
     createTask: any,
     selectedCategory: string,
     categories: string[],
@@ -114,7 +119,9 @@ const AddTask: React.FC<IProps> = (props) => {
                                           date: date,
                                           description: description,
                                           created: created,
-                                      });
+                                      },
+                                          props.id,
+                                      );
                                       show(!isShow);
                                   }}
                             >
@@ -133,4 +140,12 @@ const AddTask: React.FC<IProps> = (props) => {
     )
 };
 
-export default AddTask;
+export default connect((state: IReduxState) => {
+    return {
+        id: state.auth.id,
+    };
+}, (dispatch) => {
+    return {
+        createTask: (data: {[key: string]: string}, id: string) => dispatch(createTask(data, id)),
+    }
+})(AddTask)

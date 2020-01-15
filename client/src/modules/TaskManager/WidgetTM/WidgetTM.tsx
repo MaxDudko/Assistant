@@ -37,7 +37,6 @@ const WidgetTM: React.FC<IProps> = (props) => {
                                           created={task.created}
                                           date={task.date}
                                           description={task.description}
-                                          updateTask={null}
                                     />
                                 ]
                             })

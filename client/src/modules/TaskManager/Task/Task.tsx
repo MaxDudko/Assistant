@@ -1,17 +1,23 @@
 import React from "react";
 import style from "./Task.module.scss";
 import {IoMdStar} from "react-icons/io";
+import {connect} from "react-redux";
+import {IReduxState} from "../../../store/reducers";
+
+import {updateTask} from "../../../store/actions/tasks";
 
 interface IProps {
+    id: string,
     title: string,
     priority: number,
     created: string,
     date: string,
     description: string,
-    updateTask: any,
     index: number,
     category: string,
     categories: string[],
+
+    updateTask: any,
 }
 
 const Task: React.FC<IProps> = (props) => {
@@ -159,14 +165,17 @@ const Task: React.FC<IProps> = (props) => {
                     show ?
 						<span className={`${style.btn} ${style.lime}`}
 							  onClick={() => {
-                                  props.updateTask(props.index, {
+                                  props.updateTask({
                                       title: title,
                                       category: category,
                                       priority: priority,
                                       date: date,
                                       description: description,
                                       created: created
-                                  });
+                                  },
+                                      props.index,
+                                      props.id,
+                                  );
                                   edit(!show);
                               }}
                         >
@@ -180,4 +189,12 @@ const Task: React.FC<IProps> = (props) => {
     )
 };
 
-export default Task;
+export default connect((state: IReduxState) => {
+    return {
+        id: state.auth.id,
+    };
+}, (dispatch) => {
+    return {
+        updateTask: (data: {[key: string]: string}, index: number, id: string) => dispatch(updateTask(data, index, id)),
+    }
+})(Task)

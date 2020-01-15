@@ -7,6 +7,8 @@ import { GoProject } from "react-icons/go";
 import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
 
+import {collapseSidebar, selectController} from "../../store/actions/common";
+
 interface IProps {
     isCollapsedSidebar: boolean,
     collapseSidebar: any,
@@ -71,23 +73,8 @@ export default connect((state: IReduxState) => {
     };
 }, (dispatch) => {
     return {
-        collapseSidebar() {
-            dispatch({
-                type: "COLLAPSE_SIDEBAR",
-                payload: {
-
-                }
-            })
-        },
-        selectController(key: string, name: string) {
-            dispatch({
-                type: "SELECT_CONTROLLER",
-                payload: {
-                    key: key,
-                    name: name
-                }
-            })
-        }
+        collapseSidebar: () => dispatch(collapseSidebar()),
+        selectController: (key: string, name: string) => dispatch(selectController(key, name))
     }
 })(Sidebar)
 

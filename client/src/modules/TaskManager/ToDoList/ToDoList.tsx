@@ -7,15 +7,14 @@ interface IProps {
     selectedCategory: string,
     tasks: any,
     categories: string[],
-    updateTask: any,
-    createTask: any,
+    // updateTask: any,
 }
 
 const ToDoList: React.FC<IProps> = (props) => {
 
     return(
         <div className={style.ToDoList}>
-            <AddTask createTask={props.createTask}
+            <AddTask
                      selectedCategory={props.selectedCategory}
                      categories={props.categories}
             />
@@ -32,7 +31,6 @@ const ToDoList: React.FC<IProps> = (props) => {
                                   created={task.created}
                                   date={task.date}
                                   description={task.description}
-                                  updateTask={props.updateTask}
                             />
                             ]
                     })
@@ -48,7 +46,6 @@ const ToDoList: React.FC<IProps> = (props) => {
                                       created={task.created}
                                       date={task.date}
                                       description={task.description}
-                                      updateTask={props.updateTask}
                                 />
                             ]
                     })

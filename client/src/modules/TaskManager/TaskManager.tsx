@@ -7,7 +7,10 @@ import data from "../../assets/data";
 import ToDoList from "./ToDoList/ToDoList";
 import Category from "./Category/Category";
 import axios from "axios";
-// import Popup from "../../core/components/Popup/Popup";
+import {connect} from "react-redux";
+import {IReduxState} from "../../store/reducers";
+
+import {getTasks} from "../../store/actions/tasks";
 
 interface IState {
     period: any,
@@ -19,16 +22,15 @@ interface IState {
     data: any,
     categories: string[],
     selectedCategory: string,
-    list: [],
-    tasks: any,
-    popupShow: boolean,
-    popupData: any,
+    // tasks: any,
 
     [key: string]: any,
 }
 
 interface IProps {
     id: string,
+    tasks: any,
+    // updateTask: any,
 }
 
 class TaskManager extends React.Component<IProps, IState>{
@@ -42,11 +44,8 @@ class TaskManager extends React.Component<IProps, IState>{
         data: [],
         categories: [],
         selectedCategory: "All",
-        list: [],
         // tasks: [],
-        tasks: data.tasks,
-        popupShow: false,
-        popupData: {},
+        // tasks: data.tasks,
     };
 
     currentMonthCheck(page: string) {
@@ -71,12 +70,12 @@ class TaskManager extends React.Component<IProps, IState>{
     }
 
 
-    changeSelect(select: string) {
-        this.setState({
-            period: select,
-            data: [],
-        });
-    }
+    // changeSelect(select: string) {
+    //     this.setState({
+    //         period: select,
+    //         data: [],
+    //     });
+    // }
 
     createCalendar(change: string) {
         const data = [];
@@ -131,7 +130,7 @@ class TaskManager extends React.Component<IProps, IState>{
 
     getCategories() {
         let categories: any = [];
-        this.state.tasks.map((task: any, index: number) => {
+        this.props.tasks.map((task: any, index: number) => {
             if(!categories.includes(task.category)) categories.push(task.category)
         });
         this.setState({categories: categories})
@@ -157,53 +156,7 @@ class TaskManager extends React.Component<IProps, IState>{
         // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
     }
 
-    getTasks(id: string) {
-        axios.post('http://localhost:4000/tasks/get/', {
-            "id": id
-        })
-            .then((response) => {
-                console.log('/tasks/get: ', response);
-                this.setState({tasks: response.data})
-            })
-            .catch((error) => {
-                console.log('/tasks/get: ', error)
-            });
-    }
 
-    updateTask(index: number, data:{}) {
-
-        console.log(index, data);
-
-        let tasks = this.state.tasks;
-        tasks[index] = data;
-        this.setState({
-            tasks: tasks
-        });
-            // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
-    }
-
-    createTask(data: {}) {
-
-        console.log(data);
-
-        let tasks = this.state.tasks;
-        tasks[tasks.length] = data;
-        this.setState({
-            tasks: tasks
-        });
-
-        axios.post('http://localhost:4000/tasks/create/', {
-            "id": this.props.id,
-            "task": data
-
-        })
-            .then((response) => {
-                console.log('/profile/get: ', response);
-            })
-            .catch((error) => {
-                console.log('/profile/get: ', error)
-            });
-    }
 
     render() {
         return (
@@ -216,21 +169,19 @@ class TaskManager extends React.Component<IProps, IState>{
                               selectedCategory={this.state.selectedCategory}
                     />
                     <ToDoList selectedCategory={this.state.selectedCategory}
-                              tasks={this.state.tasks}
+                              tasks={this.props.tasks}
                               categories={this.state.categories}
-                              updateTask={this.updateTask.bind(this)}
-                              createTask={this.createTask.bind(this)}
+                              // updateTask={this.props.updateTask}
                     />
                 </div>
                 <div className={style.rightSide}>
                         <Calendar period={this.state.period}
-                                  changeSelect={this.changeSelect.bind(this)}
                                   createCalendar={this.createCalendar.bind(this)}
                                   currentDate ={this.state.currentDate}
                                   isCurrentMonth={this.state.isCurrentMonth}
                                   data={this.state.data}
                                   moment={this.state.moment}
-                                  tasks={this.state.tasks}
+                                  tasks={this.props.tasks}
                                   currentMonthCheck={this.currentMonthCheck.bind(this)}
                                   categories={this.state.categories}
                                   selectedCategory={this.state.selectedCategory}
@@ -241,4 +192,13 @@ class TaskManager extends React.Component<IProps, IState>{
     }
 }
 
-export default TaskManager;
+export default connect((state: IReduxState) => {
+    return {
+        id: state.auth.id,
+        tasks: state.tasks.tasks_data,
+    };
+}, (dispatch) => {
+    return {
+        getTasks: (id: string) => dispatch(getTasks(id)),
+    }
+})(TaskManager)

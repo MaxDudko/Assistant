@@ -4,7 +4,8 @@ import { FaUser, FaPencilAlt, FaPlusCircle } from "react-icons/fa";
 import { MdAddAPhoto } from "react-icons/md";
 import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
-
+import {setProfileData} from "../../store/actions/profile";
+import data from "../../assets/data";
 interface IProps {
     id: string,
     profile: {[key: string]: string},
@@ -188,17 +189,7 @@ export default connect((state: IReduxState) => {
     };
 }, (dispatch) => {
     return {
-        setProfileData(data: {[key: string]: string}, id: string) {
-            dispatch({
-                type: "SET_PROFILE_DATA",
-                payload: {
-                    data: data,
-                    id: id,
-                    path: "/profile/update/",
-                    typed: "UPDATE_PROFILE_DATA"
-                }
-            });
-        }
+        setProfileData: (data: any, id: string) => dispatch(setProfileData(data, id))
     }
 })(UserAccount)
 
