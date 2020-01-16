@@ -1,16 +1,17 @@
 import React from "react";
 import style from "./AddTask.module.scss";
 import {IoMdStar} from "react-icons/io";
+
 import {connect} from "react-redux";
 import {IReduxState} from "../../../store/reducers";
-
-import {createTask} from "../../../store/actions/tasks";
+import {createTask, getCategories} from "../../../store/actions";
 
 interface IProps {
     id: string,
     createTask: any,
     selectedCategory: string,
     categories: string[],
+    getCategories: any,
 }
 
 const AddTask: React.FC<IProps> = (props) => {
@@ -22,9 +23,6 @@ const AddTask: React.FC<IProps> = (props) => {
     let [created, createdChange] = React.useState(Date.now);
     let [category, categoryChange] = React.useState(props.categories[0]);
 
-    const onChangeHandler = (e: any) => {
-        categoryChange(e.target.value)
-    };
     const setPriority = () => {
         let stars = [<span style={{fontSize: "12px"}} key={ Math.random()}>Priority: </span>];
         for(let i = 1; i <= 5; i++) {
@@ -123,6 +121,7 @@ const AddTask: React.FC<IProps> = (props) => {
                                       },
                                           props.id,
                                       );
+                                      props.getCategories();
                                       show(!isShow);
                                   }}
                             >
@@ -148,5 +147,6 @@ export default connect((state: IReduxState) => {
 }, (dispatch) => {
     return {
         createTask: (data: {[key: string]: string}, id: string) => dispatch(createTask(data, id)),
+        getCategories: () => dispatch(getCategories())
     }
 })(AddTask)

@@ -4,10 +4,10 @@ import logo from "../../assets/img/mern.png";
 import { FaBars, FaTasks } from "react-icons/fa";
 import { MdDashboard, MdMonetizationOn } from "react-icons/md";
 import { GoProject } from "react-icons/go";
+
 import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
-
-import {collapseSidebar, selectController} from "../../store/actions/common";
+import {collapseSidebar, selectController} from "../../store/actions";
 
 interface IProps {
     isCollapsedSidebar: boolean,

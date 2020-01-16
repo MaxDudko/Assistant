@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './Toolbar.module.scss';
+
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 
 interface IProps {
     currentDate: string,
     createCalendar: any,
-    // isCurrentMonth: boolean,
     moment: any,
     isMonth: boolean,
     date: any,
@@ -31,7 +31,6 @@ const Toolbar: React.FC<IProps> = (props) => {
                 >
                     {
                         props.isMonth ?
-                            // <span>{props.moment.format('DD MMMM YYYY')}</span>
                             <span>{props.currentDate.split(" ").splice(1).join(" ")}</span>
                             :
                             <span>{props.date}</span>

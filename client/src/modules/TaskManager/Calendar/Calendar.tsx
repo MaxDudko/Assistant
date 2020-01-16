@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './Calendar.module.scss';
+
 import Toolbar from "./Toolbar/Toolbar";
 import Month from './Month/Month';
 import Day from './Day/Day';
+
 import {connect} from "react-redux";
 import {IReduxState} from "../../../store/reducers";
-import {getCategories, getTasks} from "../../../store/actions/tasks";
 
 interface IProps {
     calendar_data: any,
@@ -13,7 +14,6 @@ interface IProps {
     currentDate: string,
     createCalendar: any,
     moment: string,
-    // isCurrentMonth: boolean,
     categories: any,
     selectedCategory: string,
 }
@@ -26,7 +26,6 @@ const Calendar: React.FC<IProps> = (props) => {
         <div className={styles.calendar}>
             <Toolbar createCalendar={props.createCalendar}
                      currentDate ={props.currentDate}
-                     // isCurrentMonth={props.isCurrentMonth}
                      moment={props.moment}
                      isMonth={isMonth}
                      date={date}

@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./Authentication.module.scss";
+
 import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
 
@@ -135,14 +136,6 @@ export default connect((state: IReduxState) => {
     return {};
 }, (dispatch) => {
     return {
-        // authController(form: string, data: {[key: string]: string}) {
-        //     dispatch({
-        //         type: "AUTH_CONTROLLER",
-        //         payload: {
-        //             form: form,
-        //             data: data
-        //         }
-        //     })
-        // },
+
     }
 })(Authentication)

@@ -1,12 +1,11 @@
 import React from "react";
 import style from "./Task.module.scss";
 import {IoMdStar} from "react-icons/io";
+
 import {connect} from "react-redux";
 import {IReduxState} from "../../../store/reducers";
+import {updateTask, deleteTask, getCategories} from "../../../store/actions";
 
-import {updateTask} from "../../../store/actions/tasks";
-import {deleteTask} from "../../../store/actions/tasks";
-import {getCategories} from "../../../store/actions/tasks";
 interface IProps {
     id: string,
     title: string,
@@ -30,7 +29,6 @@ const Task: React.FC<IProps> = (props) => {
     let [date, dateChange] = React.useState(props.date);
     let [description, descriptionChange] = React.useState(props.description);
     let [created] = React.useState(props.created);
-    // let [category] = React.useState(props.category);
     let [category, categoryChange] = React.useState(props.categories[0]);
 
     const getPriority = () => {
@@ -61,7 +59,6 @@ const Task: React.FC<IProps> = (props) => {
                               style={{color: "gold"}}
                               onClick={() => {
                                   priorityChange(i);
-                                  // props.updateTask(props.index, props.category, "priority", priority)
                               }}
                     />
                 )
@@ -71,7 +68,6 @@ const Task: React.FC<IProps> = (props) => {
                               style={{color: "gray"}}
                               onClick={() =>{
                                   priorityChange(i);
-                                  // props.updateTask(props.index, props.category, "priority", priority)
                               }}
                     />
                 )
@@ -180,6 +176,7 @@ const Task: React.FC<IProps> = (props) => {
                                       props.index,
                                       props.id,
                                   );
+                                  props.getCategories();
                                   edit(!show);
                               }}
                         >

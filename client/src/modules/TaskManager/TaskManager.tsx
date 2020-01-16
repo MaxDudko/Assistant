@@ -1,16 +1,13 @@
 import React from "react";
-import moment from "moment";
 import style from "./TaskManager.module.scss";
-import Calendar from "./Calendar/Calendar";
 
+import Calendar from "./Calendar/Calendar";
 import ToDoList from "./ToDoList/ToDoList";
 import Category from "./Category/Category";
-import axios from "axios";
+
 import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
-
-import {getCategories, getTasks} from "../../store/actions/tasks";
-import {createCalendar} from "../../store/actions/calendar";
+import {getCategories, getTasks, createCalendar} from "../../store/actions";
 
 interface IState {}
 
@@ -19,9 +16,7 @@ interface IProps {
     tasks: any,
     categories: string[],
     selectedCategory: string,
-    // updateTask: any,
     getCategories: any,
-    // isCurrentMonth: boolean,
     createCalendar: any,
 
     calendar_data: any,
@@ -48,13 +43,11 @@ class TaskManager extends React.Component<IProps, IState>{
                     <ToDoList selectedCategory={this.props.selectedCategory}
                               tasks={this.props.tasks}
                               categories={this.props.categories}
-                              // updateTask={this.props.updateTask}
                     />
                 </div>
                 <div className={style.rightSide}>
                     <Calendar createCalendar={this.props.createCalendar}
                               currentDate ={this.props.currentDate}
-                              // isCurrentMonth={this.props.isCurrentMonth}
                               calendar_data={this.props.calendar_data}
                               moment={this.props.moment}
                               tasks={this.props.tasks}

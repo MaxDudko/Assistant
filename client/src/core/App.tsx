@@ -1,7 +1,5 @@
 import React from 'react';
 import style from './App.module.scss';
-import axios from 'axios';
-import {connect} from "react-redux";
 
 import Authentication from "./Authentication/Authentication";
 import Navbar from "./Navbar/Navbar";
@@ -11,12 +9,10 @@ import Notifications from "./Notifications/Notifications";
 import Settings from "./Settings/Settings";
 import UserAccount from "./UserAccount/UserAccount";
 
-import data from "../assets/data";
+import axios from 'axios';
+import {connect} from "react-redux";
 import {IReduxState} from "../store/reducers";
-
-import {getProfileData} from "../store/actions/profile";
-import {setID} from "../store/actions/auth";
-import {getNotificationsData} from "../store/actions/notifications";
+import {setID, getProfileData, getNotificationsData} from "../store/actions";
 
 interface IState {}
 
@@ -33,7 +29,6 @@ class App extends React.Component<IProps, IState> {
 
   componentDidMount(): void {
       const token = window.localStorage.getItem('token');
-      // const remember = (value: boolean) => this.setState({isRemember: value});
       console.log('token: ', token);
       if(!token) return;
       axios.get('http://localhost:4000/auth/get/', {
@@ -57,13 +52,9 @@ class App extends React.Component<IProps, IState> {
     authController(form:string, data:any) {
       // logout
       if(!form) {
-          // if(!this.state.isRemember)
           window.localStorage.clear();
-          // this.setState({isLogin: null});
           return;
       }
-      // const setID = (id: string) => this.setState({id: id});
-      // login/register
       console.log(data);
       this.setState({isRemember: data.remember});
       axios.post(`http://localhost:4000/auth/${form}/`, {
@@ -75,14 +66,12 @@ class App extends React.Component<IProps, IState> {
               console.log(`/auth/${form}: `, response);
               window.localStorage.setItem('token', response.data.user.token);
               authReady();
-              // if(response.data.user.remember) remember()
           })
           .catch(function (error) {
               console.log(`/auth/${form}: `, error);
           });
 
       const authReady = () => this.setState({isLogin: window.localStorage.getItem('token')});
-      // const remember = () => this.setState({isRemember: !this.state.isRemember})
   }
 
   openModal() {
@@ -98,19 +87,6 @@ class App extends React.Component<IProps, IState> {
       if(modal === null) return;
       return allModals[modal];
   }
-
-    getTasks(id: string) {
-        axios.post('http://localhost:4000/tasks/get/', {
-            "id": id
-        })
-            .then((response) => {
-                console.log('/tasks/get: ', response);
-                this.setState({tasks: response})
-            })
-            .catch((error) => {
-                console.log('/tasks/get: ', error)
-            });
-    }
 
    render() {
       return(
@@ -149,12 +125,6 @@ export default connect((state: IReduxState) => {
     };
 }, (dispatch) => {
     return {
-        // authController(form: string, data: {[key: string]: string}) {
-        //     dispatch({
-        //         type: "AUTH_CONTROLLER",
-        //         payload: {}
-        //     })
-        // },
         setID: (id: string) => dispatch(setID(id)),
         getProfileData: (id: string) => dispatch(getProfileData(id)),
         getNotificationsData: (id: string) => dispatch(getNotificationsData(id)),

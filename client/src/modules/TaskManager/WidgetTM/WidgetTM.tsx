@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import style from "./WidgetTM.module.scss";
 import {FaTasks} from "react-icons/fa";
+
 import Calendar from "../Calendar/Calendar";
-import data from "./../../../assets/data";
-import Task from "../Task/Task";
 import Category from "../Category/Category";
+import Task from "../Task/Task";
 
-interface IProps {
+import data from "./../../../assets/data";
 
-}
+interface IProps {}
 
 const WidgetTM: React.FC<IProps> = (props) => {
     let [tasks, setTasks] = React.useState(data.tasks);

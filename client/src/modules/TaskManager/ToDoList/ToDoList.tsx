@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./ToDoList.module.scss";
+
 import Task from "../Task/Task";
 import AddTask from "../AddTask/AddTask";
 
@@ -7,7 +8,6 @@ interface IProps {
     selectedCategory: string,
     tasks: any,
     categories: string[],
-    // updateTask: any,
 }
 
 const ToDoList: React.FC<IProps> = (props) => {

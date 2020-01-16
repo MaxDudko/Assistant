@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Navbar.module.scss";
 import { FaSignOutAlt, FaCogs, FaBell, FaUser } from "react-icons/fa";
+
 import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
 
@@ -45,15 +46,6 @@ export default connect((state: IReduxState) => {
     };
 }, (dispatch) => {
     return {
-        // authController(form: string, data: {[key: string]: string}) {
-        //     dispatch({
-        //         type: "AUTH_CONTROLLER",
-        //         payload: {
-        //             form: form,
-        //             data: data
-        //         }
-        //     })
-        // },
         selectController(key: string, name: string) {
             dispatch({
                 type: "SELECT_CONTROLLER",

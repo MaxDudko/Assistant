@@ -2,10 +2,11 @@ import React from "react";
 import style from "./UserAccount.module.scss";
 import { FaUser, FaPencilAlt, FaPlusCircle } from "react-icons/fa";
 import { MdAddAPhoto } from "react-icons/md";
+
 import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
-import {setProfileData} from "../../store/actions/profile";
-import data from "../../assets/data";
+import {setProfileData} from "../../store/actions";
+
 interface IProps {
     id: string,
     profile: {[key: string]: string},
@@ -35,8 +36,6 @@ const UserAccount: React.FC<IProps> = (props) => {
                                      title="Change Photo"
                                      onClick={() => avatarChange(!avatar)}
                         />
-                        {/*<input type="file" style={{display: avatar?"block":"none"}}*/}
-                        {/*       onChange={(e) => props.userAccountController("avatar", e.target.value)}/>*/}
                     </div>
                     <h4>{props.profile.firstName} {props.profile.lastName}</h4>
                 </div>

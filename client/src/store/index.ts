@@ -14,6 +14,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 const sagaMiddleware = createSagaMiddleware();
+
 const reduxDevTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__();
 
 const middlewares = compose(
@@ -22,7 +23,7 @@ const middlewares = compose(
 );
 
 export const store = createStore<IReduxState, any, any, any>(reducers, middlewares);
-// export const store = createStore<IReduxState, any, any, any>(persistedReducer, middlewares);
 
 sagaMiddleware.run(rootSaga);
+
 export const persistor = persistStore(store);

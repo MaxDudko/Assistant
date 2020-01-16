@@ -1,10 +1,10 @@
 import React from "react";
 import style from "./Notifications.module.scss";
 import {AiOutlineClose} from "react-icons/ai";
+
 import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
-
-import {deleteMessage} from "../../store/actions/notifications";
+import {deleteMessage} from "../../store/actions";
 
 interface IProps {
     notifications: {[key: string]: string}[],
@@ -14,7 +14,7 @@ interface IProps {
 const Notifications: React.FC<IProps> = (props) => {
 
     const messages = () => {
-        let list = props.notifications.map((message: any, index: number) => (
+        return [props.notifications.map((message: any, index: number) => (
                 <div className={style.message} key={index}>
                     <div className={style.head}>
                         <b className={style.title}>
@@ -34,8 +34,7 @@ const Notifications: React.FC<IProps> = (props) => {
                     </div>
                 </div>
             )
-        );
-        return list;
+        )]
     };
 
     return (

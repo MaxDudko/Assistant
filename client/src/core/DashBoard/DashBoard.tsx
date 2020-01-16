@@ -5,6 +5,7 @@ import TaskManager from "../../modules/TaskManager/TaskManager";
 import WidgetTM from "../../modules/TaskManager/WidgetTM/WidgetTM";
 import PersonalFinance from "../../modules/PersonalFinance/PersonalFinance";
 import AgileKanban from "../../modules/AgileKanban/AgileKanban";
+
 import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
 
@@ -22,8 +23,6 @@ const DashBoard: React.FC<IProps> = (props) => {
         PersonalFinance: <PersonalFinance />,
         AgileKanban: <AgileKanban />,
     };
-
-
 
     return (
         <div className={style.DashBoard + ` ${isCollapsed}`}>
