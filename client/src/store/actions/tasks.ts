@@ -53,3 +53,11 @@ export const getCategories = () => {
         payload: {}
     }
 };
+export const selectCategory = (category: string) => {
+    return {
+        type: "SELECT_CATEGORY",
+        payload: {
+            category: category,
+        }
+    }
+};

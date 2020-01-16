@@ -3,17 +3,18 @@ import styles from './Calendar.module.scss';
 import Toolbar from "./Toolbar/Toolbar";
 import Month from './Month/Month';
 import Day from './Day/Day';
+import {connect} from "react-redux";
+import {IReduxState} from "../../../store/reducers";
+import {getCategories, getTasks} from "../../../store/actions/tasks";
 
 interface IProps {
-    period: string,
-    data: any,
+    calendar_data: any,
     tasks: any,
     currentDate: string,
     createCalendar: any,
     moment: string,
-    currentMonthCheck: any,
-    isCurrentMonth: boolean,
-    categories: string[],
+    // isCurrentMonth: boolean,
+    categories: any,
     selectedCategory: string,
 }
 
@@ -23,10 +24,9 @@ const Calendar: React.FC<IProps> = (props) => {
 
     return (
         <div className={styles.calendar}>
-            <Toolbar period={props.period}
-                     createCalendar={props.createCalendar}
+            <Toolbar createCalendar={props.createCalendar}
                      currentDate ={props.currentDate}
-                     isCurrentMonth={props.isCurrentMonth}
+                     // isCurrentMonth={props.isCurrentMonth}
                      moment={props.moment}
                      isMonth={isMonth}
                      date={date}
@@ -34,13 +34,11 @@ const Calendar: React.FC<IProps> = (props) => {
             />
             {
                 isMonth ?
-                    <Month period={props.period}
-                           data={props.data}
+                    <Month calendar_data={props.calendar_data}
                            moment={props.moment}
                            currentDate ={props.currentDate}
                            createCalendar={props.createCalendar}
                            tasks={props.tasks}
-                           currentMonthCheck={props.currentMonthCheck}
                            categories={props.categories}
                            selectedCategory={props.selectedCategory}
                            setDate={setDate.bind(Calendar)}
@@ -58,4 +56,12 @@ const Calendar: React.FC<IProps> = (props) => {
     )
 };
 
-export default Calendar;
+export default connect((state: IReduxState) => {
+    return {
+
+    };
+}, (dispatch) => {
+    return {
+
+    }
+})(Calendar)

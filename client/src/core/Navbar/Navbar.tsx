@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
 
 interface IProps {
-    isLogin: string | null,
     authController: any,
     userName: string,
     noteLength: number,

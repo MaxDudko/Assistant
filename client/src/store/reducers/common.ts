@@ -1,14 +1,18 @@
+import data from "../../assets/data";
+
 export interface ICommonState {
     isCollapsedSidebar: boolean,
     moduleSelected: string,
     modalSelected: string | null,
     settingsSelected: string | null,
+    SidebarItems: any,
 }
 export const initialState = {
     isCollapsedSidebar: false,
     moduleSelected: "TaskManager",
     modalSelected: null,
     settingsSelected: null,
+    SidebarItems: data.SidebarItems,
 };
 export const common = (state:ICommonState = initialState, action: any) => {
     switch (action.type) {

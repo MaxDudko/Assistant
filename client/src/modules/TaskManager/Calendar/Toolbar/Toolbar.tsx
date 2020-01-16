@@ -5,8 +5,7 @@ import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 interface IProps {
     currentDate: string,
     createCalendar: any,
-    period: string,
-    isCurrentMonth: boolean,
+    // isCurrentMonth: boolean,
     moment: any,
     isMonth: boolean,
     date: any,
@@ -23,7 +22,7 @@ const Toolbar: React.FC<IProps> = (props) => {
                     :
                     null
             }
-            <h2>
+            <b className={styles.middle_btn}>
                 <button className={styles.btn}
                         onClick={() => {
                             props.createCalendar('');
@@ -38,7 +37,7 @@ const Toolbar: React.FC<IProps> = (props) => {
                             <span>{props.date}</span>
                     }
                 </button>
-            </h2>
+            </b>
             {
                 props.isMonth ?
                     <button className={styles.btn} onClick={() => props.createCalendar('next')}> <FaArrowCircleRight/> </button>

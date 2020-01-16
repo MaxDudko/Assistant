@@ -6,8 +6,7 @@ import {IReduxState} from "../../../store/reducers";
 
 import {updateTask} from "../../../store/actions/tasks";
 import {deleteTask} from "../../../store/actions/tasks";
-import index from "../../../store/sagas";
-
+import {getCategories} from "../../../store/actions/tasks";
 interface IProps {
     id: string,
     title: string,
@@ -21,6 +20,7 @@ interface IProps {
 
     updateTask: any,
     deleteTask: any,
+    getCategories: any,
 }
 
 const Task: React.FC<IProps> = (props) => {
@@ -187,7 +187,10 @@ const Task: React.FC<IProps> = (props) => {
 						</span>
                         :
                         <span className={`${style.btn} ${style.red}`}
-                              onClick={() => props.deleteTask({}, props.index, props.id)}
+                              onClick={() => {
+                                  props.deleteTask({}, props.index, props.id);
+                                  props.getCategories()
+                              }}
                         >
                             Delete
                         </span>
@@ -205,5 +208,6 @@ export default connect((state: IReduxState) => {
     return {
         updateTask: (data: {[key: string]: string}, index: number, id: string) => dispatch(updateTask(data, index, id)),
         deleteTask: (data: {[key: string]: string}, index: number, id: string) => dispatch(deleteTask(data, index, id)),
+        getCategories: () => dispatch(getCategories()),
     }
 })(Task)

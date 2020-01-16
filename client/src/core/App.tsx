@@ -18,13 +18,7 @@ import {getProfileData} from "../store/actions/profile";
 import {setID} from "../store/actions/auth";
 import {getNotificationsData} from "../store/actions/notifications";
 
-interface IState {
-    // isLogin: string | null,
-
-    SidebarItems: any,
-    [key: string]: any
-
-}
+interface IState {}
 
 interface IProps {
     id: string,
@@ -32,14 +26,10 @@ interface IProps {
     getProfileData: any,
     getNotificationsData: any,
     modalSelected: string | null,
+    SidebarItems: any,
 }
 
 class App extends React.Component<IProps, IState> {
-  state: IState = {
-      // isLogin: window.localStorage.getItem('token'),
-
-      SidebarItems: data.SidebarItems,
-  };
 
   componentDidMount(): void {
       const token = window.localStorage.getItem('token');
@@ -128,12 +118,12 @@ class App extends React.Component<IProps, IState> {
               {
                   window.localStorage.getItem('token') ?
                       <div>
-                          <Navbar isLogin={this.state.isLogin} authController={this.authController.bind(this)} />
+                          <Navbar authController={this.authController.bind(this)} />
                           <div className={style.wrapper}>
-                              <Sidebar SidebarItems={this.state.SidebarItems}/>
+                              <Sidebar SidebarItems={this.props.SidebarItems}/>
                               <DashBoard />
                               {
-                                  this.state.modalSelected !== null ?
+                                  this.props.modalSelected !== null ?
                                       <div className={style.modal}>
                                           {this.openModal()}
                                       </div>
@@ -155,6 +145,7 @@ export default connect((state: IReduxState) => {
     return {
         id: state.auth.id,
         modalSelected: state.common.modalSelected,
+        SidebarItems: state.common.SidebarItems,
     };
 }, (dispatch) => {
     return {

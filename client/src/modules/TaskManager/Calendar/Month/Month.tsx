@@ -4,11 +4,9 @@ import moment from 'moment';
 
 interface IProps {
     createCalendar: any,
-    data: any,
+    calendar_data: any,
     currentDate: string,
     tasks: any,
-    currentMonthCheck: any,
-    period: string,
     moment: any,
     categories: string[],
     selectedCategory: string,
@@ -26,7 +24,7 @@ const Month: React.FC<IProps> = (props) => {
     };
      
     const renderTbody = () => {
-        const data = props.data;
+        const data = props.calendar_data;
         const currentDate = props.currentDate;
 
         const decorateStyles = (td: any) => {

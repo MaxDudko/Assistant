@@ -4,11 +4,13 @@ export interface ITasksState {
     // tasks_data: {[key: string]: string}[],
     tasks_data: any,
     categories: string[],
+    selectedCategory: string,
 }
 export const initialState = {
     tasks_data: data.tasks,
     // tasks_data: [],
     categories: [],
+    selectedCategory: "All",
 };
 export const tasks = (state:ITasksState = initialState, action: any) => {
     switch (action.type) {
@@ -42,15 +44,18 @@ export const tasks = (state:ITasksState = initialState, action: any) => {
             };
         case "GET_CATEGORIES":
             let categories: any = [];
-            state.tasks_data.map((task: any, index: number) => {
+            state.tasks_data.map((task: any) => {
                 if(!categories.includes(task.category)) categories.push(task.category)
             });
-            // this.setState({categories: categories})
             return {
                 ...state,
                 categories: categories
             };
-
+        case "SELECT_CATEGORY":
+            return {
+                ...state,
+                selectedCategory: action.payload.category
+            };
         default:
             return state;
     }
