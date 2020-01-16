@@ -5,6 +5,8 @@ import {connect} from "react-redux";
 import {IReduxState} from "../../../store/reducers";
 
 import {updateTask} from "../../../store/actions/tasks";
+import {deleteTask} from "../../../store/actions/tasks";
+import index from "../../../store/sagas";
 
 interface IProps {
     id: string,
@@ -18,6 +20,7 @@ interface IProps {
     categories: string[],
 
     updateTask: any,
+    deleteTask: any,
 }
 
 const Task: React.FC<IProps> = (props) => {
@@ -109,7 +112,8 @@ const Task: React.FC<IProps> = (props) => {
 							<div>
                             <label>
 								Category:
-								<select onChange={(e) => categoryChange(e.target.value)}>
+                                <input list="select" name="select" onChange={(e) => categoryChange(e.target.value)} />
+								<datalist id="select">
                                     {
                                         props.categories.map((e: string, i: number) => (
                                             <option value={e} key={i + Math.random()}
@@ -118,7 +122,7 @@ const Task: React.FC<IProps> = (props) => {
                                             </option>
                                         ))
                                     }
-								</select>
+								</datalist>
 							</label>
                             <label>
                                 Date:
@@ -182,7 +186,11 @@ const Task: React.FC<IProps> = (props) => {
                             Save
 						</span>
                         :
-                        <span className={`${style.btn} ${style.red}`}>Delete</span>
+                        <span className={`${style.btn} ${style.red}`}
+                              onClick={() => props.deleteTask({}, props.index, props.id)}
+                        >
+                            Delete
+                        </span>
                 }
             </div>
         </div>
@@ -196,5 +204,6 @@ export default connect((state: IReduxState) => {
 }, (dispatch) => {
     return {
         updateTask: (data: {[key: string]: string}, index: number, id: string) => dispatch(updateTask(data, index, id)),
+        deleteTask: (data: {[key: string]: string}, index: number, id: string) => dispatch(deleteTask(data, index, id)),
     }
 })(Task)

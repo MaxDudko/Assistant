@@ -74,7 +74,8 @@ const AddTask: React.FC<IProps> = (props) => {
                         <div className={style.term}>
                             <label>
                                 Category:
-                                <select onChange={(e) => categoryChange(e.target.value)}>
+                                <input list="select" name="select" onChange={(e) => categoryChange(e.target.value)} />
+                                <datalist id="select">
                                     {
                                         props.categories.map((val, i) => (
                                             <option value={val} key={i + Math.random()}>
@@ -82,7 +83,7 @@ const AddTask: React.FC<IProps> = (props) => {
                                             </option>
                                         ))
                                     }
-                                </select>
+                                </datalist>
                             </label>
                             <label>
                                 Date:

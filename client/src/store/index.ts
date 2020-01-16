@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage'
 import {reducers, IReduxState} from "./reducers";
 
 import createSagaMiddleware from 'redux-saga'
-import rootSaga from './sagas/rootSaga';
+import rootSaga from './sagas/index';
 
 const persistConfig = {
     key: 'root',

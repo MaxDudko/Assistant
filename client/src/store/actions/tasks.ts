@@ -33,3 +33,23 @@ export const createTask = (data: {[key: string]: string}, id: string) => {
       }
   }
 };
+
+export const deleteTask = (data: {[key: string]: string}, index: number, id: string) => {
+    return {
+        type: "DELETE_TASK",
+        payload: {
+            data: data,
+            index: index,
+            id: id,
+            path: "/tasks/delete/",
+            typed: "DELETE_TASK"
+        }
+    }
+};
+
+export const getCategories = () => {
+    return {
+        type: "GET_CATEGORIES",
+        payload: {}
+    }
+};

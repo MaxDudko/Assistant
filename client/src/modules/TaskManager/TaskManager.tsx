@@ -10,7 +10,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
 
-import {getTasks} from "../../store/actions/tasks";
+import {getCategories, getTasks} from "../../store/actions/tasks";
 
 interface IState {
     period: any,
@@ -20,7 +20,7 @@ interface IState {
     currentDate: string,
     isCurrentMonth: boolean,
     data: any,
-    categories: string[],
+    // categories: string[],
     selectedCategory: string,
     // tasks: any,
 
@@ -30,7 +30,9 @@ interface IState {
 interface IProps {
     id: string,
     tasks: any,
+    categories: string[],
     // updateTask: any,
+    getCategories: any,
 }
 
 class TaskManager extends React.Component<IProps, IState>{
@@ -42,7 +44,7 @@ class TaskManager extends React.Component<IProps, IState>{
         currentDate: "",
         isCurrentMonth: true,
         data: [],
-        categories: [],
+        // categories: [],
         selectedCategory: "All",
         // tasks: [],
         // tasks: data.tasks,
@@ -60,13 +62,14 @@ class TaskManager extends React.Component<IProps, IState>{
     }
     componentWillReceiveProps(nextProps: Readonly<IProps>, nextContext: any): void {
         // this.getTasks(this.props.id);
-        this.getCategories();
+        // this.props.getCategories();
     }
 
     componentDidMount() {
         this.createCalendar("");
         // if(this.props.id) this.getTasks(this.props.id);
         // this.getCategories();
+        this.props.getCategories();
     }
 
 
@@ -128,33 +131,33 @@ class TaskManager extends React.Component<IProps, IState>{
         })
     }
 
-    getCategories() {
-        let categories: any = [];
-        this.props.tasks.map((task: any, index: number) => {
-            if(!categories.includes(task.category)) categories.push(task.category)
-        });
-        this.setState({categories: categories})
-    }
-
+    // getCategories() {
+    //     let categories: any = [];
+    //     this.props.tasks.map((task: any, index: number) => {
+    //         if(!categories.includes(task.category)) categories.push(task.category)
+    //     });
+    //     this.setState({categories: categories})
+    // }
+    //
     selectCategory(category: string) {
         this.setState({
             selectedCategory: category
         })
     }
-
-    setCategories(name: string) {
-        let categories = [...this.state.categories, name];
-        this.setState({categories: categories});
-
-        // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
-    }
-
-    deleteCategories(name: string) {
-        let categoris = this.state.categories.filter(e => e !== name);
-        this.setState({categories: categoris});
-
-        // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
-    }
+    //
+    // setCategories(name: string) {
+    //     let categories = [...this.state.categories, name];
+    //     this.setState({categories: categories});
+    //
+    //     // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
+    // }
+    //
+    // deleteCategories(name: string) {
+    //     let categoris = this.state.categories.filter(e => e !== name);
+    //     this.setState({categories: categoris});
+    //
+    //     // API: axios.post(...blablabla) || dispatch to App and axios.post(...blablabla)
+    // }
 
 
 
@@ -162,15 +165,13 @@ class TaskManager extends React.Component<IProps, IState>{
         return (
             <div className={style.TaskManager}>
                 <div className={style.leftSide}>
-                    <Category categories={this.state.categories}
-                              setCategories={this.setCategories.bind(this)}
-                              deleteCategories={this.deleteCategories.bind(this)}
+                    <Category categories={this.props.categories}
                               selectCategories={this.selectCategory.bind(this)}
                               selectedCategory={this.state.selectedCategory}
                     />
                     <ToDoList selectedCategory={this.state.selectedCategory}
                               tasks={this.props.tasks}
-                              categories={this.state.categories}
+                              categories={this.props.categories}
                               // updateTask={this.props.updateTask}
                     />
                 </div>
@@ -196,9 +197,11 @@ export default connect((state: IReduxState) => {
     return {
         id: state.auth.id,
         tasks: state.tasks.tasks_data,
+        categories: state.tasks.categories,
     };
 }, (dispatch) => {
     return {
         getTasks: (id: string) => dispatch(getTasks(id)),
+        getCategories: () => dispatch(getCategories()),
     }
 })(TaskManager)
