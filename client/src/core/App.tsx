@@ -1,57 +1,34 @@
 import React from 'react';
 import style from './App.module.scss';
+
+import Authentication from "./Authentication/Authentication";
+import Navbar from "./Navbar/Navbar";
+import Sidebar from "./Sidebar/Sidebar";
+import DashBoard from "./DashBoard/DashBoard";
+import Notifications from "./Notifications/Notifications";
+import Settings from "./Settings/Settings";
+import UserAccount from "./UserAccount/UserAccount";
+
 import axios from 'axios';
+import {connect} from "react-redux";
+import {IReduxState} from "../store/reducers";
+import {setID, getProfileData, getNotificationsData} from "../store/actions";
 
-import Authentication from "./components/Authentication/Authentication";
-import Navbar from "./components/Navbar/Navbar";
-import Sidebar from "./components/Sidebar/Sidebar";
-import DashBoard from "./components/DashBoard/DashBoard";
-import Notifications from "./components/Notifications/Notifications";
-import Settings from "./components/Settings/Settings";
-import UserAccount from "./components/UserAccount/UserAccount";
-// import Popup from "./components/Popup/Popup";
+interface IState {}
 
-import data from "../assets/data";
-
-interface IState {
-    isLogin: string | null,
-    id: string | null,
-
-    profile: any,
-    settings: any,
-    notifications: any,
-
-    SidebarItems: any,
-    isCollapsed: boolean,
+interface IProps {
+    id: string,
+    setID: any,
+    getProfileData: any,
+    getNotificationsData: any,
     modalSelected: string | null,
-    settingsSelected: string | null,
-    moduleSelected: string,
-    popupShow: boolean,
-    [key: string]: any
-
+    SidebarItems: any,
 }
 
-class App extends React.Component<{}, IState> {
-  state: IState = {
-      isLogin: window.localStorage.getItem('token'),
-      id: null,
-
-      profile: [],
-      settings: [],
-      notifications: [],
-
-      SidebarItems: data.SidebarItems,
-      isCollapsed: false,
-      modalSelected: null,
-      settingsSelected: null,
-      // moduleSelected: "DashBoard",
-      moduleSelected: "TaskManager",
-      popupShow: false,
-  };
+class App extends React.Component<IProps, IState> {
 
   componentDidMount(): void {
-      const token = this.state.isLogin;
-      // const remember = (value: boolean) => this.setState({isRemember: value});
+      const token = window.localStorage.getItem('token');
       console.log('token: ', token);
       if(!token) return;
       axios.get('http://localhost:4000/auth/get/', {
@@ -62,66 +39,22 @@ class App extends React.Component<{}, IState> {
           .then((response) => {
               console.log('/auth/get: ', response);
               let id = response.data.user._id;
-              setID(id);
-              // getSettings(id);
-              getProfile(id);
-              getNotifications(id);
-              // remember(response.data.user.remember);
+              this.props.setID(id);
+              this.props.getProfileData(id);
+              this.props.getNotificationsData(id);
           })
           .catch((error) => {
               console.log('/auth/get: ', error);
               window.localStorage.clear();
           });
-
-      const setID = (id: string) => this.setState({id: id});
-      const setProfileData = (data: any) => this.setState({profile: data});
-      const setNotificationsData = (data: any) => this.setState({notifications: data});
-      const setSettingsData = (data: any) => this.setState({settings: data});
-
-      const getProfile = (id: string) => axios.post('http://localhost:4000/profile/get/', {
-          "id": id
-      })
-          .then((response) => {
-              console.log('/profile/get: ', response);
-              setProfileData(response.data);
-          })
-          .catch((error) => {
-              console.log('/profile/get: ', error)
-          });
-
-      const getNotifications = (id: string) => axios.post('http://localhost:4000/notifications/get/', {
-          "id": id
-      })
-          .then((response) => {
-              console.log('/notifications/get: ', response);
-              setNotificationsData(response.data);
-          })
-          .catch((error) => {
-              console.log('/notifications/get: ', error);
-          });
-
-      const getSettings = (id: string) => axios.post('http://localhost:4000/settings/get/', {})
-          .then((response) => {
-              console.log('/settings/get: ', response);
-              setSettingsData(response.data)
-          })
-          .catch((error) => {
-              console.log('/settings/get: ', error);
-          });
-
-      
   }
 
     authController(form:string, data:any) {
       // logout
       if(!form) {
-          // if(!this.state.isRemember)
           window.localStorage.clear();
-          this.setState({isLogin: null});
           return;
       }
-
-      // login/register
       console.log(data);
       this.setState({isRemember: data.remember});
       axios.post(`http://localhost:4000/auth/${form}/`, {
@@ -133,47 +66,21 @@ class App extends React.Component<{}, IState> {
               console.log(`/auth/${form}: `, response);
               window.localStorage.setItem('token', response.data.user.token);
               authReady();
-              // if(response.data.user.remember) remember()
           })
           .catch(function (error) {
               console.log(`/auth/${form}: `, error);
           });
 
       const authReady = () => this.setState({isLogin: window.localStorage.getItem('token')});
-      // const remember = () => this.setState({isRemember: !this.state.isRemember})
-  }
-
-  viewController() {
-      this.setState({isCollapsed: !this.state.isCollapsed})
-  }
-
-  selectController(key: any, selected: string) {
-      if(key === "modalSelected") {
-          this.state[key] === selected ?
-              this.setState({[key]: null})
-              :
-              this.setState({[key]: selected})
-      } else {
-          this.setState({[key]: selected})
-      }
   }
 
   openModal() {
-      let modal = this.state.modalSelected;
+      let modal = this.props.modalSelected;
 
       const allModals: { [key: string]: any } = {
-          Notifications: <Notifications notifications={this.state.notifications}
-                                        notificationsController={this.notificationsController.bind(this)}
-          />,
-
-          Settings: <Settings selectController={this.selectController.bind(this)}
-                              settingsSelected={this.state.settingsSelected}
-                              settingsController={this.selectController.bind(this)}
-          />,
-
-          UserAccount: <UserAccount userData={this.state.profile}
-                                    userAccountController={this.userAccountController.bind(this)}
-          />,
+          Notifications: <Notifications/>,
+          Settings: <Settings/>,
+          UserAccount: <UserAccount/>,
 
       };
 
@@ -181,89 +88,24 @@ class App extends React.Component<{}, IState> {
       return allModals[modal];
   }
 
-  notificationsController(id: number) {
-      let index;
-      this.state.notifications.map((el:any, i: number) => {
-          if(el["id"] === id) {
-              index = i;
-          }
-      });
-
-      let state = this.state.notifications;
-      state.splice(index, 1);
-
-      this.setState({notifications: state})
-  }
-
-  userAccountController(key:string, value:string) {
-      if(!key) {
-          axios.post('http://localhost:4000/profile/update/', {
-              "user": {
-              "id": this.state.id,
-                  "profile": {
-                      ...this.state.profile
-              }
-          }
-          })
-              .then((response) => {
-                  console.log('/profile/update: ', response);
-              })
-              .catch((error) => {
-                  console.log('/profile/update: ', error)
-              });
-      }
-      this.setState({
-          profile: {
-              ...this.state.profile,
-              [key]: value
-          }
-      })
-  }
-
-  settingsController() {
-      // axios.post('http://localhost:4000/settings/update/', {})
-  }
-
    render() {
       return(
           <div className={style.App}>
               {
-                  this.state.isLogin ?
+                  window.localStorage.getItem('token') ?
                       <div>
-                          <Navbar isLogin={this.state.isLogin}
-                                  userName={this.state.profile.userName}
-                                  avatar={this.state.profile.avatar}
-                                  notifications={this.state.notifications.length}
-                                  selectController={this.selectController.bind(this)}
-                                  signOut={this.authController.bind(this)}
-                          />
+                          <Navbar authController={this.authController.bind(this)} />
                           <div className={style.wrapper}>
-                              <Sidebar isCollapsed={this.state.isCollapsed}
-                                       viewController={this.viewController.bind(this)}
-                                       SidebarItems={this.state.SidebarItems}
-                                       selectController={this.selectController.bind(this)}
-                                       moduleSelected={this.state.moduleSelected}
-                              />
-                              <DashBoard moduleSelected={this.state.moduleSelected}
-                                         isCollapsed={this.state.isCollapsed}
-                              />
+                              <Sidebar SidebarItems={this.props.SidebarItems}/>
+                              <DashBoard />
                               {
-                                  this.state.modalSelected !== null ?
+                                  this.props.modalSelected !== null ?
                                       <div className={style.modal}>
                                           {this.openModal()}
                                       </div>
                                       :
                                       null
                               }
-                              {/*{*/}
-                              {/*    this.state.popupShow ?*/}
-                              {/*        <Popup question={"Are you sure want to bla-bla-bla?"}*/}
-                              {/*               yes={null}*/}
-                              {/*               no={null}*/}
-                              {/*        />*/}
-                              {/*        :*/}
-                              {/*        null*/}
-                              {/*}*/}
                           </div>
                       </div>
                       :
@@ -274,4 +116,17 @@ class App extends React.Component<{}, IState> {
   }
 }
 
-export default App;
+
+export default connect((state: IReduxState) => {
+    return {
+        id: state.auth.id,
+        modalSelected: state.common.modalSelected,
+        SidebarItems: state.common.SidebarItems,
+    };
+}, (dispatch) => {
+    return {
+        setID: (id: string) => dispatch(setID(id)),
+        getProfileData: (id: string) => dispatch(getProfileData(id)),
+        getNotificationsData: (id: string) => dispatch(getNotificationsData(id)),
+    }
+})(App)

@@ -4,11 +4,9 @@ import moment from 'moment';
 
 interface IProps {
     createCalendar: any,
-    data: any,
+    calendar_data: any,
     currentDate: string,
     tasks: any,
-    currentMonthCheck: any,
-    period: string,
     moment: any,
     categories: string[],
     selectedCategory: string,
@@ -26,7 +24,7 @@ const Month: React.FC<IProps> = (props) => {
     };
      
     const renderTbody = () => {
-        const data = props.data;
+        const data = props.calendar_data;
         const currentDate = props.currentDate;
 
         const decorateStyles = (td: any) => {
@@ -52,31 +50,27 @@ const Month: React.FC<IProps> = (props) => {
                 <a href="/">{td.Date}</a>
                 {
                     props.selectedCategory === "All" ?
-                        props.categories.map((category:any) => {
-                            if(!props.tasks[category]) return null;
-                            return [
-                                props.tasks[category].map((task: any, i: number) => {
-                                    if(moment(task.date).format('DD MMMM YYYY') === `${td.Date} ${td.Month} ${td.Year}`) return(
-                                        <span key={i} className={style.task}>
-                                            <span>{task.title}</span>
-                                            <span>{task.date.split("T")[1]}</span>
-                                        </span>
-                                    )
-                                })
-                            ]
+                        props.tasks.map((task: any, i: number) => {
+                            if(moment(task.date).format('DD MMMM YYYY') === `${td.Date} ${td.Month} ${td.Year}`) return(
+                                <span key={i} className={style.task}>
+                                    <span>{task.title}</span>
+                                    <span>{task.date.split("T")[1]}</span>
+                                </span>
+                            )
                         })
                         :
-                        props.tasks[props.selectedCategory] ?
-                            props.tasks[props.selectedCategory].map((task: any, i: number) => {
-                                if(moment(task.date).format('DD MMMM YYYY') === `${td.Date} ${td.Month} ${td.Year}`) return(
+                        props.tasks.map((task: any, i: number) => {
+                                if(
+                                    moment(task.date).format('DD MMMM YYYY') === `${td.Date} ${td.Month} ${td.Year}`
+                                    &&
+                                    task.category === props.selectedCategory
+                                ) return(
                                     <span key={i} className={style.task}>
                                         <span>{task.title}</span>
                                         <span>{task.date.split("T")[1]}</span>
                                     </span>
                                 )
                             })
-                            :
-                            null
                 }
             </td>
         ));

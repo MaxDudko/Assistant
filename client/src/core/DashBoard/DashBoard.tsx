@@ -1,19 +1,22 @@
 import React from "react";
 import style from "./DashBoard.module.scss";
 
-import TaskManager from "../../../modules/TaskManager/TaskManager";
-import WidgetTM from "../../../modules/TaskManager/WidgetTM/WidgetTM";
-import PersonalFinance from "../../../modules/PersonalFinance/PersonalFinance";
-import AgileKanban from "../../../modules/AgileKanban/AgileKanban";
+import TaskManager from "../../modules/TaskManager/TaskManager";
+import WidgetTM from "../../modules/TaskManager/WidgetTM/WidgetTM";
+import PersonalFinance from "../../modules/PersonalFinance/PersonalFinance";
+import AgileKanban from "../../modules/AgileKanban/AgileKanban";
+
+import {connect} from "react-redux";
+import {IReduxState} from "../../store/reducers";
 
 interface IProps {
     moduleSelected: string,
-    isCollapsed: boolean,
+    isCollapsedSidebar: boolean,
 }
 
 const DashBoard: React.FC<IProps> = (props) => {
 
-    let isCollapsed = props.isCollapsed ? style.collapsed_true : style.collapsed_false;
+    let isCollapsed = props.isCollapsedSidebar ? style.collapsed_true : style.collapsed_false;
 
     const Module: any = {
         TaskManager: <TaskManager />,
@@ -28,7 +31,7 @@ const DashBoard: React.FC<IProps> = (props) => {
                     Module[props.moduleSelected]
                     :
                     <div className={style.DashBoardWidgets}>
-                        <WidgetTM/>
+                        <WidgetTM />
                         {/*<TaskManager />*/}
                         <AgileKanban/>
                         <PersonalFinance/>
@@ -38,4 +41,13 @@ const DashBoard: React.FC<IProps> = (props) => {
     )
 };
 
-export default DashBoard;
+export default connect((state: IReduxState) => {
+    return {
+        isCollapsedSidebar: state.common.isCollapsedSidebar,
+        moduleSelected: state.common.moduleSelected,
+    };
+}, (dispatch) => {
+    return {
+
+    }
+})(DashBoard)

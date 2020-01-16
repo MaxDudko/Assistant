@@ -5,11 +5,12 @@ import { FaCogs, FaMobile,FaShieldAlt } from "react-icons/fa";
 import General from "./General";
 import Widgets from "./Widgets";
 import Security from "./Security";
+import {connect} from "react-redux";
+import {IReduxState} from "../../store/reducers";
 
 interface IProps {
     selectController: any,
     settingsSelected: string | null,
-    settingsController: any,
 }
 
 const Settings: React.FC<IProps> = (props) => {
@@ -46,7 +47,7 @@ const Settings: React.FC<IProps> = (props) => {
                 }
             </div>
             <span className={style.btn}
-                onClick={() => props.settingsController()}
+                onClick={() => alert("WTF???")}
             >
                 Update
             </span>
@@ -54,4 +55,21 @@ const Settings: React.FC<IProps> = (props) => {
     )
 };
 
-export default Settings;
+export default connect((state: IReduxState) => {
+    return {
+        settingsSelected: state.common.settingsSelected,
+    };
+}, (dispatch) => {
+    return {
+        selectController(key: string, name: string) {
+            dispatch({
+                type: "SELECT_CONTROLLER",
+                payload: {
+                    key: key,
+                    name: name
+                }
+            })
+        }
+    }
+})(Settings)
+

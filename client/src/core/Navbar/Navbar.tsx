@@ -2,11 +2,13 @@ import React from "react";
 import style from "./Navbar.module.scss";
 import { FaSignOutAlt, FaCogs, FaBell, FaUser } from "react-icons/fa";
 
+import {connect} from "react-redux";
+import {IReduxState} from "../../store/reducers";
+
 interface IProps {
-    isLogin: string | null,
-    signOut: any,
+    authController: any,
     userName: string,
-    notifications: number,
+    noteLength: number,
     avatar?: string,
     selectController: any
 }
@@ -16,7 +18,7 @@ const Navbar: React.FC<IProps> = (props) => {
         <div className={style.Navbar}>
             <div className={style.item} onClick={() => props.selectController("modalSelected", "Notifications")}>
                 <FaBell title="Notifications" />
-                <span>{props.notifications}</span>
+                <span>{props.noteLength}</span>
             </div>
             <div className={style.item} onClick={() => props.selectController("modalSelected", "Settings")}>
                 <FaCogs title="Settings" />
@@ -29,11 +31,29 @@ const Navbar: React.FC<IProps> = (props) => {
                         <FaUser title="User Account" />
                 }
             </div>
-            <div className={style.item} onClick={() => props.signOut()}>
+            <div className={style.item} onClick={() => props.authController()}>
                 <FaSignOutAlt title="Sign Out" />
             </div>
         </div>
     )
 };
 
-export default Navbar;
+export default connect((state: IReduxState) => {
+    return {
+        noteLength: state.notifications.notifications_data.length,
+        avatar: state.profile.profile_data.avatar,
+        userName: state.profile.profile_data.userName,
+    };
+}, (dispatch) => {
+    return {
+        selectController(key: string, name: string) {
+            dispatch({
+                type: "SELECT_CONTROLLER",
+                payload: {
+                    key: key,
+                    name: name
+                }
+            })
+        }
+    }
+})(Navbar)

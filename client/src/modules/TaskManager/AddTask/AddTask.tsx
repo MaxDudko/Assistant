@@ -2,10 +2,16 @@ import React from "react";
 import style from "./AddTask.module.scss";
 import {IoMdStar} from "react-icons/io";
 
+import {connect} from "react-redux";
+import {IReduxState} from "../../../store/reducers";
+import {createTask, getCategories} from "../../../store/actions";
+
 interface IProps {
+    id: string,
     createTask: any,
     selectedCategory: string,
     categories: string[],
+    getCategories: any,
 }
 
 const AddTask: React.FC<IProps> = (props) => {
@@ -66,15 +72,16 @@ const AddTask: React.FC<IProps> = (props) => {
                         <div className={style.term}>
                             <label>
                                 Category:
-                                <select onChange={(e) => categoryChange(e.target.value)}>
+                                <input list="select" name="select" onChange={(e) => categoryChange(e.target.value)} />
+                                <datalist id="select">
                                     {
-                                        props.categories.map((e, i) => (
-                                            <option value={e} key={i + Math.random()}>
-                                                {e}
+                                        props.categories.map((val, i) => (
+                                            <option value={val} key={i + Math.random()}>
+                                                {val}
                                             </option>
                                         ))
                                     }
-                                </select>
+                                </datalist>
                             </label>
                             <label>
                                 Date:
@@ -104,14 +111,17 @@ const AddTask: React.FC<IProps> = (props) => {
                             </span>
                             <span className={style.btn}
                                   onClick={() => {
-                                      props.createTask(category, {
+                                      props.createTask({
                                           title: title,
                                           category: category,
                                           priority: priority,
                                           date: date,
                                           description: description,
                                           created: created,
-                                      });
+                                      },
+                                          props.id,
+                                      );
+                                      props.getCategories();
                                       show(!isShow);
                                   }}
                             >
@@ -130,4 +140,13 @@ const AddTask: React.FC<IProps> = (props) => {
     )
 };
 
-export default AddTask;
+export default connect((state: IReduxState) => {
+    return {
+        id: state.auth.id,
+    };
+}, (dispatch) => {
+    return {
+        createTask: (data: {[key: string]: string}, id: string) => dispatch(createTask(data, id)),
+        getCategories: () => dispatch(getCategories())
+    }
+})(AddTask)

@@ -2,22 +2,26 @@ import React from "react";
 import style from "./Notifications.module.scss";
 import {AiOutlineClose} from "react-icons/ai";
 
+import {connect} from "react-redux";
+import {IReduxState} from "../../store/reducers";
+import {deleteMessage} from "../../store/actions";
+
 interface IProps {
-    notifications: any,
-    notificationsController: any,
+    notifications: {[key: string]: string}[],
+    deleteMessage: any,
 }
 
 const Notifications: React.FC<IProps> = (props) => {
 
     const messages = () => {
-        let list = props.notifications.map((message: any, index: number) => (
+        return [props.notifications.map((message: any, index: number) => (
                 <div className={style.message} key={index}>
                     <div className={style.head}>
                         <b className={style.title}>
                             <span className={style.id}>#{message.id}</span>
                             {message.title}
                             <span className={style.menu}>
-                                <AiOutlineClose className={style.btn} onClick={() => props.notificationsController(message.id)} />
+                                <AiOutlineClose className={style.btn} onClick={() => props.deleteMessage(message.id)} />
                             </span>
                         </b>
                         <span className={style.subtitle}>from: <a href="/#">{message.from}</a></span>
@@ -30,8 +34,7 @@ const Notifications: React.FC<IProps> = (props) => {
                     </div>
                 </div>
             )
-        );
-        return list;
+        )]
     };
 
     return (
@@ -44,4 +47,12 @@ const Notifications: React.FC<IProps> = (props) => {
     )
 };
 
-export default Notifications;
+export default connect((state: IReduxState) => {
+    return {
+        notifications: state.notifications.notifications_data,
+    };
+}, (dispatch) => {
+    return {
+        deleteMessage: (id: string) => dispatch(deleteMessage(id)),
+    }
+})(Notifications)

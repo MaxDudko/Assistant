@@ -2,15 +2,24 @@ import React from "react";
 import style from "./Task.module.scss";
 import {IoMdStar} from "react-icons/io";
 
+import {connect} from "react-redux";
+import {IReduxState} from "../../../store/reducers";
+import {updateTask, deleteTask, getCategories} from "../../../store/actions";
+
 interface IProps {
+    id: string,
     title: string,
     priority: number,
     created: string,
     date: string,
     description: string,
-    updateTask: any,
     index: number,
     category: string,
+    categories: string[],
+
+    updateTask: any,
+    deleteTask: any,
+    getCategories: any,
 }
 
 const Task: React.FC<IProps> = (props) => {
@@ -20,7 +29,7 @@ const Task: React.FC<IProps> = (props) => {
     let [date, dateChange] = React.useState(props.date);
     let [description, descriptionChange] = React.useState(props.description);
     let [created] = React.useState(props.created);
-    let [category] = React.useState(props.category);
+    let [category, categoryChange] = React.useState(props.categories[0]);
 
     const getPriority = () => {
         let stars = [];
@@ -50,7 +59,6 @@ const Task: React.FC<IProps> = (props) => {
                               style={{color: "gold"}}
                               onClick={() => {
                                   priorityChange(i);
-                                  // props.updateTask(props.index, props.category, "priority", priority)
                               }}
                     />
                 )
@@ -60,7 +68,6 @@ const Task: React.FC<IProps> = (props) => {
                               style={{color: "gray"}}
                               onClick={() =>{
                                   priorityChange(i);
-                                  // props.updateTask(props.index, props.category, "priority", priority)
                               }}
                     />
                 )
@@ -98,6 +105,21 @@ const Task: React.FC<IProps> = (props) => {
                 <div>
                     {
                         show ?
+							<div>
+                            <label>
+								Category:
+                                <input list="select" name="select" onChange={(e) => categoryChange(e.target.value)} />
+								<datalist id="select">
+                                    {
+                                        props.categories.map((e: string, i: number) => (
+                                            <option value={e} key={i + Math.random()}
+                                            >
+                                                {e}
+                                            </option>
+                                        ))
+                                    }
+								</datalist>
+							</label>
                             <label>
                                 Date:
                                 <input className={style.input}
@@ -107,6 +129,7 @@ const Task: React.FC<IProps> = (props) => {
                                        onChange={(e) => dateChange(e.target.value)}
                                 />
                             </label>
+                            </div>
                             :
                             <i>{props.date}</i>
                     }
@@ -142,25 +165,46 @@ const Task: React.FC<IProps> = (props) => {
                     show ?
 						<span className={`${style.btn} ${style.lime}`}
 							  onClick={() => {
-                                  props.updateTask(category, props.index, {
+                                  props.updateTask({
                                       title: title,
                                       category: category,
                                       priority: priority,
                                       date: date,
                                       description: description,
                                       created: created
-                                  });
+                                  },
+                                      props.index,
+                                      props.id,
+                                  );
+                                  props.getCategories();
                                   edit(!show);
                               }}
                         >
                             Save
 						</span>
                         :
-                        <span className={`${style.btn} ${style.red}`}>Delete</span>
+                        <span className={`${style.btn} ${style.red}`}
+                              onClick={() => {
+                                  props.deleteTask({}, props.index, props.id);
+                                  props.getCategories()
+                              }}
+                        >
+                            Delete
+                        </span>
                 }
             </div>
         </div>
     )
 };
 
-export default Task;
+export default connect((state: IReduxState) => {
+    return {
+        id: state.auth.id,
+    };
+}, (dispatch) => {
+    return {
+        updateTask: (data: {[key: string]: string}, index: number, id: string) => dispatch(updateTask(data, index, id)),
+        deleteTask: (data: {[key: string]: string}, index: number, id: string) => dispatch(deleteTask(data, index, id)),
+        getCategories: () => dispatch(getCategories()),
+    }
+})(Task)

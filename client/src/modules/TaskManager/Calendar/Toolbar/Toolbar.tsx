@@ -1,13 +1,11 @@
 import React from 'react';
 import styles from './Toolbar.module.scss';
+
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 
 interface IProps {
     currentDate: string,
-    changeSelect: any,
     createCalendar: any,
-    period: string,
-    isCurrentMonth: boolean,
     moment: any,
     isMonth: boolean,
     date: any,
@@ -18,8 +16,13 @@ const Toolbar: React.FC<IProps> = (props) => {
 
     return (
         <div className={styles.Toolbar}>
-            <button className={styles.btn} onClick={() => props.createCalendar('prev')}> <FaArrowCircleLeft/> </button>
-            <h2>
+            {
+                props.isMonth ?
+                    <button className={styles.btn} onClick={() => props.createCalendar('prev')}> <FaArrowCircleLeft/> </button>
+                    :
+                    null
+            }
+            <b className={styles.middle_btn}>
                 <button className={styles.btn}
                         onClick={() => {
                             props.createCalendar('');
@@ -28,13 +31,18 @@ const Toolbar: React.FC<IProps> = (props) => {
                 >
                     {
                         props.isMonth ?
-                            <span>{props.moment.format('DD MMMM YYYY')}</span>
+                            <span>{props.currentDate.split(" ").splice(1).join(" ")}</span>
                             :
                             <span>{props.date}</span>
                     }
                 </button>
-            </h2>
-            <button className={styles.btn} onClick={() => props.createCalendar('next')}> <FaArrowCircleRight/> </button>
+            </b>
+            {
+                props.isMonth ?
+                    <button className={styles.btn} onClick={() => props.createCalendar('next')}> <FaArrowCircleRight/> </button>
+                    :
+                    null
+            }
         </div>
     )
 };
