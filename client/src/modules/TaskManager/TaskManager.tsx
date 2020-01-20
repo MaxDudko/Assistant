@@ -13,9 +13,9 @@ interface IState {}
 
 interface IProps {
     id: string,
-    tasks: any,
     categories: string[],
     selectedCategory: string,
+    // getTasks: any,
     getCategories: any,
     createCalendar: any,
 
@@ -29,6 +29,7 @@ interface IProps {
 class TaskManager extends React.Component<IProps, IState>{
 
     componentDidMount() {
+        // this.props.getTasks(this.props.id);
         this.props.createCalendar("");
         this.props.getCategories();
     }
@@ -41,7 +42,6 @@ class TaskManager extends React.Component<IProps, IState>{
                               selectedCategory={this.props.selectedCategory}
                     />
                     <ToDoList selectedCategory={this.props.selectedCategory}
-                              tasks={this.props.tasks}
                               categories={this.props.categories}
                     />
                 </div>
@@ -50,7 +50,6 @@ class TaskManager extends React.Component<IProps, IState>{
                               currentDate ={this.props.currentDate}
                               calendar_data={this.props.calendar_data}
                               moment={this.props.moment}
-                              tasks={this.props.tasks}
                               categories={this.props.categories}
                               selectedCategory={this.props.selectedCategory}
                     />
@@ -63,7 +62,6 @@ class TaskManager extends React.Component<IProps, IState>{
 export default connect((state: IReduxState) => {
     return {
         id: state.auth.id,
-        tasks: state.tasks.tasks_data,
         categories: state.tasks.categories,
         selectedCategory: state.tasks.selectedCategory,
 

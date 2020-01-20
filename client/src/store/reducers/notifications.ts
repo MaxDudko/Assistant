@@ -1,8 +1,11 @@
+import data from "../../assets/data";
+
 export interface INotificationsState {
     notifications_data: {[key: string]: string}[],
 }
 export const initialState = {
-    notifications_data: [],
+    // notifications_data: [],
+    notifications_data: data.notifications,
 };
 export const notifications = (state:INotificationsState = initialState, action: any) => {
     switch (action.type) {

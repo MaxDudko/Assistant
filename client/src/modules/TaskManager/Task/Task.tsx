@@ -8,6 +8,7 @@ import {updateTask, deleteTask, getCategories} from "../../../store/actions";
 
 interface IProps {
     id: string,
+    task_id: string,
     title: string,
     priority: number,
     created: string,
@@ -166,12 +167,13 @@ const Task: React.FC<IProps> = (props) => {
 						<span className={`${style.btn} ${style.lime}`}
 							  onClick={() => {
                                   props.updateTask({
-                                      title: title,
-                                      category: category,
-                                      priority: priority,
-                                      date: date,
-                                      description: description,
-                                      created: created
+                                          title: title,
+                                          category: category,
+                                          priority: priority,
+                                          date: date,
+                                          description: description,
+                                          created: created,
+                                          _id: props.task_id
                                   },
                                       props.index,
                                       props.id,
@@ -180,12 +182,12 @@ const Task: React.FC<IProps> = (props) => {
                                   edit(!show);
                               }}
                         >
-                            Save
+                            Update
 						</span>
                         :
                         <span className={`${style.btn} ${style.red}`}
                               onClick={() => {
-                                  props.deleteTask({}, props.index, props.id);
+                                  props.deleteTask({_id: props.task_id}, props.index, props.id);
                                   props.getCategories()
                               }}
                         >

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from './Month.module.scss';
 import moment from 'moment';
+import {connect} from "react-redux";
+import {IReduxState} from "../../../../store/reducers";
 
 interface IProps {
     createCalendar: any,
@@ -98,4 +100,12 @@ const Month: React.FC<IProps> = (props) => {
 
 };
 
-export default Month;
+export default connect((state: IReduxState) => {
+    return {
+        tasks: state.tasks.tasks_data,
+    };
+}, (dispatch) => {
+    return {
+
+    }
+})(Month)

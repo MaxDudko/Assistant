@@ -1,6 +1,8 @@
 import React from "react";
 import style from "./Day.module.scss";
 import moment from "moment";
+import {connect} from "react-redux";
+import {IReduxState} from "../../../../store/reducers";
 
 interface IProps {
     tasks: any,
@@ -67,4 +69,12 @@ const Day: React.FC<IProps> = (props) => {
     )
 };
 
-export default Day;
+export default connect((state: IReduxState) => {
+    return {
+        tasks: state.tasks.tasks_data,
+    };
+}, (dispatch) => {
+    return {
+
+    }
+})(Day)

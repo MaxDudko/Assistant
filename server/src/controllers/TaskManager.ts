@@ -14,11 +14,11 @@ const TaskManagerController = {
         });
     },
 
-    setTask(req: Request, res: Response) {
+    createTask(req: Request, res: Response) {
         const { body: { user } } = req;
-        console.log('/TaskManager/setTask: ', req.body);
+        console.log('/TaskManager/createTask: ', req.body);
 
-        User.updateMany({_id: req.body.id}, {$push: {tasks: req.body.task}},  (err, user) =>  {
+        User.updateMany({_id: req.body.user.id}, {$push: {tasks: req.body.user.data}},  (err, user) =>  {
             if (err) {
                 return res.send('error updated');
             }
@@ -26,9 +26,27 @@ const TaskManagerController = {
         })
     },
 
-    updateTask(req: Request, res: Response) {},
+    updateTask(req: Request, res: Response) {
+        console.log('/tasks/update: ', req.body);
 
-    deleteTask(req: Request, res: Response) {}
+        User.findOneAndUpdate({_id: req.body.user.id, "tasks._id": req.body.user.data._id}, {$set: {"tasks.$": req.body.user.data}},  (err, user) =>  {
+            if (err) {
+                return res.send('error updated');
+            }
+            return res.send("updated");
+        })
+    },
+
+    deleteTask(req: Request, res: Response) {
+        console.log('>>>>>>>>>/tasks/delete: ', req.body);
+
+        User.update({_id: req.body.user.id/*, tasks._id: req.body.user._id*/}, {$pull: {tasks: {_id: req.body.user.data._id}}},  (err, user) =>  {
+            if (err) {
+                return res.send('error updated');
+            }
+            return res.send("updated");
+        })
+    }
 };
 
 export default TaskManagerController;
