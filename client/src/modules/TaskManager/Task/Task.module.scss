@@ -83,9 +83,7 @@
       color: lime;
       &:hover {
         border-style: solid;
-        background: rgba(0, 255, 0, .4);
         text-shadow: -1px 0 rgba(0, 0, 0, .4), 0 1px rgba(0, 0, 0, .4), 1px 0 rgba(0, 0, 0, .4), 0 -1px rgba(0, 0, 0, .4);
-        box-shadow: inset 2px -1px 5px lime, inset -2px 1px 5px lime;
         text-decoration: underline;
         transition: 1s;
       }
@@ -95,9 +93,7 @@
       color: red;
       &:hover {
         border-style: solid;
-        background: rgba(255, 0, 0, .4);
         text-shadow: -1px 0 rgba(0, 0, 0, .4), 0 1px rgba(0, 0, 0, .4), 1px 0 rgba(0, 0, 0, .4), 0 -1px rgba(0, 0, 0, .4);
-        box-shadow: inset 2px -1px 5px red, inset -2px 1px 5px red;
         text-decoration: underline;
         transition: 1s;
       }

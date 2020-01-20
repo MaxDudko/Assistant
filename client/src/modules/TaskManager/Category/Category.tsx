@@ -15,28 +15,24 @@ const Category: React.FC<IProps> = (props) => {
 
     return(
         <div className={style.Category}>
-            <div className={style.categoryType}>
-                <span className={`${style.categoryType} ${props.selectedCategory === "All" ? style.selected : ''}`}
-                      onClick={() => props.selectCategory("All")}
-                >
-                    All
-                </span>
+            <div className={`${style.categoryType} ${props.selectedCategory === "All" ? style.selected : ''}`}
+                 onClick={() => props.selectCategory("All")}
+            >
+                All
             </div>
             {
                 props.categories.map((name: string, i: number) => {
                     return [
-                        <div className={style.categoryType} key={i}>
-
-                            <span className={`${style.name} ${props.selectedCategory === name ? style.selected : ''}`}
-                                  onClick={() => props.selectCategory(name)}
-                            >
-                                {name}
-                            </span>
-
+                        <div className={`${style.categoryType} ${props.selectedCategory === name ? style.selected : ''}`}
+                             onClick={() => props.selectCategory(name)}
+                             key={i}
+                        >
+                            {name}
                         </div>
                     ]
                 })
             }
+            <div style={{flexGrow: 1, height: "100%", background: "#353A40"}}> </div>
         </div>
     )
 };

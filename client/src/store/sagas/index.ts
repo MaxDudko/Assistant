@@ -1,4 +1,4 @@
-import {all, takeEvery} from "redux-saga/effects";
+import {all, put, takeEvery} from "redux-saga/effects";
 import {getData} from "./getData";
 import {updateData} from "./updateData";
 

@@ -31,7 +31,7 @@ class TaskManager extends React.Component<IProps, IState>{
     componentDidMount() {
         // this.props.getTasks(this.props.id);
         this.props.createCalendar("");
-        this.props.getCategories();
+        // this.props.getCategories();
     }
 
     render() {

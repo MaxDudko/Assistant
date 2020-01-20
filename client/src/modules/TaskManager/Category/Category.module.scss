@@ -1,9 +1,9 @@
 .Category {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  background: #353A40;
-  color: white;
+  background: linear-gradient(#353A40 10px, transparent);
+  color: azure;
   //position: absolute;
   //top: 0;
   //z-index: 100;
@@ -20,93 +20,21 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-grow: 1;
-    &:first-child {
-      border-right: 1px solid lighten(#24292e, 20%);
-      //padding-left: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 28px;
-      &:hover {
-        transition: 1s;
-        background: darken(#24292e, 10%);
-      }
-    }
-    .name {
-      padding: 5px 0;
-      flex-grow: 1;
-      &:hover {
-        background: darken(#24292e, 10%);
-        transition: 1s;
-        color: #9191d4;
-      }
-    }
-    .btn {
-      padding: 6px 10px 4px 10px;
-      height: 28px;
-      &:nth-child(1):hover {
-        color: lime;
-      }
-      &:nth-child(2):hover {
-        color: red;
-      }
-      &:hover {
-        transition: 1s;
-        background: darken(#24292e, 10%);
-        //color: #9191d4;
-      }
-      &:last-child {
-        border-right: 1px solid lighten(#24292e, 20%);
-      }
-    }
-  }
-  .categoryAdd {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    height: 100%;
-    padding: 0 10px;
-    font-size: 30px;
-    border-right: 1px solid lighten(#24292e, 20%);
-    &:hover {
-      background: darken(#24292e, 10%);
-      color: #A2A4D7;
-      transition: 1s;
-    }
-  }
-  .dropdown {
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    margin-right: 10px;
-    transition: 1s;
+    //flex-grow: 1;
+    width: 200px;
+    border: 1px solid #9191d4;
+    border-radius: 5px 15px 0 0;
+    //background: lighten(#24292e, 10%);
     background: #353A40;
-    height: 100%;
-    .btn {
-      //position: relative;
-      //right: 20px;
-      color: white;
-      font-size: 20px;
-      margin-left: 4px;
+    height: 28px;
       &:hover {
-        cursor: pointer;
-        transition: 1s;
       }
-      &:nth-child(2):hover {
-        color: lime;
-      }
-      &:nth-child(3):hover {
-        color: red;
-      }
-    }
   }
   .selected {
-    color: #9191d4;
-    text-decoration: underline;
-    transition: 1s;
+    color: lime;
+    background: linear-gradient(#353A40 10px, transparent);
+    border-bottom: none !important;
   }
 }
 @media (max-width: 720px) {

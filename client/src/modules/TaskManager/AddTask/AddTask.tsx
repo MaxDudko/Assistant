@@ -5,6 +5,7 @@ import {IoMdStar} from "react-icons/io";
 import {connect} from "react-redux";
 import {IReduxState} from "../../../store/reducers";
 import {createTask, getCategories} from "../../../store/actions";
+import {MdPlaylistAdd} from "react-icons/all";
 
 interface IProps {
     id: string,
@@ -125,7 +126,7 @@ const AddTask: React.FC<IProps> = (props) => {
                                       show(!isShow);
                                   }}
                             >
-                                Save
+                                Create
                             </span>
                         </div>
                     </div>
@@ -133,7 +134,8 @@ const AddTask: React.FC<IProps> = (props) => {
                     <b className={style.btnAddTask}
                         onClick={() => show(!isShow)}
                     >
-                        Add New Task
+                        <MdPlaylistAdd style={{fontSize: "30px"}} />
+                        Create New Task
                     </b>
             }
         </div>

@@ -11,9 +11,13 @@ interface IProps {
     selectedCategory: string,
     tasks: any,
     categories: string[],
+    getCategories: any,
 }
 
 const ToDoList: React.FC<IProps> = (props) => {
+    useEffect(() => {
+        props.getCategories();
+    }, [props.tasks]);
 
     return(
         <div className={style.ToDoList}>
@@ -67,6 +71,6 @@ export default connect((state: IReduxState) => {
     };
 }, (dispatch) => {
     return {
-
+        getCategories: () => dispatch(getCategories()),
     }
 })(ToDoList)

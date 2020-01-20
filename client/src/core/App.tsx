@@ -25,6 +25,7 @@ interface IProps {
     SidebarItems: any,
 
     getTasks: any,
+    getCategories: any,
 }
 
 class App extends React.Component<IProps, IState> {
@@ -45,12 +46,16 @@ class App extends React.Component<IProps, IState> {
               this.props.getProfileData(id);
               this.props.getNotificationsData(id);
               this.props.getTasks(id);
+              // this.props.getCategories();
           })
           .catch((error) => {
               console.log('/auth/get: ', error);
               window.localStorage.clear();
           });
   }
+    componentWillReceiveProps() {
+        // this.props.getCategories();
+    }
 
     authController(form:string, data:any) {
       // logout
@@ -132,5 +137,6 @@ export default connect((state: IReduxState) => {
         getProfileData: (id: string) => dispatch(getProfileData(id)),
         getNotificationsData: (id: string) => dispatch(getNotificationsData(id)),
         getTasks: (id: string) => dispatch(getTasks(id)),
+        getCategories: () => dispatch(getCategories())
     }
 })(App)
