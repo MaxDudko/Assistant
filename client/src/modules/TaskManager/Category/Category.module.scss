@@ -4,10 +4,6 @@
   align-items: center;
   background: linear-gradient(#353A40 10px, transparent);
   color: azure;
-  //position: absolute;
-  //top: 0;
-  //z-index: 100;
-  //width: 100%;
   height: 28px;
   text-align: center;
   position: fixed;
@@ -25,7 +21,6 @@
     width: 200px;
     border: 1px solid #9191d4;
     border-radius: 5px 15px 0 0;
-    //background: lighten(#24292e, 10%);
     background: #353A40;
     height: 28px;
       &:hover {

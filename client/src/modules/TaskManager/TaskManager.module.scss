@@ -1,9 +1,7 @@
 .TaskManager {
   width: 100%;
   min-height: 100vh;
-  //background: lighten(#24292e, 70%);
   background: rgba(0, 0, 255, .1);
-  //background: #24292e;
   display: flex;
   justify-content: space-between;
   overflow-y: scroll;
@@ -16,9 +14,6 @@
     width: 45%;
 
   }
-  //div {
-  //  border: 1px solid black;
-  //}
 }
 @media (max-width: 720px) {
   .TaskManager {

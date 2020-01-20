@@ -5,9 +5,6 @@ import bodyParser from "body-parser";
 import session from "express-session"
 import cors from "cors";
 import errorHandler from "errorhandler";
-// import * as passport from "./config/passport";
-// import Router from "./routes/index";
-// import Users from "./models/Users";
 
 const App = Express();
 

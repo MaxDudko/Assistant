@@ -1,13 +1,11 @@
 import data from "../../assets/data";
 
 export interface ITasksState {
-    // tasks_data: {[key: string]: string}[],
     tasks_data: any,
     categories: string[],
     selectedCategory: string,
 }
 export const initialState = {
-    // tasks_data: data.tasks,
     tasks_data: [],
     categories: [],
     selectedCategory: "All",

@@ -6,7 +6,6 @@ export interface ICalendarState {
     prev: number,
     moment: any,
     currentDate: string,
-    // isCurrentMonth: boolean,
     calendar_data: any,
 }
 export const initialState = {
@@ -15,7 +14,6 @@ export const initialState = {
     prev: 0,
     moment: moment(),
     currentDate: "",
-    // isCurrentMonth: true,
     calendar_data: [],
 };
 
@@ -24,9 +22,6 @@ const createCalendar = (change: string, period: any, next: any, prev: any) => {
     let prevDate;
     let nextDate;
     let currentDate;
-    // let select = this.state.period;
-    // let next = this.state.next;
-    // let prev = this.state.prev;
 
     if(change === 'prev') {
         prev++;
@@ -72,11 +67,6 @@ const createCalendar = (change: string, period: any, next: any, prev: any) => {
 
 export const calendar = (state:ICalendarState = initialState, action: any) => {
     switch (action.type) {
-        // case 'CURRENT_MONTH_CHECK':
-        //     return {
-        //         ...state,
-        //         isCurrentMonth: !state.isCurrentMonth
-        //     };
         case 'CHANGE_SELECT':
             return {
                 ...state,
