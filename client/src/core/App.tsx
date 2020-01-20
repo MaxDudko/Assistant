@@ -12,7 +12,7 @@ import UserAccount from "./UserAccount/UserAccount";
 import axios from 'axios';
 import {connect} from "react-redux";
 import {IReduxState} from "../store/reducers";
-import {setID, getProfileData, getNotificationsData} from "../store/actions";
+import {setID, getProfileData, getNotificationsData, getTasks, getCategories, createCalendar} from "../store/actions";
 
 interface IState {}
 
@@ -23,6 +23,8 @@ interface IProps {
     getNotificationsData: any,
     modalSelected: string | null,
     SidebarItems: any,
+
+    getTasks: any,
 }
 
 class App extends React.Component<IProps, IState> {
@@ -42,6 +44,7 @@ class App extends React.Component<IProps, IState> {
               this.props.setID(id);
               this.props.getProfileData(id);
               this.props.getNotificationsData(id);
+              this.props.getTasks(id);
           })
           .catch((error) => {
               console.log('/auth/get: ', error);
@@ -128,5 +131,6 @@ export default connect((state: IReduxState) => {
         setID: (id: string) => dispatch(setID(id)),
         getProfileData: (id: string) => dispatch(getProfileData(id)),
         getNotificationsData: (id: string) => dispatch(getNotificationsData(id)),
+        getTasks: (id: string) => dispatch(getTasks(id)),
     }
 })(App)

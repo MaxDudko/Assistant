@@ -41,7 +41,7 @@ const profileController = {
     updateProfileData(req: Request, res: Response) {
         console.log('/profile/update: ', req.body);
 
-        User.update({_id: req.body.user.id}, {$set: {profile: req.body.user.profile}},  (err, user) =>  {
+        User.update({_id: req.body.user.id}, {$set: {profile: req.body.user.data}},  (err, user) =>  {
             if (err) {
                 return res.send('error updated');
             }

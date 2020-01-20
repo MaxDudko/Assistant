@@ -1,13 +1,13 @@
 import Express, {Request} from "express";
 import TaskManagerController from "../controllers/TaskManager";
 
-const {getTasks, setTask, updateTask, deleteTask} = TaskManagerController;
+const {getTasks, createTask, updateTask, deleteTask} = TaskManagerController;
 
 const TaskManagerRouter = Express.Router();
 
 TaskManagerRouter.post('/get', getTasks);
-TaskManagerRouter.post('/create', setTask);
+TaskManagerRouter.post('/create', createTask);
 TaskManagerRouter.post('/update', updateTask);
-TaskManagerRouter.delete('/delete', deleteTask);
+TaskManagerRouter.post('/delete', deleteTask);
 
 export default TaskManagerRouter;

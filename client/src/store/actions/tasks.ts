@@ -3,13 +3,25 @@ export const getTasks = (id: string) => {
         type: "GET_TASKS_DATA",
         payload: {
             id: id,
-            path: 'tasks/get/',
-            typed: "RECEIVED_TASKS_DATA"
+            path: '/tasks/get/',
+            typed: "RECEIVED_TASKS_DATA",
         }
     }
 };
 
-export const updateTask = (data: {[key: string]: string}, index: number, id: string) => {
+export const createTask = (data: any, id: string) => {
+    return {
+        type: "CREATE_TASK",
+        payload: {
+            data: data,
+            id: id,
+            path: "/tasks/create/",
+            typed: "CREATED_TASK",
+        }
+    }
+};
+
+export const updateTask = (data: any, index: number, id: string) => {
     return {
         type: "UPDATE_TASK",
         payload: {
@@ -17,24 +29,12 @@ export const updateTask = (data: {[key: string]: string}, index: number, id: str
             id: id,
             index: index,
             path: "/tasks/update/",
-            typed: "UPDATE_TASK"
+            typed: "UPDATED_TASK",
         }
     }
 };
 
-export const createTask = (data: {[key: string]: string}, id: string) => {
-  return {
-      type: "CREATE_TASK",
-      payload: {
-          data: data,
-          id: id,
-          path: "/tasks/create/",
-          typed: "CREATE_TASK"
-      }
-  }
-};
-
-export const deleteTask = (data: {[key: string]: string}, index: number, id: string) => {
+export const deleteTask = (data: any, index: number, id: string) => {
     return {
         type: "DELETE_TASK",
         payload: {
@@ -42,7 +42,7 @@ export const deleteTask = (data: {[key: string]: string}, index: number, id: str
             index: index,
             id: id,
             path: "/tasks/delete/",
-            typed: "DELETE_TASK"
+            typed: "DELETED_TASK",
         }
     }
 };

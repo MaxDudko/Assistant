@@ -146,7 +146,7 @@ export default connect((state: IReduxState) => {
     };
 }, (dispatch) => {
     return {
-        createTask: (data: {[key: string]: string}, id: string) => dispatch(createTask(data, id)),
+        createTask: (data: any, id: string) => dispatch(createTask(data, id)),
         getCategories: () => dispatch(getCategories())
     }
 })(AddTask)

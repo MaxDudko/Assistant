@@ -10,6 +10,7 @@ export function* getData(action: any) {
         .then((response) => {
             console.log(`${action.payload.path}: `, response);
             data = response.data;
+            console.log(response.data)
         })
         .catch((error) => {
             console.log(`${action.payload.path}: `, error)

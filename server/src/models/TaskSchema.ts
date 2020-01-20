@@ -1,13 +1,19 @@
 import Mongoose, {Schema} from "mongoose";
 
 const TaskSchema: Schema = new Mongoose.Schema({
-    title: String,
+    title: {
+        required: true,
+        type: String,
+    },
     category: {
         required: true,
         type: String,
     },
     priority: Number,
-    date: Date,
+    date: {
+        required: true,
+        type: String,
+    },
     description: String,
     created: {
         type: Date,

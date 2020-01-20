@@ -7,8 +7,8 @@ export interface ITasksState {
     selectedCategory: string,
 }
 export const initialState = {
-    tasks_data: data.tasks,
-    // tasks_data: [],
+    // tasks_data: data.tasks,
+    tasks_data: [],
     categories: [],
     selectedCategory: "All",
 };
@@ -17,9 +17,17 @@ export const tasks = (state:ITasksState = initialState, action: any) => {
         case 'RECEIVED_TASKS_DATA':
             return {
                 ...state,
-                tasks_data: Object.assign(state.tasks_data, action.payload)
+                tasks_data: action.payload
             };
-        case 'UPDATE_TASK':
+        case 'CREATED_TASK':
+            return {
+                ...state,
+                tasks_data: [
+                    ...state.tasks_data,
+                    action.payload.data
+                ]
+            };
+        case 'UPDATED_TASK':
             return {
                 ...state,
                 tasks_data: state.tasks_data.map((task: any, i: number) => (
@@ -29,15 +37,7 @@ export const tasks = (state:ITasksState = initialState, action: any) => {
                         {...task})
                 )
             };
-        case 'CREATE_TASK':
-            return {
-                ...state,
-                tasks_data: [
-                    ...state.tasks_data,
-                    action.payload.data
-                ]
-            };
-        case "DELETE_TASK":
+        case "DELETED_TASK":
             return {
                 ...state,
                 tasks_data: state.tasks_data.filter((task: any, i: number) => i !== action.payload.index)

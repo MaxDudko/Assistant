@@ -10,7 +10,6 @@ import {IReduxState} from "../../../store/reducers";
 
 interface IProps {
     calendar_data: any,
-    tasks: any,
     currentDate: string,
     createCalendar: any,
     moment: string,
@@ -37,7 +36,6 @@ const Calendar: React.FC<IProps> = (props) => {
                            moment={props.moment}
                            currentDate ={props.currentDate}
                            createCalendar={props.createCalendar}
-                           tasks={props.tasks}
                            categories={props.categories}
                            selectedCategory={props.selectedCategory}
                            setDate={setDate.bind(Calendar)}
@@ -45,8 +43,7 @@ const Calendar: React.FC<IProps> = (props) => {
                            isMonth={isMonth}
                     />
                     :
-                    <Day tasks={props.tasks}
-                         selectedCategory={props.selectedCategory}
+                    <Day selectedCategory={props.selectedCategory}
                          categories={props.categories}
                          date={date}
                     />
