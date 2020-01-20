@@ -31,9 +31,13 @@ const Toolbar: React.FC<IProps> = (props) => {
                 >
                     {
                         props.isMonth ?
-                            <span>{props.currentDate.split(" ").splice(1).join(" ")}</span>
+                            <span className={props.moment.format("DD MMMM YYYY") === props.currentDate ? styles.current : ""}>
+                                {props.currentDate.split(" ").splice(1).join(" ")}
+                            </span>
                             :
-                            <span>{props.date}</span>
+                            <span className={props.moment.format("DD MMMM YYYY") === props.date ? styles.current : ""}>
+                                {props.date}
+                            </span>
                     }
                 </button>
             </b>

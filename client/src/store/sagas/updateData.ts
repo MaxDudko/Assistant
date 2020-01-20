@@ -19,5 +19,4 @@ export function* updateData(action: any) {
             console.log(`${action.payload.path}: `, error)
         });
     yield put({type: action.payload.typed, payload: action.payload});
-    if(action.payload.typed2) yield put({type: action.payload.typed2, payload: {}})
 }

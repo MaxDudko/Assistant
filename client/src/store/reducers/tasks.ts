@@ -32,9 +32,13 @@ export const tasks = (state:ITasksState = initialState, action: any) => {
                 ...state,
                 tasks_data: state.tasks_data.map((task: any, i: number) => (
                     (i === action.payload.index) ?
-                        {...action.payload.data}
+                        {
+                            ...action.payload.data
+                        }
                         :
-                        {...task})
+                        {
+                            ...task
+                        })
                 )
             };
         case "DELETED_TASK":
