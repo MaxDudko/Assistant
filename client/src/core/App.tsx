@@ -12,7 +12,7 @@ import UserAccount from "./UserAccount/UserAccount";
 import axios from 'axios';
 import {connect} from "react-redux";
 import {IReduxState} from "../store/reducers";
-import {setID, getProfileData, getNotificationsData, getTasks, getCategories, createCalendar} from "../store/actions";
+import {setID, getProfileData, getNotificationsData, getTasks, getCategories} from "../store/actions";
 
 interface IState {}
 
@@ -46,19 +46,14 @@ class App extends React.Component<IProps, IState> {
               this.props.getProfileData(id);
               this.props.getNotificationsData(id);
               this.props.getTasks(id);
-              // this.props.getCategories();
           })
           .catch((error) => {
               console.log('/auth/get: ', error);
               window.localStorage.clear();
           });
   }
-    componentWillReceiveProps() {
-        // this.props.getCategories();
-    }
 
     authController(form:string, data:any) {
-      // logout
       if(!form) {
           window.localStorage.clear();
           return;

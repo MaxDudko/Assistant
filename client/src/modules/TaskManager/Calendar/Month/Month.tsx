@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import style from './Month.module.scss';
 import moment from 'moment';
 import {connect} from "react-redux";

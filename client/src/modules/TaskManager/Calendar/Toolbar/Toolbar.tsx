@@ -18,7 +18,9 @@ const Toolbar: React.FC<IProps> = (props) => {
         <div className={styles.Toolbar}>
             {
                 props.isMonth ?
-                    <button className={styles.btn} onClick={() => props.createCalendar('prev')}> <FaArrowCircleLeft/> </button>
+                    <button className={styles.btn} onClick={() => props.createCalendar('prev')}>
+                        <FaArrowCircleLeft />
+                    </button>
                     :
                     null
             }
@@ -43,7 +45,9 @@ const Toolbar: React.FC<IProps> = (props) => {
             </b>
             {
                 props.isMonth ?
-                    <button className={styles.btn} onClick={() => props.createCalendar('next')}> <FaArrowCircleRight/> </button>
+                    <button className={styles.btn} onClick={() => props.createCalendar('next')}>
+                        <FaArrowCircleRight />
+                    </button>
                     :
                     null
             }
