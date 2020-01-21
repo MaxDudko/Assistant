@@ -5,6 +5,8 @@
     background-color: #353A40;
     min-width: 100%;
     max-height: 28px;
+    position: relative;
+    z-index: 1000;
     & h2 {
         margin: 0;
         padding: 0;
@@ -42,5 +44,5 @@
     justify-content: center;
 }
 .current {
-    color: lime;
+    color: #9191d4;
 }

@@ -7,8 +7,8 @@
   height: 28px;
   text-align: center;
   position: fixed;
-  width: 44.5%;
-  z-index: 1000;
+  width: 100%;
+  //z-index: 1000;
   .title {
     padding-left: 15px;
   }
@@ -22,14 +22,20 @@
     border: 1px solid #9191d4;
     border-radius: 5px 15px 0 0;
     background: #353A40;
-    height: 28px;
+    height: 26px;
       &:hover {
       }
   }
   .selected {
-    color: lime;
+    color: #9191d4;
     background: linear-gradient(#353A40 10px, transparent);
     border-bottom: none !important;
+  }
+  .length {
+    position: absolute;
+    padding-left: 28px;
+    top: 14px;
+    font-size: 12px;
   }
 }
 @media (max-width: 720px) {

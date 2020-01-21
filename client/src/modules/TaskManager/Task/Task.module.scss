@@ -4,12 +4,10 @@
   //-webkit-backdrop-filter: blur(1px);
   //backdrop-filter: blur(1px);
   border-radius: 10px;
-  border: 1px solid #9191d4;
-  color: #9191d4;
-  &:hover {
-    transform: scale(.999);
-    box-shadow: inset 2px -1px 5px #9191d4, inset -2px 1px 5px #9191d4;
-  }
+  border: 1px solid #696969;
+  color: #b6b6e2;
+  background: #353A40;
+
   i {
     font-size: 12px;
   }

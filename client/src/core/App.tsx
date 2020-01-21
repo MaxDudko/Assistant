@@ -97,9 +97,10 @@ class App extends React.Component<IProps, IState> {
               {
                   window.localStorage.getItem('token') ?
                       <div>
-                          <Navbar authController={this.authController.bind(this)} />
+                          <Navbar authController={this.authController.bind(this)}
+                                  SidebarItems={this.props.SidebarItems}
+                          />
                           <div className={style.wrapper}>
-                              <Sidebar SidebarItems={this.props.SidebarItems}/>
                               <DashBoard />
                               {
                                   this.props.modalSelected !== null ?

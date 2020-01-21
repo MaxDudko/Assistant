@@ -1,20 +1,26 @@
 .table {
-    text-align: center;
-    width: 100%;
+  text-align: center;
+  width: 100%;
+  table-layout: fixed;
+
 }
 .thead td {
     border: 1px solid #bcc4e0;
-    color: #9191d4;
+    color: white;
 }
 .td {
-   width: 100px;
-   height: 100px;
+   width: 100%;
+   height: 80px;
    border: 1px solid #bcc4e0;
    position: relative;
+   &:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
 }
 .td:hover {
     transform: scale(.95);
-    box-shadow: inset 2px -2px 5px #9191d4, inset -2px 2px 5px #9191d4;
     cursor: pointer;
 }
 .td a {
@@ -23,32 +29,34 @@
     right: 0;
     margin-top: 0;
     text-decoration: none;
-    color: #9191d4;
+    color: white;
     padding: 5px;
 
 }
 
 .decorate {
     border: 1px solid #9191d4;
-    box-shadow: inset 2px -1px 5px #9191d4;
 }
 .decorateDate {
-  border: .1px solid lime;
-  box-shadow: inset 4px -4px 5px #9191d4, inset -4px 4px 5px #9191d4;
+  border: .1px solid #9191d4;
+  box-shadow: 4px 4px 2px #9191d4 inset, -4px -4px 2px #9191d4 inset;
   a {
-    color: lime;
+    color: #9191d4;
+    font-weight: bold;
   }
 }
 
 .task {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: 0;
   span:nth-child(1) {
-    color: #9191d4;
+    color: #b6b6e2;
     font-size: 12px;
   }
   span:nth-child(2) {
-    color: #9191d4;
+    color: #b6b6e2;
     font-size: 12px;
     text-decoration: overline;
   }

@@ -1,29 +1,29 @@
 .TaskManager {
   width: 100%;
   min-height: 100vh;
-  background: rgba(0, 0, 255, .1);
-  display: flex;
-  justify-content: space-between;
+  background: lighten(#353A40, 10%);
   overflow-y: scroll;
-  .leftSide {
-    width: 50%;
+  //.leftSide {
+  //  width: 50%;
+  //}
+  //.rightSide {
+  //  position: fixed;
+  //  right: 0;
+  //  width: 45%;
+  //
+  //}
+  .wrapper {
+    display: flex;
   }
-  .rightSide {
-    position: fixed;
-    right: 0;
-    width: 45%;
-
+  .TaskList {
+    width: 50%;
   }
 }
 @media (max-width: 720px) {
-  .TaskManager {
+  .wrapper {
     flex-direction: column;
-    .leftSide, .rightSide {
+    .TaskList {
       width: 100%;
-      position: static;
-    }
-    .leftSide {
-      display: flex;
     }
   }
 }

@@ -1,4 +1,6 @@
 .AddTask {
+  position: relative;
+  width: 100%;
   margin-top: 10px;
 }
 .btnAddTask {
@@ -11,6 +13,11 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
+  background: #353A40;
+  //position: fixed;
+  //top: 95px;
+  //left: 20px;
+  //right: calc(50% + 20px);
     &:hover {
       //border-style: solid;
       //background: rgba(0, 255, 0, .4);
@@ -27,7 +34,7 @@
   margin-top: 20px;
   cursor: pointer;
   padding: 10px;
-  //background: rgba(162, 164, 215, .5);
+  background: #353A40;
   border: 1px solid #9191d4;
   color: #9191d4;
   &:hover {
@@ -125,3 +132,9 @@
   }
 }
 
+
+@media (max-width: 720px) {
+  .btnAddTask {
+    //right: 20px;
+  }
+}

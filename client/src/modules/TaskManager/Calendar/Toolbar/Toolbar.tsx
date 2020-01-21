@@ -2,6 +2,11 @@ import React from 'react';
 import styles from './Toolbar.module.scss';
 
 import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
+import {MdFullscreen, MdFullscreenExit} from "react-icons/md";
+import {connect} from "react-redux";
+import {IReduxState} from "../../../../store/reducers";
+import {createCalendar, getCategories, getTasks} from "../../../../store/actions";
+import {TaskManagerView_CHANGE} from "../../../../store/actions/common";
 
 interface IProps {
     currentDate: string,
@@ -55,4 +60,12 @@ const Toolbar: React.FC<IProps> = (props) => {
     )
 };
 
-export default Toolbar;
+export default connect((state: IReduxState) => {
+    return {
+        TaskManagerView: state.common.TaskManagerView,
+    };
+}, (dispatch) => {
+    return {
+        // TaskManagerView_CHANGE: (view: string) => dispatch(TaskManagerView_CHANGE(view)),
+    }
+})(Toolbar)

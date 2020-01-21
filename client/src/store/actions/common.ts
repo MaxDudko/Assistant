@@ -14,3 +14,12 @@ export const selectController = (key: string, name: string) => {
         }
     }
 };
+
+export const TaskManagerView_CHANGE = (view: string) => {
+    return {
+        type: "TaskManagerView_CHANGE",
+        payload: {
+            view: view
+        }
+    }
+};

@@ -1,11 +1,10 @@
 .Sidebar {
   background: lighten(#24292e, 5%);
   color: white;
-  position: fixed;
   z-index: 110;
   top: 0;
   left: 0;
-  height: 100vh;
+  //height: 100vh;
   .header {
     display: flex;
     align-items: center;
@@ -32,6 +31,7 @@
   }
   .list {
     background: rgba(0, 0, 0, .1);
+    display: flex;
     .item {
       display: flex;
       justify-content: flex-start;
@@ -54,9 +54,9 @@
   }
 }
 
-.collapsed_false {
-  width: 200px;
-}
+//.collapsed_false {
+//  width: 200px;
+//}
 
 .collapsed_true {
   width: 50px;

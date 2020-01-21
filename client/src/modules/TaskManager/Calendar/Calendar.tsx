@@ -15,6 +15,7 @@ interface IProps {
     moment: string,
     categories: any,
     selectedCategory: string,
+    TaskManagerView: string,
 }
 
 const Calendar: React.FC<IProps> = (props) => {
@@ -22,7 +23,7 @@ const Calendar: React.FC<IProps> = (props) => {
     let [date, setDate] = React.useState(props.currentDate);
 
     return (
-        <div className={styles.calendar}>
+        <div className={props.TaskManagerView === "Calendar" ? styles.fullCalendar : styles.calendar}>
             <Toolbar createCalendar={props.createCalendar}
                      currentDate ={props.currentDate}
                      moment={props.moment}
@@ -54,7 +55,7 @@ const Calendar: React.FC<IProps> = (props) => {
 
 export default connect((state: IReduxState) => {
     return {
-
+        TaskManagerView: state.common.TaskManagerView,
     };
 }, (dispatch) => {
     return {
