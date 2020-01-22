@@ -5,7 +5,7 @@
   width: 500px;
   min-height: 100%;
   overflow-y: scroll;
-  color: #b6b6e2;
+  color: white;
   background: lighten(#24292e, 5%);
 
   h2 {
@@ -17,8 +17,8 @@
     padding: 10px;
     border-radius: 10px;
     min-height: fit-content;
-    border: 1px solid #9191d4;
-    color: #b6b6e2;
+    border: 1px solid white;
+    color: white;
     background: #353A40;
     .head {
       display: flex;

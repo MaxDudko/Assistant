@@ -5,13 +5,13 @@
 
 }
 .thead td {
-    border: 1px solid #bcc4e0;
+    border: 1px solid white;
     color: white;
 }
 .td {
    width: 100%;
    height: 120px;
-   border: 1px solid #bcc4e0;
+   border: 1px solid white;
    position: relative;
 }
 .td:hover {
@@ -30,14 +30,13 @@
 }
 
 .decorate {
-    border: 1px solid #9191d4;
+    background: lighten(#353A40, 4%);
+  //border: 1px solid #9191d4;
 }
 .decorateDate {
-  border: .1px solid #9191d4;
-  box-shadow: 4px 4px 2px #9191d4 inset, -4px -4px 2px #9191d4 inset;
+  border: 1px solid  lime;
   a {
-    color: #9191d4;
-    font-weight: bold;
+    color: lime;
   }
 }
 
@@ -47,11 +46,11 @@
   //position: absolute;
   //top: 0;
   span:nth-child(1) {
-    color: #b6b6e2;
+    color: white;
     font-size: 12px;
   }
   span:nth-child(2) {
-    color: #b6b6e2;
+    color: white;
     font-size: 12px;
     text-decoration: overline;
   }
