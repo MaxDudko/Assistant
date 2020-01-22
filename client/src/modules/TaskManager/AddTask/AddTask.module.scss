@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
   margin-top: 10px;
+  //min-height: 52px;
 }
 .btnAddTask {
   border-radius: 5px;
@@ -15,13 +16,9 @@
   padding: 10px;
   background: #353A40;
   //position: fixed;
-  //top: 95px;
   //left: 20px;
   //right: calc(50% + 20px);
     &:hover {
-      //border-style: solid;
-      //background: rgba(0, 255, 0, .4);
-      //box-shadow: inset 2px -1px 5px lime, inset -2px 1px 5px lime;
       color: lime;
       border: 1px solid lime;
       text-shadow: -1px 0 rgba(0, 0, 0, .4), 0 1px rgba(0, 0, 0, .4), 1px 0 rgba(0, 0, 0, .4), 0 -1px rgba(0, 0, 0, .4);
@@ -37,10 +34,6 @@
   background: #353A40;
   border: 1px solid #9191d4;
   color: #9191d4;
-  &:hover {
-    transform: scale(.999);
-    box-shadow: inset 2px -1px 5px #9191d4, inset -2px 1px 5px #9191d4;
-  }
   i {
     font-size: 12px;
   }

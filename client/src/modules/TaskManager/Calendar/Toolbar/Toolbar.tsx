@@ -66,6 +66,5 @@ export default connect((state: IReduxState) => {
     };
 }, (dispatch) => {
     return {
-        // TaskManagerView_CHANGE: (view: string) => dispatch(TaskManagerView_CHANGE(view)),
     }
 })(Toolbar)

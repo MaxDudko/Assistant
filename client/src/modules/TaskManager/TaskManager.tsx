@@ -26,8 +26,6 @@ interface IProps {
     moment: any,
 
     TaskManagerView: string,
-
-    // TaskManagerView_CHANGE: any,
 }
 
 class TaskManager extends React.Component<IProps, IState>{
@@ -56,7 +54,6 @@ class TaskManager extends React.Component<IProps, IState>{
                                       moment={this.props.moment}
                                       categories={this.props.categories}
                                       selectedCategory={this.props.selectedCategory}
-                                // TaskManagerView_CHANGE={this.props.TaskManagerView}
                             />
                         </div>
                         :
@@ -75,7 +72,6 @@ class TaskManager extends React.Component<IProps, IState>{
                                       moment={this.props.moment}
                                       categories={this.props.categories}
                                       selectedCategory={this.props.selectedCategory}
-                                // TaskManagerView_CHANGE={this.props.TaskManagerView}
                             />
                         </div>
                 }
@@ -104,6 +100,5 @@ export default connect((state: IReduxState) => {
         getCategories: () => dispatch(getCategories()),
 
         createCalendar: (change: string) => dispatch(createCalendar(change)),
-        // TaskManagerView_CHANGE: (view: string) => dispatch(TaskManagerView_CHANGE(view)),
     }
 })(TaskManager)

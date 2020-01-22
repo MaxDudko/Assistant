@@ -18,10 +18,6 @@ interface IProps {
 }
 
 const WidgetTM: React.FC<IProps> = (props) => {
-    // let [tasks, setTasks] = React.useState(data.tasks);
-    // let [categories, setCategories] = React.useState(Object.keys(tasks));
-    // let [currentDate] = React.useState(Date.now);
-    // let [isGetAll] = React.useState(false);
 
     return(
         <div className={style.Widget}>
