@@ -4,8 +4,8 @@
   //-webkit-backdrop-filter: blur(1px);
   //backdrop-filter: blur(1px);
   border-radius: 10px;
-  border: 1px solid #9191d4;
-  color: #b6b6e2;
+  border: 1px solid white;
+  color: white;
   background: #353A40;
 
   i {
@@ -23,13 +23,13 @@
     background: transparent;
     outline: none;
     border-radius: 5px;
-    border: 1px dotted #A2A4D7;
+    border: 1px dotted white;
     padding: 4px;
-    caret-color: #9191d4;
-    color: #9191d4;
+    caret-color: white;
+    color: white;
   }
   input::placeholder, textarea::placeholder {
-    color: #A2A4D7;
+    color: white;
   }
   .title {
     display: flex;
@@ -98,9 +98,12 @@
   }
 }
 @media (max-width: 720px) {
+  .Task {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
   .Task .title .stars {
     margin: 0;
-    min-width: 40%;
     text-align: right;
   }
 }

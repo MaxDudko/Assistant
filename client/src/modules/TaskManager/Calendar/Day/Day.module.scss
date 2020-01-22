@@ -3,7 +3,7 @@
   width: 100%;
 }
 .td {
-  border: 1px solid #bcc4e0;
+  border: 1px solid white;
   color: white;
 }
 .td:nth-child(1) {
@@ -15,7 +15,7 @@
 .td {
   width: 100px;
   height: 25px;
-  border: 1px solid #bcc4e0;
+  border: 1px solid white;
   position: relative;
 }
 .td:hover {
@@ -34,7 +34,7 @@
 }
 
 .decorate {
-  box-shadow: inset 2px -1px 5px #9191d4;
+  box-shadow: inset 2px -1px 5px lighten(#9191d4, 10%);
 }
 .decorateDate {
   border: 1px solid lime;
@@ -48,11 +48,11 @@
   display: flex;
   flex-direction: column;
   span:nth-child(1) {
-    color: #9191d4;
+    color: white;
     font-size: 12px;
   }
   span:nth-child(2) {
-    color: #9191d4;
+    color: white;
     font-size: 12px;
     text-decoration: overline;
   }

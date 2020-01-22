@@ -19,7 +19,7 @@
     justify-content: center;
     //flex-grow: 1;
     width: 200px;
-    border: 1px solid #9191d4;
+    border: 1px solid white;
     border-radius: 5px 15px 0 0;
     background: #353A40;
     height: 26px;
@@ -27,7 +27,7 @@
       }
   }
   .selected {
-    color: #9191d4;
+    color: white;
     background: linear-gradient(#353A40 10px, transparent);
     border-bottom: none !important;
   }
@@ -41,11 +41,12 @@
 @media (max-width: 720px) {
   .Category {
     height: 40px;
-    width: calc(100% - 40px);
+    width: 100%;
     .categoryType {
       min-height: 100%;
       height: auto;
       border-bottom: 1px solid lighten(#24292e, 20%);
+      margin-top: 2px;
       div:last-child {
         display: flex;
         flex-direction: column;

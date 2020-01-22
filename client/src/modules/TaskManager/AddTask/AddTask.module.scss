@@ -8,8 +8,8 @@
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
-  border: 1px solid #9191d4;
-  color: #9191d4;
+  border: 1px solid white;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,8 +32,8 @@
   cursor: pointer;
   padding: 10px;
   background: #353A40;
-  border: 1px solid #9191d4;
-  color: #9191d4;
+  border: 1px solid white;
+  color: white;
   i {
     font-size: 12px;
   }
@@ -50,13 +50,13 @@
     background: transparent;
     outline: none;
     border-radius: 5px;
-    border: 1px dotted #A2A4D7;
+    border: 1px dotted white;
     padding: 4px;
-    caret-color: #9191d4;
-    color: #9191d4;
+    caret-color: white;
+    color: white;
   }
   input::placeholder, textarea::placeholder {
-    color: #A2A4D7;
+    color: white;
   }
   .title {
     display: flex;
@@ -128,6 +128,8 @@
 
 @media (max-width: 720px) {
   .btnAddTask {
-    //right: 20px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }
