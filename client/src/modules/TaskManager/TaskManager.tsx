@@ -8,6 +8,7 @@ import Category from "./Category/Category";
 import {connect} from "react-redux";
 import {IReduxState} from "../../store/reducers";
 import {getCategories, getTasks, createCalendar} from "../../store/actions";
+import {TaskManagerView_CHANGE} from "../../store/actions/common";
 
 interface IState {}
 
@@ -22,7 +23,9 @@ interface IProps {
     currentDate: string,
     next: any,
     prev: any,
-    moment: any
+    moment: any,
+
+    TaskManagerView: string,
 }
 
 class TaskManager extends React.Component<IProps, IState>{
@@ -34,23 +37,44 @@ class TaskManager extends React.Component<IProps, IState>{
     render() {
         return (
             <div className={style.TaskManager}>
-                <div className={style.leftSide}>
-                    <Category categories={this.props.categories}
-                              selectedCategory={this.props.selectedCategory}
-                    />
-                    <ToDoList selectedCategory={this.props.selectedCategory}
-                              categories={this.props.categories}
-                    />
-                </div>
-                <div className={style.rightSide}>
-                    <Calendar createCalendar={this.props.createCalendar}
-                              currentDate ={this.props.currentDate}
-                              calendar_data={this.props.calendar_data}
-                              moment={this.props.moment}
-                              categories={this.props.categories}
-                              selectedCategory={this.props.selectedCategory}
-                    />
-                </div>
+                {
+                    this.props.TaskManagerView === "view_1" ?
+                        <div className={style.wrapper}>
+                            <div className={style.TaskList}>
+                                <Category categories={this.props.categories}
+                                          selectedCategory={this.props.selectedCategory}
+                                />
+                                <ToDoList selectedCategory={this.props.selectedCategory}
+                                          categories={this.props.categories}
+                                />
+                            </div>
+                            <Calendar createCalendar={this.props.createCalendar}
+                                      currentDate ={this.props.currentDate}
+                                      calendar_data={this.props.calendar_data}
+                                      moment={this.props.moment}
+                                      categories={this.props.categories}
+                                      selectedCategory={this.props.selectedCategory}
+                            />
+                        </div>
+                        :
+                        <div className={style.wrapper}>
+                            <div className={style.TaskList}>
+                                <Category categories={this.props.categories}
+                                          selectedCategory={this.props.selectedCategory}
+                                />
+                                <ToDoList selectedCategory={this.props.selectedCategory}
+                                          categories={this.props.categories}
+                                />
+                            </div>
+                            <Calendar createCalendar={this.props.createCalendar}
+                                      currentDate ={this.props.currentDate}
+                                      calendar_data={this.props.calendar_data}
+                                      moment={this.props.moment}
+                                      categories={this.props.categories}
+                                      selectedCategory={this.props.selectedCategory}
+                            />
+                        </div>
+                }
             </div>
         );
     }
@@ -67,6 +91,8 @@ export default connect((state: IReduxState) => {
         next: state.calendar.next,
         prev: state.calendar.prev,
         moment: state.calendar.moment,
+
+        TaskManagerView: state.common.TaskManagerView,
     };
 }, (dispatch) => {
     return {

@@ -23,19 +23,19 @@ const Sidebar: React.FC<IProps> = (props) => {
 
     return (
         <div className={`${style.Sidebar} ${isCollapsed}`}>
-            <div className={style.header}>
-                <img src={logo} alt="#"
-                     className={style.logo}
-                />
-                <span className={style.title}
-                      onClick={() => props.selectController('modalSelected', null)}
-                >
-                    Assistant
-                </span>
-                <FaBars className={style.collapsed_icon}
-                        onClick={() => props.collapseSidebar()}
-                />
-            </div>
+            {/*<div className={style.header}>*/}
+            {/*    <img src={logo} alt="#"*/}
+            {/*         className={style.logo}*/}
+            {/*    />*/}
+            {/*    <span className={style.title}*/}
+            {/*          onClick={() => props.selectController('modalSelected', null)}*/}
+            {/*    >*/}
+            {/*        Assistant*/}
+            {/*    </span>*/}
+            {/*    <FaBars className={style.collapsed_icon}*/}
+            {/*            onClick={() => props.collapseSidebar()}*/}
+            {/*    />*/}
+            {/*</div>*/}
             <div className={style.list}>
                 {
                     props.SidebarItems.map((item: any, index: number) => {

@@ -1,9 +1,7 @@
 .Widget {
   width: 100%;
   max-height: calc(100vh - 52px);
-  border: 1px dotted rgba(0, 0, 255, 1);
-  border-radius: 10px;
-  background: rgba(0, 0, 255, .1);
+  background: lighten(#353A40, 10%);
   overflow-y: scroll;
   h1 {
     display: flex;

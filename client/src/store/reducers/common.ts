@@ -6,6 +6,7 @@ export interface ICommonState {
     modalSelected: string | null,
     settingsSelected: string | null,
     SidebarItems: any,
+    TaskManagerView: string,
 }
 export const initialState = {
     isCollapsedSidebar: false,
@@ -13,6 +14,7 @@ export const initialState = {
     modalSelected: null,
     settingsSelected: null,
     SidebarItems: data.SidebarItems,
+    TaskManagerView: "view_1",
 };
 export const common = (state:ICommonState = initialState, action: any) => {
     switch (action.type) {
@@ -31,6 +33,11 @@ export const common = (state:ICommonState = initialState, action: any) => {
             return {
               ...state,
                 [action.payload.key]: action.payload.name || null
+            };
+        case 'TaskManagerView_CHANGE':
+            return {
+                ...state,
+                TaskManagerView: action.payload.view
             };
         default:
             return state;

@@ -54,7 +54,9 @@ const Month: React.FC<IProps> = (props) => {
                     props.selectedCategory === "All" ?
                         props.tasks.map((task: any, i: number) => {
                             if(moment(task.date).format('DD MMMM YYYY') === `${td.Date} ${td.Month} ${td.Year}`) return(
-                                <span key={i} className={style.task}>
+                                <span key={i} className={style.task}
+                                      title={task.description}
+                                >
                                     <span>{task.title}</span>
                                     <span>{task.date.split("T")[1]}</span>
                                 </span>
@@ -67,7 +69,9 @@ const Month: React.FC<IProps> = (props) => {
                                     &&
                                     task.category === props.selectedCategory
                                 ) return(
-                                    <span key={i} className={style.task}>
+                                    <span key={i} className={style.task}
+                                          title={task.description}
+                                    >
                                         <span>{task.title}</span>
                                         <span>{task.date.split("T")[1]}</span>
                                     </span>

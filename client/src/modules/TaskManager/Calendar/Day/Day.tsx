@@ -36,7 +36,9 @@ const Day: React.FC<IProps> = (props) => {
                                                     &&
                                                     task.date.split("T")[1].split(":")[0] === `${e < 10 ? '0'+e : e.toString()}`
                                                 ) return(
-                                                    <span key={i} className={style.task}>
+                                                    <span key={i} className={style.task}
+                                                          title={task.description}
+                                                    >
                                                         <span>{task.title}</span>
                                                         <span>{task.date.split("T")[1]}</span>
                                                     </span>
@@ -51,7 +53,9 @@ const Day: React.FC<IProps> = (props) => {
                                                     &&
                                                     task.category === props.selectedCategory
                                                 ) return(
-                                                    <span key={i} className={style.task}>
+                                                    <span key={i} className={style.task}
+                                                          title={task.description}
+                                                    >
                                                         <span>{task.title}</span>
                                                         <span>{task.date.split("T")[1]}</span>
                                                     </span>

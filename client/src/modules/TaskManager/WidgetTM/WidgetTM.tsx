@@ -7,14 +7,17 @@ import Category from "../Category/Category";
 import Task from "../Task/Task";
 
 import data from "./../../../assets/data";
+import {connect} from "react-redux";
+import {IReduxState} from "../../../store/reducers";
+import AddTask from "../AddTask/AddTask";
 
-interface IProps {}
+interface IProps {
+    tasks: any,
+    categories: any,
+    selectedCategory: string,
+}
 
 const WidgetTM: React.FC<IProps> = (props) => {
-    let [tasks, setTasks] = React.useState(data.tasks);
-    let [categories, setCategories] = React.useState(Object.keys(tasks));
-    let [currentDate] = React.useState(Date.now);
-    let [isGetAll] = React.useState(false);
 
     return(
         <div className={style.Widget}>
@@ -23,16 +26,22 @@ const WidgetTM: React.FC<IProps> = (props) => {
                  Task Manager
             </h1>
             <div className={style.list}>
+                {/*<Category selectedCategory={props.selectedCategory}*/}
+                {/*          categories={props.categories}*/}
+                {/*/>*/}
+                <AddTask selectedCategory={props.selectedCategory}
+                         categories={props.categories}
+                />
                 {
-                    categories.map((category:any, i:number) => {
+                    props.categories.map((category:any, i:number) => {
                         return [
-                            tasks.map((task: any, i: number) => {
-                                return[
+                            props.tasks.map((task: any, i: number) => {
+                                return [
                                     <Task key={i}
                                           task_id={task._id}
                                           index={i}
                                           category={category}
-                                          categories={categories}
+                                          categories={props.categories}
                                           title={task.title}
                                           priority={task.priority}
                                           created={task.created}
@@ -49,5 +58,14 @@ const WidgetTM: React.FC<IProps> = (props) => {
     )
 };
 
-export default WidgetTM;
+export default connect((state: IReduxState) => {
+    return {
+        tasks: state.tasks.tasks_data,
+        categories: state.tasks.categories,
+        selectedCategory: state.tasks.selectedCategory,
+    };
+}, (dispatch) => {
+    return {
 
+    }
+})(WidgetTM)

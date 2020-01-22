@@ -22,8 +22,8 @@ const ToDoList: React.FC<IProps> = (props) => {
     return(
         <div className={style.ToDoList}>
             <AddTask
-                     selectedCategory={props.selectedCategory}
-                     categories={props.categories}
+                selectedCategory={props.selectedCategory}
+                categories={props.categories}
             />
             {
                 props.selectedCategory === "All" ?

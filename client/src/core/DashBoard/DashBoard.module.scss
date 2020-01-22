@@ -6,15 +6,11 @@
   display: flex;
   .DashBoardWidgets {
     display: flex;
+    width: 100%;
   }
 }
-.collapsed_true {
-  padding-left: 50px;
-  width: calc(100% - 50px);
-}
 .collapsed_false {
-  padding-left: 200px;
-  width: calc(100% - 200px);
+  width: 100%;
 }
 
 @media (max-width: 720px) {
@@ -24,7 +20,5 @@
     }
   }
   .collapsed_false {
-    padding-left: 150px;
-    width: calc(100% - 150px);
   }
 }

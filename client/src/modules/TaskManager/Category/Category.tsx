@@ -9,6 +9,7 @@ interface IProps {
     categories: any,
     selectCategory: any,
     selectedCategory: string,
+    tasks_data: any,
 }
 
 const Category: React.FC<IProps> = (props) => {
@@ -19,6 +20,7 @@ const Category: React.FC<IProps> = (props) => {
                  onClick={() => props.selectCategory("All")}
             >
                 All
+                <span className={style.length}>{props.tasks_data.length}</span>
             </div>
             {
                 props.categories.map((name: string, i: number) => {
@@ -40,6 +42,7 @@ const Category: React.FC<IProps> = (props) => {
 export default connect((state: IReduxState) => {
     return {
         id: state.auth.id,
+        tasks_data: state.tasks.tasks_data,
     };
 }, (dispatch) => {
     return {
